@@ -1,0 +1,14 @@
+CREATE DATABASE IF NOT EXISTS unfair_reviews;
+
+USE unfair_reviews;
+
+CREATE TABLE reviews (
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  url_id INT NOT NULL,
+  name VARCHAR(15) NOT NULL,
+  location VARCHAR(50) NOT NULL,
+  date DATETIME NOT NULL,
+  raiting INT NOT NULL,
+  helpful INT DEFAULT 0,
+  img VARCHAR(225)
+);
