@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev-start": "webpack --config webpack.config.js --watch --watch-poll",
+    "dev-server": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,29 @@
   "bugs": {
     "url": "https://github.com/Unfair-dot-com/reviews/issues"
   },
-  "homepage": "https://github.com/Unfair-dot-com/reviews#readme"
+  "homepage": "https://github.com/Unfair-dot-com/reviews#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "path": "^0.12.7",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel": "^6.23.0",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "jest": "^26.2.2",
+    "nodemon": "^2.0.4",
+    "puppeteer": "^5.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
 }
