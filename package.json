@@ -1,0 +1,28 @@
+{
+  "name": "fec-reviews",
+  "version": "1.0.0",
+  "description": "Reviews component for Team Grey's FEC Unfair.com ",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unfair-dot-com/reviews.git"
+  },
+  "keywords": [
+    "reviews",
+    "react",
+    "express",
+    "SOA"
+  ],
+  "author": "Matthew Wigglesworth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Unfair-dot-com/reviews/issues"
+  },
+  "homepage": "https://github.com/Unfair-dot-com/reviews#readme"
+}
