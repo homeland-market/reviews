@@ -1,0 +1,2 @@
+# Ignore webpack bundle.js
+public/*.js
