@@ -2,7 +2,7 @@
 .DS_Store
 
 ## mysql login ##
-server/database/config.js
+.config.js
 
 ## NPM ##
 npm
