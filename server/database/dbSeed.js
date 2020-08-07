@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const mocker = require('mocker-data-generator').default;
-const db = require('./index');
+const db = require('./index.js');
 
 // mock data template for review data
 const reviewGenerator = {
@@ -19,7 +19,7 @@ const reviewGenerator = {
   comment: {
     faker: 'lorem.paragraph',
   },
-  raiting: {
+  rating: {
     faker: 'random.number({"min": 1, "max": 5})',
   },
 };
@@ -35,8 +35,8 @@ const seeder = () => {
       .then((info) => {
         info.reviewGenerator.forEach((review) => {
           const singleReviewArguments = [review.url_id, review.name, review.location, review.date,
-            review.comment, review.raiting];
-          const queryString = 'INSERT INTO reviews (url_id, name, location, date, comment, raiting) VALUES (?, ?, ?, ?, ?, ?)';
+            review.comment, review.rating];
+          const queryString = 'INSERT INTO reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
           db.query(queryString, singleReviewArguments, (err) => {
             if (err) {
               console.error(err);

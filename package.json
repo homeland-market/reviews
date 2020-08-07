@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev-start": "webpack --config webpack.config.js --watch --watch-poll",
-    "dev-server": "nodemon server/index.js",
+    "dev-server": "nodemon server/database/index.js",
     "seed": "node server/dbSeed.js"
   },
   "repository": {

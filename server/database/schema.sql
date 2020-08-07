@@ -9,7 +9,7 @@ CREATE TABLE reviews (
   location VARCHAR(50) NOT NULL,
   date DATETIME NOT NULL,
   comment VARCHAR(8000) NOT NULL,
-  raiting INT NOT NULL,
+  rating INT NOT NULL,
   helpful INT DEFAULT 0,
   img VARCHAR(225)
 );
