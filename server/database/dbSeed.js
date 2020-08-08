@@ -24,29 +24,30 @@ const reviewsTemplate = {
   },
 };
 
-const databaseInsertion = (data) => {
-  const queryString = 'INSERT INTO reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
-  db.query(queryString, data, (err, results) => {
+const databaseInsertion = (data) => new Promise((resolve, reject) => {
+  const queryString = 'INSERT INTO user_reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(queryString, data, (err, success) => {
     if (err) {
-      return err;
+      reject(err);
+    } else {
+      resolve(success);
     }
-    return results;
   });
-};
+});
 
-const reviewGenerator = () => {
-  mocker()
-    .schema('reviewsTemplate', reviewsTemplate, Math.floor(Math.random() * 100))
-    .build()
-    .then((info) => {
-      info.reviewsTemplate.forEach((review) => {
-        const databaseData = [review.url_id, review.name, review.location, review.date,
-          review.comment, review.rating];
-        return databaseInsertion(databaseData);
-      });
-    })
-    .catch((err) => console.error(err));
-};
+const reviewGenerator = () => mocker()
+  .schema('reviewsTemplate', reviewsTemplate, Math.floor(Math.random() * 100))
+  .build()
+  .then((info) => {
+    const insertionPromises = [];
+    info.reviewsTemplate.forEach((review) => {
+      const databaseData = [review.url_id, review.name, review.location, review.date,
+        review.comment, review.rating];
+      insertionPromises.push(databaseInsertion(databaseData));
+    });
+    return Promise.all(insertionPromises)
+      .catch((err) => console.error(err));
+  });
 
 const databaseSeeder = () => {
   let counter = (Math.floor(Math.random() * 35) + 5);
@@ -55,7 +56,9 @@ const databaseSeeder = () => {
     databaseEntries.push(reviewGenerator());
     counter -= 1;
   }
-  Promise.all(databaseEntries).then(() => console.log('** reviews database seeded **'));
+  return Promise.all(databaseEntries)
+    .then(() => console.log('🚀🚀 reviews database has been seeded'))
+    .catch((err) => console.error(err));
 };
 
 databaseSeeder();
