@@ -8,8 +8,8 @@
   },
   "scripts": {
     "dev-start": "webpack --config webpack.config.js --watch --watch-poll",
-    "dev-server": "nodemon server/database/index.js",
-    "seed": "node server/dbSeed.js"
+    "dev-server": "nodemon server/index.js",
+    "seed": "node server/database/dbSeed.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,8 @@
     "path": "^0.12.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "styled-components": "^5.1.1"
+    "styled-components": "^5.1.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.1",
