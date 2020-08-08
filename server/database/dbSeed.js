@@ -50,7 +50,7 @@ const reviewGenerator = () => mocker()
   });
 
 const databaseSeeder = () => {
-  let counter = (Math.floor(Math.random() * 35) + 5);
+  let counter = (Math.floor(Math.random() * 15) + 5);
   const databaseEntries = [];
   while (counter > 0) {
     databaseEntries.push(reviewGenerator());
