@@ -3,7 +3,7 @@ const mocker = require('mocker-data-generator').default;
 const db = require('./index.js');
 
 // mock data template for review data
-const reviewGenerator = {
+const reviewsTemplate = {
   url_id: {
     faker: 'random.number({"min": 0, "max": 99})',
   },
@@ -24,30 +24,38 @@ const reviewGenerator = {
   },
 };
 
-// generates a random number of data enteries(0 - 100) a random number of times ((5 - 35))
-const seeder = () => {
-  let counter = (Math.floor(Math.random() * 35) + 5);
-  const promises = [];
-  while (counter > 0) {
-    promises.push(mocker()
-      .schema('reviewGenerator', reviewGenerator, Math.floor(Math.random() * 100))
-      .build()
-      .then((info) => {
-        info.reviewGenerator.forEach((review) => {
-          const singleReviewArguments = [review.url_id, review.name, review.location, review.date,
-            review.comment, review.rating];
-          const queryString = 'INSERT INTO reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
-          db.query(queryString, singleReviewArguments, (err) => {
-            if (err) {
-              console.error(err);
-            }
-          });
-        });
-      })
-      .catch((error) => console.error(error)));
-    counter -= 1;
-  }
-  Promise.all(promises).then(() => console.log('** reviews database seeded **'));
+const databaseInsertion = (data) => {
+  const queryString = 'INSERT INTO reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
+  db.query(queryString, data, (err, results) => {
+    if (err) {
+      return err;
+    }
+    return results;
+  });
 };
 
-seeder();
+const reviewGenerator = () => {
+  mocker()
+    .schema('reviewsTemplate', reviewsTemplate, Math.floor(Math.random() * 100))
+    .build()
+    .then((info) => {
+      info.reviewsTemplate.forEach((review) => {
+        const databaseData = [review.url_id, review.name, review.location, review.date,
+          review.comment, review.rating];
+        return databaseInsertion(databaseData);
+      });
+    })
+    .catch((err) => console.error(err));
+};
+
+const databaseSeeder = () => {
+  let counter = (Math.floor(Math.random() * 35) + 5);
+  const databaseEntries = [];
+  while (counter > 0) {
+    databaseEntries.push(reviewGenerator());
+    counter -= 1;
+  }
+  Promise.all(databaseEntries).then(() => console.log('** reviews database seeded **'));
+};
+
+databaseSeeder();
