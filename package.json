@@ -8,7 +8,8 @@
   },
   "scripts": {
     "dev-start": "webpack --config webpack.config.js --watch --watch-poll",
-    "dev-server": "nodemon server/index.js"
+    "dev-server": "nodemon server/database/index.js",
+    "seed": "node server/dbSeed.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "mocker-data-generator": "^2.8.0",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
     "react": "^16.13.1",
