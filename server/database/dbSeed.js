@@ -65,11 +65,11 @@ const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resol
     });
 });
 
-const promiseCompiler = (counter, func, arg1, arg2) => {
+const promiseCompiler = (counter, func, arg1, arg2, moonImageIndex) => {
   const promiseArray = [];
   let loopCounter = counter;
   while (loopCounter > 0) {
-    promiseArray.push(func(arg1, arg2));
+    promiseArray.push(func(arg1, moonImageIndex ? loopCounter : arg2));
     loopCounter -= 1;
   }
   return promiseArray;
@@ -92,13 +92,8 @@ const databaseSeeder = () => {
         .catch((err) => console.error(err));
     })
     .then(() => {
-      let moonImageCount = 5;
-      const moonImagesPromises = [];
-      while (moonImageCount > 0) {
-        moonImagesPromises.push(databaseImageInsertion('0', moonImageCount));
-        moonImageCount -= 1;
-      }
-      return Promise.all(moonImagesPromises)
+      const moonImageCount = 5;
+      return Promise.all(promiseCompiler(moonImageCount, databaseImageInsertion, '0', 1, 2))
         .then(() => console.log('🌜🌜 moon images seeded!'))
         .catch((err) => console.error(err));
     })
