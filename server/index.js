@@ -20,4 +20,4 @@ app.get('/api/reviews/:id', (req, res) => {
   });
 });
 
-app.listen(PORT, () => console.log(`🚀🚀 reviews server connected!\n🚀🚀 Listening on ${PORT}`));
+app.listen(PORT, () => console.log(`🚀🚀 review server connected!\n🚀🚀 Listening on ${PORT}`));
