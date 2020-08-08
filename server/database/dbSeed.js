@@ -76,13 +76,8 @@ const promiseCompiler = (counter, func, arg1, arg2) => {
 };
 
 const databaseSeeder = () => {
-  let counter = Math.floor(Math.random() * 25) + 10;
-  const databaseEntries = [];
-  while (counter > 0) {
-    databaseEntries.push(reviewGenerator());
-    counter -= 1;
-  }
-  return Promise.all(databaseEntries)
+  const mainReviewCounter = Math.floor(Math.random() * 25) + 10;
+  return Promise.all(promiseCompiler(mainReviewCounter, reviewGenerator))
     .then(() => console.log('🚀🚀 review database seeded!'))
     .then(() => {
       const imageCounter = Math.floor(Math.random() * 300) + 100;
@@ -91,9 +86,9 @@ const databaseSeeder = () => {
         .catch((err) => console.error(err));
     })
     .then(() => {
-      const moonCount = 25;
-      return Promise.all(promiseCompiler(moonCount, reviewGenerator, '0', 1))
-        .then(() => console.log('🌜🌜moon reviews seeded!'))
+      const moonReviewsCount = 25;
+      return Promise.all(promiseCompiler(moonReviewsCount, reviewGenerator, '0', 1))
+        .then(() => console.log('🌜🌜 moon reviews seeded!'))
         .catch((err) => console.error(err));
     })
     .then(() => {
@@ -104,7 +99,7 @@ const databaseSeeder = () => {
         moonImageCount -= 1;
       }
       return Promise.all(moonImagesPromises)
-        .then(() => console.log('🌜🌜moon images seeded!'))
+        .then(() => console.log('🌜🌜 moon images seeded!'))
         .catch((err) => console.error(err));
     })
     .catch((err) => console.error(err));
