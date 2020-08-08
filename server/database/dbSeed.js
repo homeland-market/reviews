@@ -57,7 +57,7 @@ const databaseSeeder = () => {
     counter -= 1;
   }
   return Promise.all(databaseEntries)
-    .then(() => console.log('🚀🚀 reviews database has been seeded'))
+    .then(() => console.log('🚀🚀 reviews database seeded!'))
     .catch((err) => console.error(err));
 };
 
