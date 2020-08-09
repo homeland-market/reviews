@@ -8,12 +8,12 @@ class App extends React.Component {
     super();
     this.state = {
       reviews: [],
-      reviewCount: 3,
+      reviewDisplayCount: 3,
       urlId: window.location.pathname,
     };
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
-    this.resetReviewCount = this.resetReviewCount.bind(this);
+    this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
   }
 
   componentDidMount() {
@@ -35,19 +35,19 @@ class App extends React.Component {
 
   seeMoreReviews() {
     this.setState((prevState) => ({
-      reviewCount: prevState.reviewCount + 10,
+      reviewDisplayCount: prevState.reviewDisplayCount + 10,
     }));
   }
 
-  resetReviewCount() {
+  resetReviewDisplayCount() {
     this.setState({
-      reviewCount: 3,
+      reviewDisplayCount: 3,
     });
   }
 
   render() {
     const { reviews } = this.state;
-    const { reviewCount } = this.state;
+    const { reviewDisplayCount } = this.state;
     return (
       <div>
         <h1>
@@ -55,8 +55,8 @@ class App extends React.Component {
         </h1>
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
-          resetReviewCount={this.resetReviewCount}
-          reviewCount={reviewCount}
+          resetReviewDisplayCount={this.resetReviewDisplayCount}
+          reviewDisplayCount={reviewDisplayCount}
           reviews={reviews}
         />
         <h1>
