@@ -8,6 +8,7 @@ class App extends React.Component {
     super();
     this.state = {
       reviews: [],
+      reviewCount: 3,
       urlId: window.location.pathname,
     };
   }
@@ -18,23 +19,26 @@ class App extends React.Component {
 
   getReviews() {
     const { urlId } = this.state;
-    axios.get(`/api/reviews${urlId}`)
-      .then((data) => {
-        this.setState({
-          reviews: data.data,
-        });
-      })
-      .catch((err) => console.log(err));
+    if (urlId !== '/') {
+      axios.get(`/api/reviews${urlId}`)
+        .then((data) => {
+          this.setState({
+            reviews: data.data,
+          });
+        })
+        .catch((err) => console.error(err));
+    }
   }
 
   render() {
     const { reviews } = this.state;
+    const { reviewCount } = this.state;
     return (
       <div>
         <h1>
           Hello World
         </h1>
-        <ReviewsRender reviews={reviews} />
+        <ReviewsRender reviewCount={reviewCount} reviews={reviews} />
       </div>
     );
   }
