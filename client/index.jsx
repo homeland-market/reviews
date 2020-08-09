@@ -13,6 +13,7 @@ class App extends React.Component {
     };
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
+    this.resetReviewCount = this.resetReviewCount.bind(this);
   }
 
   componentDidMount() {
@@ -38,6 +39,12 @@ class App extends React.Component {
     }));
   }
 
+  resetReviewCount() {
+    this.setState({
+      reviewCount: 3,
+    });
+  }
+
   render() {
     const { reviews } = this.state;
     const { reviewCount } = this.state;
@@ -48,9 +55,13 @@ class App extends React.Component {
         </h1>
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
+          resetReviewCount={this.resetReviewCount}
           reviewCount={reviewCount}
           reviews={reviews}
         />
+        <h1>
+          PLACEHOLDER
+        </h1>
       </div>
     );
   }
