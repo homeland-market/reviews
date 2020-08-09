@@ -53,7 +53,7 @@ const reviewGenerator = (moonId, singleMoonEntry) => mocker()
 // inserts img url's into the datatabase
 const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resolve, reject) => {
   const randomIdIndex = Math.floor(Math.random() * 99) + 1;
-  const randomImgIndex = Math.floor(Math.random() * 50) + 5;
+  const randomImgIndex = Math.floor(Math.random() * 46) + 5;
   const imageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/${moonImageIndex || randomImgIndex}.jpg`;
   const queryString = 'update user_reviews set img = ? where url_id = ? and img is NULL order by rand() limit 1';
   db.query(queryString, [imageURL, moonIndex || randomIdIndex],

@@ -11,6 +11,8 @@ class App extends React.Component {
       reviewCount: 3,
       urlId: window.location.pathname,
     };
+
+    this.seeMoreReviews = this.seeMoreReviews.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,12 @@ class App extends React.Component {
     }
   }
 
+  seeMoreReviews() {
+    this.setState((prevState) => ({
+      reviewCount: prevState.reviewCount + 10,
+    }));
+  }
+
   render() {
     const { reviews } = this.state;
     const { reviewCount } = this.state;
@@ -38,7 +46,11 @@ class App extends React.Component {
         <h1>
           Hello World
         </h1>
-        <ReviewsRender reviewCount={reviewCount} reviews={reviews} />
+        <ReviewsRender
+          seeMoreReviews={this.seeMoreReviews}
+          reviewCount={reviewCount}
+          reviews={reviews}
+        />
       </div>
     );
   }
