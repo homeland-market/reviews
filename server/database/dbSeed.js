@@ -54,7 +54,7 @@ const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resol
   const randomIdIndex = Math.floor(Math.random() * 99) + 1; // 1 - 99
   const randomImgIndex = Math.floor(Math.random() * 50) + 5; // 5 - 50
   const imageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/${moonImageIndex || randomImgIndex}.jpg`;
-  const queryString = 'update user_reviews set img = "?" where url_id = ? and img is NULL order by rand() limit 1';
+  const queryString = 'update user_reviews set img = ? where url_id = ? and img is NULL order by rand() limit 1';
   db.query(queryString, [imageURL, moonIndex || randomIdIndex],
     (err, success) => {
       if (err) {
@@ -65,11 +65,11 @@ const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resol
     });
 });
 
-const promiseCompiler = (counter, func, arg1, arg2, moonImageIndex) => {
+const promiseCompiler = (counter, func, arg1, arg2) => {
   const promiseArray = [];
   let loopCounter = counter;
   while (loopCounter > 0) {
-    promiseArray.push(func(arg1, moonImageIndex ? loopCounter : arg2));
+    promiseArray.push(func(arg1, arg2 === 'loop' ? loopCounter : arg2));
     loopCounter -= 1;
   }
   return promiseArray;
@@ -93,7 +93,7 @@ const databaseSeeder = () => {
     })
     .then(() => {
       const moonImageCount = 5;
-      return Promise.all(promiseCompiler(moonImageCount, databaseImageInsertion, '0', 1, 2))
+      return Promise.all(promiseCompiler(moonImageCount, databaseImageInsertion, '0', 'loop'))
         .then(() => console.log('🌜🌜 moon images seeded!'))
         .catch((err) => console.error(err));
     })
