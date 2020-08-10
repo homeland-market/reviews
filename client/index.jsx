@@ -5,12 +5,17 @@ import ReviewsRender from './components/ReviewsRender';
 import ReviewsOverview from './components/ReviewsOverview';
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      urlId: window.location.pathname,
       reviews: [],
       reviewDisplayCount: 3,
-      urlId: window.location.pathname,
+      filteredReviews: [],
+      filterToggle: {
+        starRaiting: 0,
+        orderBy: 0, // this is for ordering by pictures etc (not yet implemented)
+      },
     };
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
@@ -29,18 +34,34 @@ class App extends React.Component {
         .then((data) => {
           this.setState({
             reviews: data.data,
+            filteredReviews: data.data,
           });
         })
         .catch((err) => console.error(err));
     }
   }
 
-  filterReviews() {
-    // TODO
-    const filteredReviews = ['TODO'];
-    this.setState({
-      reviews: filteredReviews,
-    });
+  filterReviews(key, value) {
+    const { reviews } = this.state;
+    const { filterToggle } = this.state;
+    if (filterToggle.starRaiting === value) {
+      this.setState({
+        reviewDisplayCount: 3,
+        filteredReviews: reviews,
+        filterToggle: {
+          starRaiting: 0,
+        },
+      });
+    } else {
+      const filtered = reviews.filter((review) => review[key] === value);
+      this.setState({
+        reviewDisplayCount: 3,
+        filteredReviews: filtered,
+        filterToggle: {
+          starRaiting: value,
+        },
+      });
+    }
   }
 
   // averageRaiting() {
@@ -62,8 +83,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { reviews } = this.state;
-    const { reviewDisplayCount } = this.state;
+    const { reviews, reviewDisplayCount, filteredReviews } = this.state;
     return (
       <div>
         <h1>
@@ -71,12 +91,13 @@ class App extends React.Component {
         </h1>
         <ReviewsOverview
           reviews={reviews}
+          filterReviews={this.filterReviews}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
-          reviews={reviews}
+          filteredReviews={filteredReviews}
         />
         <h1>
           PLACEHOLDER

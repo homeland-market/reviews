@@ -3,23 +3,23 @@ import PropTypes from 'prop-types';
 
 const ReviewsRender = ({
   reviewDisplayCount,
-  reviews,
   seeMoreReviews,
   resetReviewDisplayCount,
+  filteredReviews,
 }) => (
   <section>
     <p>
       Showing 1-
-      {reviewDisplayCount > reviews.length ? reviews.length : reviewDisplayCount}
+      {reviewDisplayCount > filteredReviews.length ? filteredReviews.length : reviewDisplayCount}
       {' '}
       of
       {' '}
-      {reviews.length}
+      {filteredReviews.length}
       {' '}
       reviews.
     </p>
     <div>
-      {reviews.slice(0, reviewDisplayCount).map((review) => (
+      {filteredReviews.slice(0, reviewDisplayCount).map((review) => (
         <div key={review.id}>
           <p>{review.name}</p>
           <p>{review.location}</p>
@@ -31,11 +31,12 @@ const ReviewsRender = ({
         </div>
       ))}
     </div>
-    {reviewDisplayCount < reviews.length ? (
+    {reviewDisplayCount < filteredReviews.length ? (
       <button type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
         Show
         {' '}
-        {reviews.length - reviewDisplayCount >= 10 ? 10 : reviews.length - reviewDisplayCount}
+        {filteredReviews.length - reviewDisplayCount >= 10 ? 10
+          : filteredReviews.length - reviewDisplayCount}
         {' '}
         More Reviews
       </button>
@@ -49,10 +50,10 @@ const ReviewsRender = ({
 );
 
 ReviewsRender.propTypes = {
-  reviewDisplayCount: PropTypes.number.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   seeMoreReviews: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
+  reviewDisplayCount: PropTypes.number.isRequired,
+  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ReviewsRender;

@@ -5,21 +5,21 @@ const ReviewsOverview = {
 
   reviewScores: [5, 4, 3, 2, 1],
 
-  averageRating(reviews) {
+  totalReviewsAverageRating(reviews) {
     return (reviews.reduce((acc, review) => acc + (review.rating || 0), 0)
     / reviews.length).toFixed(1);
   },
 
-  reviewScoreTotals(reviews, score) {
+  individualReviewScoreTotals(reviews, score) {
     return reviews.reduce((acc, review) => acc + (review.rating === score ? 1 : 0), 0);
   },
 
-  ReviewsOverviewRender({ reviews }) {
+  reviewsOverviewRender({ reviews, filterReviews }) {
     return (
       <section>
         <h1>Reviews Overview</h1>
         <div>
-          {reviews.length ? ReviewsOverview.averageRating(reviews) : 0}
+          {reviews.length ? ReviewsOverview.totalReviewsAverageRating(reviews) : 0}
         </div>
         <div>
           {reviews.length}
@@ -28,10 +28,10 @@ const ReviewsOverview = {
         </div>
         <div>
           {ReviewsOverview.reviewScores.map((score) => (
-            <div key={score}>
+            <div key={score} onClick={() => filterReviews('rating', score)}>
               {score}
               {' '}
-              {ReviewsOverview.reviewScoreTotals(reviews, score)}
+              {ReviewsOverview.individualReviewScoreTotals(reviews, score)}
             </div>
           ))}
         </div>
@@ -40,8 +40,9 @@ const ReviewsOverview = {
   },
 };
 
-ReviewsOverview.ReviewsOverviewRender.propTypes = {
+ReviewsOverview.reviewsOverviewRender.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+  filterReviews: PropTypes.func.isRequired,
 };
 
-export default ReviewsOverview.ReviewsOverviewRender;
+export default ReviewsOverview.reviewsOverviewRender;
