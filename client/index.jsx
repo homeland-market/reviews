@@ -43,6 +43,12 @@ class App extends React.Component {
     });
   }
 
+  // averageRaiting() {
+  //   let totalScore = (reviews.reduce((a, b) => a + (b.rating || 0), 0) / reviews.length);
+  //   totalScore = totalScore.toFixed(1);
+  //   console.log(totalScore);
+  // }
+
   seeMoreReviews() {
     this.setState((prevState) => ({
       reviewDisplayCount: prevState.reviewDisplayCount + 10,
@@ -63,7 +69,9 @@ class App extends React.Component {
         <h1>
           Hello World
         </h1>
-        <ReviewsOverview />
+        <ReviewsOverview
+          reviews={reviews}
+        />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
