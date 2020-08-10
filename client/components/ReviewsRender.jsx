@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReviewsRender = ({ reviewCount, reviews, seeMoreReviews, resetReviewCount }) => (
+const ReviewsRender = ({
+  reviewDisplayCount,
+  seeMoreReviews,
+  resetReviewDisplayCount,
+  filteredReviews,
+}) => (
   <section>
     <p>
       Showing 1-
-      {reviewCount > reviews.length ? reviews.length : reviewCount}
+      {reviewDisplayCount > filteredReviews.length ? filteredReviews.length : reviewDisplayCount}
       {' '}
       of
       {' '}
-      {reviews.length}
+      {filteredReviews.length}
       {' '}
       reviews.
     </p>
     <div>
-      {reviews.slice(0, reviewCount).map((review) => (
+      {filteredReviews.slice(0, reviewDisplayCount).map((review) => (
         <div key={review.id}>
           <p>{review.name}</p>
           <p>{review.location}</p>
@@ -26,17 +31,18 @@ const ReviewsRender = ({ reviewCount, reviews, seeMoreReviews, resetReviewCount 
         </div>
       ))}
     </div>
-    {reviewCount < reviews.length ? (
+    {reviewDisplayCount < filteredReviews.length ? (
       <button type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
         Show
         {' '}
-        {reviews.length - reviewCount >= 10 ? 10 : reviews.length - reviewCount}
+        {filteredReviews.length - reviewDisplayCount >= 10 ? 10
+          : filteredReviews.length - reviewDisplayCount}
         {' '}
         More Reviews
       </button>
     ) : null}
-    {reviewCount > 3 ? (
-      <button type="button" onClick={resetReviewCount} onKeyPress={resetReviewCount}>
+    {reviewDisplayCount > 3 ? (
+      <button type="button" onClick={resetReviewDisplayCount} onKeyPress={resetReviewDisplayCount}>
         Show Less
       </button>
     ) : null}
@@ -44,10 +50,10 @@ const ReviewsRender = ({ reviewCount, reviews, seeMoreReviews, resetReviewCount 
 );
 
 ReviewsRender.propTypes = {
-  reviewCount: PropTypes.number.isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   seeMoreReviews: PropTypes.func.isRequired,
-  resetReviewCount: PropTypes.func.isRequired,
+  resetReviewDisplayCount: PropTypes.func.isRequired,
+  reviewDisplayCount: PropTypes.number.isRequired,
+  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ReviewsRender;
