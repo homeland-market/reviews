@@ -1,53 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const averageRating = (reviews) => (reviews.reduce((acc, review) => acc + (review.rating || 0), 0)
-  / reviews.length).toFixed(1);
+const ReviewsOverview = {
 
-const reviewScoreTotals = (reviews, score) => reviews.reduce((acc, review) => acc
-  + (review.rating === score ? 1 : 0), 0);
+  reviewScores: [5, 4, 3, 2, 1],
 
-const ReviewsOverview = ({ reviews }) => (
-  <section>
-    <h1>Reviews Overview</h1>
-    <div>
-      {reviews.length ? averageRating(reviews) : 0}
-    </div>
-    <div>
-      {reviews.length}
-      {' '}
-      Reviews
-    </div>
-    <div>
-      5
-      {' '}
-      {reviewScoreTotals(reviews, 5)}
-    </div>
-    <div>
-      4
-      {' '}
-      {reviewScoreTotals(reviews, 4)}
-    </div>
-    <div>
-      3
-      {' '}
-      {reviewScoreTotals(reviews, 3)}
-    </div>
-    <div>
-      2
-      {' '}
-      {reviewScoreTotals(reviews, 2)}
-    </div>
-    <div>
-      1
-      {' '}
-      {reviewScoreTotals(reviews, 1)}
-    </div>
-  </section>
-);
+  averageRating(reviews) {
+    return (reviews.reduce((acc, review) => acc + (review.rating || 0), 0)
+    / reviews.length).toFixed(1);
+  },
 
-ReviewsOverview.propTypes = {
+  reviewScoreTotals(reviews, score) {
+    return reviews.reduce((acc, review) => acc + (review.rating === score ? 1 : 0), 0);
+  },
+
+  ReviewsOverviewRender({ reviews }) {
+    return (
+      <section>
+        <h1>Reviews Overview</h1>
+        <div>
+          {reviews.length ? ReviewsOverview.averageRating(reviews) : 0}
+        </div>
+        <div>
+          {reviews.length}
+          {' '}
+          Reviews
+        </div>
+        <div>
+          {ReviewsOverview.reviewScores.map((score) => (
+            <div key={score}>
+              {score}
+              {' '}
+              {ReviewsOverview.reviewScoreTotals(reviews, score)}
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  },
+};
+
+ReviewsOverview.ReviewsOverviewRender.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ReviewsOverview;
+export default ReviewsOverview.ReviewsOverviewRender;
