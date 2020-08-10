@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ReviewsRender from './components/ReviewsRender';
+import ReviewsOverview from './components/ReviewsOverview';
 
 class App extends React.Component {
   constructor() {
@@ -14,6 +15,7 @@ class App extends React.Component {
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +33,14 @@ class App extends React.Component {
         })
         .catch((err) => console.error(err));
     }
+  }
+
+  filterReviews() {
+    // TODO
+    const filteredReviews = ['TODO'];
+    this.setState({
+      reviews: filteredReviews,
+    });
   }
 
   seeMoreReviews() {
@@ -53,6 +63,7 @@ class App extends React.Component {
         <h1>
           Hello World
         </h1>
+        <ReviewsOverview />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
