@@ -13,7 +13,7 @@ class App extends React.Component {
       reviewDisplayCount: 3,
       filteredReviews: [],
       filterToggle: {
-        starRaiting: 0,
+        starRating: 0,
         orderBy: 0, // this is for ordering by pictures etc (not yet implemented)
       },
     };
@@ -44,12 +44,12 @@ class App extends React.Component {
   filterReviews(key, value) {
     const { reviews } = this.state;
     const { filterToggle } = this.state;
-    if (filterToggle.starRaiting === value) {
+    if (filterToggle.starRating === value) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
         filterToggle: {
-          starRaiting: 0,
+          starRating: 0,
         },
       });
     } else {
@@ -58,7 +58,7 @@ class App extends React.Component {
         reviewDisplayCount: 3,
         filteredReviews: filtered,
         filterToggle: {
-          starRaiting: value,
+          starRating: value,
         },
       });
     }

@@ -6,7 +6,7 @@ const ReviewsOverview = {
   reviewScores: [5, 4, 3, 2, 1],
 
   totalReviewsAverageRating(reviews) {
-    return (reviews.reduce((acc, review) => acc + (review.rating || 0), 0)
+    return (reviews.reduce((acc, review) => acc + (review.rating || null), 0)
     / reviews.length).toFixed(1);
   },
 
