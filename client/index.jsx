@@ -40,7 +40,7 @@ class App extends React.Component {
     }
   }
 
-  filterReviews(key, value) {
+  filterReviews(value) {
     const { reviews } = this.state;
     const { starRatingFilterToggle } = this.state;
     if (starRatingFilterToggle === value) {
@@ -50,7 +50,7 @@ class App extends React.Component {
         starRatingFilterToggle: 0,
       });
     } else {
-      const filtered = reviews.filter((review) => review[key] === value);
+      const filtered = reviews.filter((review) => review.rating === value);
       if (filtered.length) {
         this.setState({
           reviewDisplayCount: 3,

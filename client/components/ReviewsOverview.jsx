@@ -31,8 +31,8 @@ const ReviewsOverview = {
             <button
               key={score}
               type="button"
-              onClick={() => filterReviews('rating', score)}
-              onKeyPress={() => filterReviews('raiting', score)}
+              onClick={() => filterReviews(score)}
+              onKeyPress={() => filterReviews(score)}
             >
               <div>
                 {score}
