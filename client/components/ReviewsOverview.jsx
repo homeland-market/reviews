@@ -6,8 +6,8 @@ const ReviewsOverview = {
   reviewScores: [5, 4, 3, 2, 1],
 
   totalReviewsAverageRating(reviews) {
-    return (reviews.reduce((acc, review) => acc + (review.rating || null), 0)
-      / reviews.length).toFixed(1);
+    return (reviews.reduce((acc, review) => acc
+    + (review.rating || null), 0) / reviews.length).toFixed(1);
   },
 
   individualReviewScoreTotals(reviews, score) {
