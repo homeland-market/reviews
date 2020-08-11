@@ -1,30 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const textSlicer = (text, filterCondition) => {
+  const results = [];
+  const findAllInstances = (word) => {
+    const lowerCaseWord = word.toLowerCase();
+    const lowerFilterCondition = filterCondition.toLowerCase();
+    if (lowerCaseWord.indexOf(lowerFilterCondition) === -1) {
+      return results;
+    }
+    results.push(
+      word.substring(lowerCaseWord.indexOf(lowerFilterCondition),
+        lowerCaseWord.indexOf(lowerFilterCondition) + filterCondition.length),
+    );
+    return findAllInstances(lowerCaseWord.slice(lowerCaseWord.indexOf(lowerFilterCondition) + 1));
+  };
+  findAllInstances(text);
+  return results;
+};
+
 const textHighlighter = (review, filterCondition) => {
   if (filterCondition === '' || typeof filterCondition === 'number') {
     return (
       <p>{review.comment}</p>
     );
   }
-
+  const matches = [];
+  const domElements = [];
+  const arrayOfMatchingInstances = review.comment.split(' ').filter((word) => word.toLowerCase().includes(filterCondition.toLowerCase()));
+  arrayOfMatchingInstances.forEach((word) => matches.push(...textSlicer(word, filterCondition)));
   const arrayOfNoneMatchingInstances = review.comment.split(new RegExp(filterCondition, 'gi'));
-  const elements = [];
   for (let i = 0; i < arrayOfNoneMatchingInstances.length; i += 1) {
     if (i === arrayOfNoneMatchingInstances.length - 1) {
-      elements.push(<span key={i}>{arrayOfNoneMatchingInstances[i]}</span>);
+      domElements.push(<span key={i}>{arrayOfNoneMatchingInstances[i]}</span>);
     } else {
-      elements.push(
+      domElements.push(
         <span key={i}>
           {arrayOfNoneMatchingInstances[i]}
-          <mark>{filterCondition}</mark>
+          <mark>{matches[i]}</mark>
         </span>,
       );
     }
   }
   return (
     <p key={review.id}>
-      {elements}
+      {domElements}
     </p>
   );
 };
