@@ -15,8 +15,7 @@ class App extends React.Component {
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
-      starRatingFilter: 0,
-      textFilter: '',
+      filterReviewsBy: 0,
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
@@ -45,13 +44,12 @@ class App extends React.Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { starRatingFilter } = this.state;
-    if (starRatingFilter === value || value === 0) {
+    const { filterReviewsBy } = this.state;
+    if (filterReviewsBy === value || value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        starRatingFilter: 0,
-        textFilter: '',
+        filterReviewsBy: 0,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -59,8 +57,7 @@ class App extends React.Component {
         this.setState({
           reviewDisplayCount: 3,
           filteredReviews: filtered,
-          starRatingFilter: value,
-          textFilter: '',
+          filterReviewsBy: value,
         });
       }
     }
@@ -68,8 +65,7 @@ class App extends React.Component {
 
   filterReviewsByText(value) {
     this.setState((prevState) => ({
-      starRatingFilter: 0,
-      textFilter: value,
+      filterReviewsBy: value,
       filteredReviews: prevState.reviews.filter((review) => review.comment.includes(value)),
     }));
   }
@@ -111,8 +107,7 @@ class App extends React.Component {
       reviews,
       reviewDisplayCount,
       filteredReviews,
-      starRatingFilter,
-      textFilter,
+      filterReviewsBy,
     } = this.state;
     return (
       <div>
@@ -130,9 +125,8 @@ class App extends React.Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           sortReviewsBy={this.sortReviewsBy}
-          starRatingFilter={starRatingFilter}
+          filterReviewsBy={filterReviewsBy}
           filterReviews={this.filterReviews}
-          textFilter={textFilter}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}

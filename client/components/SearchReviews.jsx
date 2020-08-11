@@ -18,6 +18,7 @@ class SearchReviews extends React.Component {
   searchReviewText() {
     const { query } = this.state;
     const { filterReviewsByText } = this.props;
+    document.getElementById('search-bar').reset();
     filterReviewsByText(query);
   }
 
@@ -25,7 +26,7 @@ class SearchReviews extends React.Component {
     return (
       <section>
         <h1> SEARCH REVIEWS </h1>
-        <form className="search-bar">
+        <form id="search-bar">
           <input
             onChange={this.handleChange}
             type="text"
