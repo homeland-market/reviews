@@ -17,7 +17,7 @@ const ReviewsOverview = {
   reviewsOverviewRender({ reviews, filterReviews }) {
     return (
       <section>
-        <h1>Reviews Overview</h1>
+        <h1>REVIEWS OVERVIEW</h1>
         <div>
           {reviews.length ? ReviewsOverview.totalReviewsAverageRating(reviews) : 0}
         </div>
@@ -28,7 +28,12 @@ const ReviewsOverview = {
         </div>
         <div>
           {ReviewsOverview.reviewScores.map((score) => (
-            <button key={score} type="button" onClick={() => filterReviews('rating', score)}>
+            <button
+              key={score}
+              type="button"
+              onClick={() => filterReviews('rating', score)}
+              onKeyPress={() => filterReviews('raiting', score)}
+            >
               <div>
                 {score}
                 {' '}

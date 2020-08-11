@@ -21,11 +21,14 @@ const reviewsTemplate = {
   rating: {
     faker: 'random.number({"min": 1, "max": 5})',
   },
+  helpful: {
+    faker: 'random.number({"min": 0, "max": 15})',
+  },
 };
 
 // inserts raw review data into the database
 const databaseRawDataInserion = (data) => new Promise((resolve, reject) => {
-  const queryString = 'INSERT INTO user_reviews (url_id, name, location, date, comment, rating) VALUES (?, ?, ?, ?, ?, ?)';
+  const queryString = 'INSERT INTO user_reviews (url_id, name, location, date, comment, rating, helpful) VALUES (?, ?, ?, ?, ?, ?, ?)';
   db.query(queryString, data, (err, success) => {
     if (err) {
       reject(err);
@@ -43,7 +46,7 @@ const reviewGenerator = (moonId, singleMoonEntry) => mocker()
     const insertionPromises = [];
     info.reviewsTemplate.forEach((review) => {
       const databaseData = [moonId || review.url_id, review.name, review.location, review.date,
-        review.comment, review.rating];
+        review.comment, review.rating, review.helpful];
       insertionPromises.push(databaseRawDataInserion(databaseData));
     });
     return Promise.all(insertionPromises)

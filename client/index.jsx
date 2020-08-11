@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ReviewsRender from './components/ReviewsRender';
 import ReviewsOverview from './components/ReviewsOverview';
+import SortReviews from './components/SortReviews';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,15 +13,13 @@ class App extends React.Component {
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
-      filterToggle: {
-        starRating: 0,
-        orderBy: 0, // this is for ordering by pictures etc (not yet implemented)
-      },
+      starRatingFilterToggle: 0,
     };
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
+    this.sortReviewsBy = this.sortReviewsBy.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +33,7 @@ class App extends React.Component {
         .then((data) => {
           this.setState({
             reviews: data.data,
-            filteredReviews: data.data,
+            filteredReviews: data.data.sort((a, b) => b.helpful - a.helpful),
           });
         })
         .catch((err) => console.error(err));
@@ -43,32 +42,44 @@ class App extends React.Component {
 
   filterReviews(key, value) {
     const { reviews } = this.state;
-    const { filterToggle } = this.state;
-    if (filterToggle.starRating === value) {
+    const { starRatingFilterToggle } = this.state;
+    if (starRatingFilterToggle === value) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        filterToggle: {
-          starRating: 0,
-        },
+        starRatingFilterToggle: 0,
       });
     } else {
       const filtered = reviews.filter((review) => review[key] === value);
-      this.setState({
-        reviewDisplayCount: 3,
-        filteredReviews: filtered,
-        filterToggle: {
-          starRating: value,
-        },
-      });
+      if (filtered.length) {
+        this.setState({
+          reviewDisplayCount: 3,
+          filteredReviews: filtered,
+          starRatingFilterToggle: value,
+        });
+      }
     }
   }
 
-  // averageRaiting() {
-  //   let totalScore = (reviews.reduce((a, b) => a + (b.rating || 0), 0) / reviews.length);
-  //   totalScore = totalScore.toFixed(1);
-  //   console.log(totalScore);
-  // }
+  sortReviewsBy(value) {
+    if (value === 'Includes customer photos') {
+      this.setState((prevState) => ({
+        filteredReviews: prevState.filteredReviews.sort((a, b) => (a.img === null)
+        - (b.img === null) || +(a > b) || -(a < b)),
+      }));
+    }
+    if (value === 'Most recent') {
+      this.setState((prevState) => ({
+        filteredReviews: prevState.filteredReviews.sort((a, b) => new Date(b.date)
+        - new Date(a.date)),
+      }));
+    }
+    if (value === 'Most helpful' || value === 'Most relevant') {
+      this.setState((prevState) => ({
+        filteredReviews: prevState.filteredReviews.sort((a, b) => b.helpful - a.helpful),
+      }));
+    }
+  }
 
   seeMoreReviews() {
     this.setState((prevState) => ({
@@ -87,11 +98,16 @@ class App extends React.Component {
     return (
       <div>
         <h1>
-          Hello World
+          REVIEWS & RATINGS
         </h1>
         <ReviewsOverview
           reviews={reviews}
           filterReviews={this.filterReviews}
+        />
+        <SortReviews
+          reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
+          sortReviewsBy={this.sortReviewsBy}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
@@ -99,9 +115,6 @@ class App extends React.Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
         />
-        <h1>
-          PLACEHOLDER
-        </h1>
       </div>
     );
   }
