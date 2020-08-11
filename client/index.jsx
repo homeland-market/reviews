@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      urlId: window.location.pathname,
+      productId: window.location.pathname,
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
@@ -29,9 +29,9 @@ class App extends React.Component {
   }
 
   getReviews() {
-    const { urlId } = this.state;
-    if (urlId !== '/') {
-      axios.get(`/api/reviews${urlId}`)
+    const { productId } = this.state;
+    if (productId !== '/') {
+      axios.get(`/api/reviews${productId}`)
         .then((data) => {
           this.setState({
             reviews: data.data,
@@ -64,10 +64,10 @@ class App extends React.Component {
   }
 
   filterReviewsByText(value) {
-    const { filteredReviews } = this.state;
     this.setState((prevState) => ({
       filterCondition: value,
-      filteredReviews: prevState.reviews.filter((review) => review.comment.includes(value)),
+      filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
+        .includes(value.toLowerCase())),
     }));
   }
 
