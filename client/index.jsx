@@ -15,7 +15,7 @@ class App extends React.Component {
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
-      filterReviewsBy: 0,
+      filterCondition: 0,
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
@@ -44,12 +44,12 @@ class App extends React.Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { filterReviewsBy } = this.state;
-    if (filterReviewsBy === value || value === 0) {
+    const { filterCondition } = this.state;
+    if (filterCondition === value || value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        filterReviewsBy: 0,
+        filterCondition: 0,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -57,15 +57,16 @@ class App extends React.Component {
         this.setState({
           reviewDisplayCount: 3,
           filteredReviews: filtered,
-          filterReviewsBy: value,
+          filterCondition: value,
         });
       }
     }
   }
 
   filterReviewsByText(value) {
+    const { filteredReviews } = this.state;
     this.setState((prevState) => ({
-      filterReviewsBy: value,
+      filterCondition: value,
       filteredReviews: prevState.reviews.filter((review) => review.comment.includes(value)),
     }));
   }
@@ -107,7 +108,7 @@ class App extends React.Component {
       reviews,
       reviewDisplayCount,
       filteredReviews,
-      filterReviewsBy,
+      filterCondition,
     } = this.state;
     return (
       <div>
@@ -125,7 +126,7 @@ class App extends React.Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           sortReviewsBy={this.sortReviewsBy}
-          filterReviewsBy={filterReviewsBy}
+          filterCondition={filterCondition}
           filterReviews={this.filterReviews}
         />
         <ReviewsRender
@@ -133,6 +134,7 @@ class App extends React.Component {
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
+          filterCondition={filterCondition}
         />
       </div>
     );

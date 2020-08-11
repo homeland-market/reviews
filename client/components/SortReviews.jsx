@@ -20,12 +20,12 @@ class SortReviews extends React.Component {
   }
 
   renderReviewsWith() {
-    const { filterReviewsBy } = this.props;
-    if (filterReviewsBy !== 0 && typeof filterReviewsBy === 'number') {
-      return `reviews with "${filterReviewsBy} stars". `;
+    const { filterCondition } = this.props;
+    if (filterCondition !== 0 && typeof filterCondition === 'number') {
+      return `reviews with "${filterCondition} stars". `;
     }
-    if (filterReviewsBy !== '' && typeof filterReviewsBy === 'string') {
-      return `reviews with "${filterReviewsBy}". `;
+    if (filterCondition !== '' && typeof filterCondition === 'string') {
+      return `reviews with "${filterCondition}". `;
     }
     return 'reviews.';
   }
@@ -34,7 +34,7 @@ class SortReviews extends React.Component {
     const {
       filteredReviews,
       reviewDisplayCount,
-      filterReviewsBy,
+      filterCondition,
       filterReviews,
     } = this.props;
     const { value } = this.state;
@@ -55,7 +55,7 @@ class SortReviews extends React.Component {
           {filteredReviews.length}
           {' '}
           {this.renderReviewsWith()}
-          {filterReviewsBy !== 0 && filterReviewsBy !== '' ? (
+          {filterCondition !== 0 && filterCondition !== '' ? (
             <button type="button" onClick={() => filterReviews(0)} onKeyPress={() => filterReviews(0)}>
               Clear
             </button>
@@ -79,7 +79,7 @@ SortReviews.propTypes = {
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortReviewsBy: PropTypes.func.isRequired,
-  filterReviewsBy: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   filterReviews: PropTypes.func.isRequired,
 };
 
