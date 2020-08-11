@@ -8,16 +8,9 @@ const ReviewsRender = ({
   filteredReviews,
 }) => (
   <section>
-    <p>
-      Showing 1-
-      {reviewDisplayCount > filteredReviews.length ? filteredReviews.length : reviewDisplayCount}
-      {' '}
-      of
-      {' '}
-      {filteredReviews.length}
-      {' '}
-      reviews.
-    </p>
+    <h1>
+      REVIEWS RENDER
+    </h1>
     <div>
       {filteredReviews.slice(0, reviewDisplayCount).map((review) => (
         <div key={review.id}>
@@ -42,7 +35,11 @@ const ReviewsRender = ({
       </button>
     ) : null}
     {reviewDisplayCount > 3 ? (
-      <button type="button" onClick={resetReviewDisplayCount} onKeyPress={resetReviewDisplayCount}>
+      <button
+        type="button"
+        onClick={resetReviewDisplayCount}
+        onKeyPress={resetReviewDisplayCount}
+      >
         Show Less
       </button>
     ) : null}

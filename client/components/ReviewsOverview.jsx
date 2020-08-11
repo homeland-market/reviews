@@ -6,8 +6,8 @@ const ReviewsOverview = {
   reviewScores: [5, 4, 3, 2, 1],
 
   totalReviewsAverageRating(reviews) {
-    return (reviews.reduce((acc, review) => acc + (review.rating || null), 0)
-    / reviews.length).toFixed(1);
+    return (reviews.reduce((acc, review) => acc
+    + (review.rating || null), 0) / reviews.length).toFixed(1);
   },
 
   individualReviewScoreTotals(reviews, score) {
@@ -17,7 +17,7 @@ const ReviewsOverview = {
   reviewsOverviewRender({ reviews, filterReviews }) {
     return (
       <section>
-        <h1>Reviews Overview</h1>
+        <h1>REVIEWS OVERVIEW</h1>
         <div>
           {reviews.length ? ReviewsOverview.totalReviewsAverageRating(reviews) : 0}
         </div>
@@ -28,11 +28,18 @@ const ReviewsOverview = {
         </div>
         <div>
           {ReviewsOverview.reviewScores.map((score) => (
-            <div key={score} onClick={() => filterReviews('rating', score)}>
-              {score}
-              {' '}
-              {ReviewsOverview.individualReviewScoreTotals(reviews, score)}
-            </div>
+            <button
+              key={score}
+              type="button"
+              onClick={() => filterReviews(score)}
+              onKeyPress={() => filterReviews(score)}
+            >
+              <div>
+                {score}
+                {' '}
+                {ReviewsOverview.individualReviewScoreTotals(reviews, score)}
+              </div>
+            </button>
           ))}
         </div>
       </section>
