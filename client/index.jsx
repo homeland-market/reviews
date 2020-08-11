@@ -13,7 +13,7 @@ class App extends React.Component {
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
-      starRatingFilterToggle: 0,
+      starRatingFilter: 0,
     };
 
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
@@ -42,12 +42,12 @@ class App extends React.Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { starRatingFilterToggle } = this.state;
-    if (starRatingFilterToggle === value) {
+    const { starRatingFilter } = this.state;
+    if (starRatingFilter === value) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        starRatingFilterToggle: 0,
+        starRatingFilter: 0,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -55,7 +55,7 @@ class App extends React.Component {
         this.setState({
           reviewDisplayCount: 3,
           filteredReviews: filtered,
-          starRatingFilterToggle: value,
+          starRatingFilter: value,
         });
       }
     }
