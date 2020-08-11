@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
-import React from 'react';
 import ReactDOM from 'react-dom';
+import React from 'react';
 import axios from 'axios';
-import ReviewsRender from './components/ReviewsRender';
 import ReviewsOverview from './components/ReviewsOverview';
+import ReviewsRender from './components/ReviewsRender';
 import SortReviews from './components/SortReviews';
 
 class App extends React.Component {
@@ -16,7 +16,6 @@ class App extends React.Component {
       filteredReviews: [],
       starRatingFilter: 0,
     };
-
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
