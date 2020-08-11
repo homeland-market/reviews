@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const textSlicer = (text, filterCondition) => {
+const wordConditionFinder = (text, filterCondition) => {
   const results = [];
   const findAllInstances = (word) => {
     const lowerCaseWord = word.toLowerCase();
@@ -32,7 +32,8 @@ const textHighlighter = (review, filterCondition) => {
     .includes(trimmedCondition.toLowerCase()));
   const arrayOfNoneMatchingInstances = review.comment.split(new RegExp(trimmedCondition, 'ig'));
 
-  arrayOfMatchingInstances.forEach((word) => matches.push(...textSlicer(word, trimmedCondition)));
+  arrayOfMatchingInstances.forEach((word) => matches.push(...wordConditionFinder(word,
+    trimmedCondition)));
 
   for (let i = 0; i < arrayOfNoneMatchingInstances.length; i += 1) {
     if (i === arrayOfNoneMatchingInstances.length - 1) {
