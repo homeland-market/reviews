@@ -4,6 +4,7 @@ import React from 'react';
 import axios from 'axios';
 import ReviewsOverview from './components/ReviewsOverview';
 import ReviewsRender from './components/ReviewsRender';
+import SearchReviews from './components/SearchReviews';
 import SortReviews from './components/SortReviews';
 
 class App extends React.Component {
@@ -15,11 +16,13 @@ class App extends React.Component {
       reviewDisplayCount: 3,
       filteredReviews: [],
       starRatingFilter: 0,
+      textFilter: '',
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
     this.sortReviewsBy = this.sortReviewsBy.bind(this);
+    this.filterReviewsByText = this.filterReviewsByText.bind(this);
   }
 
   componentDidMount() {
@@ -48,6 +51,7 @@ class App extends React.Component {
         reviewDisplayCount: 3,
         filteredReviews: reviews,
         starRatingFilter: 0,
+        textFilter: '',
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -56,9 +60,18 @@ class App extends React.Component {
           reviewDisplayCount: 3,
           filteredReviews: filtered,
           starRatingFilter: value,
+          textFilter: '',
         });
       }
     }
+  }
+
+  filterReviewsByText(value) {
+    this.setState((prevState) => ({
+      starRatingFilter: 0,
+      textFilter: value,
+      filteredReviews: prevState.reviews.filter((review) => review.comment.includes(value)),
+    }));
   }
 
   sortReviewsBy(value) {
@@ -99,6 +112,7 @@ class App extends React.Component {
       reviewDisplayCount,
       filteredReviews,
       starRatingFilter,
+      textFilter,
     } = this.state;
     return (
       <div>
@@ -109,12 +123,16 @@ class App extends React.Component {
           reviews={reviews}
           filterReviews={this.filterReviews}
         />
+        <SearchReviews
+          filterReviewsByText={this.filterReviewsByText}
+        />
         <SortReviews
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           sortReviewsBy={this.sortReviewsBy}
           starRatingFilter={starRatingFilter}
           filterReviews={this.filterReviews}
+          textFilter={textFilter}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}

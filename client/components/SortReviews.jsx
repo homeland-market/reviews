@@ -19,8 +19,25 @@ class SortReviews extends React.Component {
     sortReviewsBy(value);
   }
 
+  renderReviewsWith() {
+    const { starRatingFilter, textFilter } = this.props;
+    if (starRatingFilter !== 0 && textFilter === '') {
+      return `reviews with "${starRatingFilter} stars". `;
+    }
+    if (starRatingFilter === 0 && textFilter !== '') {
+      return `reviews with "${textFilter}". `;
+    }
+    return 'reviews.';
+  }
+
   render() {
-    const { filteredReviews, reviewDisplayCount, starRatingFilter, filterReviews } = this.props;
+    const {
+      filteredReviews,
+      reviewDisplayCount,
+      starRatingFilter,
+      filterReviews,
+      textFilter,
+    } = this.props;
     const { value } = this.state;
     return (
       <section>
@@ -38,8 +55,8 @@ class SortReviews extends React.Component {
           {' '}
           {filteredReviews.length}
           {' '}
-          {starRatingFilter !== 0 ? `reviews with "${starRatingFilter} stars". ` : 'reviews.'}
-          {starRatingFilter !== 0 ? (
+          {this.renderReviewsWith()}
+          {starRatingFilter !== 0 || textFilter !== '' ? (
             <button type="button" onClick={() => filterReviews(0)} onKeyPress={() => filterReviews(0)}>
               Clear
             </button>
@@ -65,6 +82,11 @@ SortReviews.propTypes = {
   sortReviewsBy: PropTypes.func.isRequired,
   starRatingFilter: PropTypes.number.isRequired,
   filterReviews: PropTypes.func.isRequired,
+  textFilter: PropTypes.string,
+};
+
+SortReviews.defaultProps = {
+  textFilter: '',
 };
 
 export default SortReviews;
