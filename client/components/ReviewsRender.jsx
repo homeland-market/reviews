@@ -25,11 +25,15 @@ const textHighlighter = (review, filterCondition) => {
       <p>{review.comment}</p>
     );
   }
+  const trimmedCondition = filterCondition.trim();
   const matches = [];
   const domElements = [];
-  const arrayOfMatchingInstances = review.comment.split(' ').filter((word) => word.toLowerCase().includes(filterCondition.toLowerCase()));
-  arrayOfMatchingInstances.forEach((word) => matches.push(...textSlicer(word, filterCondition)));
-  const arrayOfNoneMatchingInstances = review.comment.split(new RegExp(filterCondition, 'gi'));
+  const arrayOfMatchingInstances = [review.comment].filter((word) => word.toLowerCase()
+    .includes(trimmedCondition.toLowerCase()));
+  const arrayOfNoneMatchingInstances = review.comment.split(new RegExp(trimmedCondition, 'ig'));
+
+  arrayOfMatchingInstances.forEach((word) => matches.push(...textSlicer(word, trimmedCondition)));
+
   for (let i = 0; i < arrayOfNoneMatchingInstances.length; i += 1) {
     if (i === arrayOfNoneMatchingInstances.length - 1) {
       domElements.push(<span key={i}>{arrayOfNoneMatchingInstances[i]}</span>);

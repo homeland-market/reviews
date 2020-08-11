@@ -67,7 +67,7 @@ class App extends React.Component {
     this.setState((prevState) => ({
       filterCondition: value,
       filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
-        .includes(value.toLowerCase())),
+        .includes(value.toLowerCase().trim())),
     }));
   }
 
