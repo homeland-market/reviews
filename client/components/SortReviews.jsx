@@ -25,7 +25,7 @@ class SortReviews extends React.Component {
     return (
       <section>
         <h1>
-          SORT REVIEWS
+          REVIEWS SORT
         </h1>
         <p>
           Showing
