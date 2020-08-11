@@ -20,14 +20,14 @@ class SortReviews extends React.Component {
   }
 
   render() {
-    const { filteredReviews, reviewDisplayCount } = this.props;
+    const { filteredReviews, reviewDisplayCount, starRatingFilter, filterReviews } = this.props;
     const { value } = this.state;
     return (
       <section>
         <h1>
           REVIEWS SORT
         </h1>
-        <p>
+        <div>
           Showing
           {' '}
           {filteredReviews.length ? '1-' : '0-'}
@@ -38,8 +38,13 @@ class SortReviews extends React.Component {
           {' '}
           {filteredReviews.length}
           {' '}
-          reviews.
-        </p>
+          {starRatingFilter !== 0 ? `reviews with "${starRatingFilter} stars". ` : 'reviews.'}
+          {starRatingFilter !== 0 ? (
+            <button type="button" onClick={() => filterReviews(0)} onKeyPress={() => filterReviews(0)}>
+              Clear
+            </button>
+          ) : null}
+        </div>
         <div>
           <span>Sort By </span>
           <select value={value.value} onChange={this.handleChange}>
@@ -58,6 +63,8 @@ SortReviews.propTypes = {
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortReviewsBy: PropTypes.func.isRequired,
+  starRatingFilter: PropTypes.number.isRequired,
+  filterReviews: PropTypes.func.isRequired,
 };
 
 export default SortReviews;

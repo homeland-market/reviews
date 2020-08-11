@@ -43,7 +43,7 @@ class App extends React.Component {
   filterReviews(value) {
     const { reviews } = this.state;
     const { starRatingFilter } = this.state;
-    if (starRatingFilter === value) {
+    if (starRatingFilter === value || value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
@@ -94,7 +94,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { reviews, reviewDisplayCount, filteredReviews } = this.state;
+    const {
+      reviews,
+      reviewDisplayCount,
+      filteredReviews,
+      starRatingFilter,
+    } = this.state;
     return (
       <div>
         <h1>
@@ -108,6 +113,8 @@ class App extends React.Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           sortReviewsBy={this.sortReviewsBy}
+          starRatingFilter={starRatingFilter}
+          filterReviews={this.filterReviews}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
