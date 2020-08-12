@@ -9,7 +9,8 @@
   "scripts": {
     "dev-start": "webpack --config webpack.config.js",
     "dev-server": "nodemon server/index.js",
-    "seed": "node server/database/dbSeed.js"
+    "seed": "node server/database/dbSeed.js",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
