@@ -10,18 +10,21 @@ class ReviewsRender extends React.Component {
     this.highlightAllMatchingCommentText = this.highlightAllMatchingCommentText.bind(this);
   }
 
-  helpfulClicker(e) {
+  helpfulClicker(review) {
     const { helpfulToggle } = this.state;
-    const clickedId = e.target.value;
+    const { updateReviewHelpfulness } = this.props;
+    const clickedId = review.id;
     const propertyIndex = helpfulToggle.indexOf(clickedId);
     if (propertyIndex === -1) {
+      updateReviewHelpfulness(review.helpful + 1, clickedId); // this might be buggy
       this.setState({
         helpfulToggle: [...helpfulToggle, clickedId],
-      }, () => console.log(this.state.helpfulToggle));
+      });
     } else {
       this.setState({
         helpfulToggle: helpfulToggle.filter((id) => id !== clickedId),
-      }, () => console.log(this.state.helpfulToggle));
+      });
+      updateReviewHelpfulness(review.helpful, clickedId); // this might be buggy
     }
   }
 
@@ -81,7 +84,7 @@ class ReviewsRender extends React.Component {
               <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
               {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : this.highlightAllMatchingCommentText(review)}
               <p>{review.rating}</p>
-              <button type="button" value={review.id} onClick={this.helpfulClicker}>{review.helpful}</button>
+              <button type="button" value={review} onClick={() => this.helpfulClicker(review)}>{review.helpful}</button>
               {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
             </div>
           ))}
@@ -111,6 +114,7 @@ class ReviewsRender extends React.Component {
 }
 
 ReviewsRender.propTypes = {
+  updateReviewHelpfulness: PropTypes.func.isRequired,
   seeMoreReviews: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,

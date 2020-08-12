@@ -17,6 +17,7 @@ class App extends React.Component {
       filteredReviews: [],
       filterCondition: 0,
     };
+    this.updateReviewHelpfulness = this.updateReviewHelpfulness.bind(this);
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
@@ -40,6 +41,21 @@ class App extends React.Component {
         })
         .catch((err) => console.error(err));
     }
+  }
+
+  updateReviewHelpfulness(helpfulCount, id) {
+  //   const { productId } = this.state;
+  //   axios.put(`/api/reviews${productId}`, {
+  //     id: id,
+  //     helpful: helpfulCount,
+  //   })
+  //   .then((data) => {
+  //       this.setState({
+  //         reviews: data.data,
+  //         filteredReviews: data.data.sort((a, b) => b.helpful - a.helpful),
+  //       });
+  //     })
+  //     .catch((err) => console.error(err));
   }
 
   filterReviews(value) {
@@ -76,13 +92,13 @@ class App extends React.Component {
     if (value === 'Includes customer photos') {
       this.setState((prevState) => ({
         filteredReviews: prevState.filteredReviews.sort((a, b) => (a.img === null)
-        - (b.img === null) || +(a > b) || -(a < b)),
+          - (b.img === null) || +(a > b) || -(a < b)),
       }));
     }
     if (value === 'Most recent') {
       this.setState((prevState) => ({
         filteredReviews: prevState.filteredReviews.sort((a, b) => new Date(b.date)
-        - new Date(a.date)),
+          - new Date(a.date)),
       }));
     }
     if (value === 'Most helpful' || value === 'Most relevant') {
@@ -131,6 +147,7 @@ class App extends React.Component {
           filterReviews={this.filterReviews}
         />
         <ReviewsRender
+          updateReviewHelpfulness={this.updateReviewHelpfulness}
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
