@@ -4,11 +4,25 @@ import PropTypes from 'prop-types';
 class ReviewsRender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      helpfulToggle: {},
-    };
+    this.state = { helpfulToggle: [] };
+    this.helpfulClicker = this.helpfulClicker.bind(this);
     this.filterConditionExtractor = this.filterConditionExtractor.bind(this);
     this.highlightAllMatchingCommentText = this.highlightAllMatchingCommentText.bind(this);
+  }
+
+  helpfulClicker(e) {
+    const { helpfulToggle } = this.state;
+    const clickedId = e.target.value;
+    const propertyIndex = helpfulToggle.indexOf(clickedId);
+    if (propertyIndex === -1) {
+      this.setState({
+        helpfulToggle: [...helpfulToggle, clickedId],
+      }, () => console.log(this.state.helpfulToggle));
+    } else {
+      this.setState({
+        helpfulToggle: helpfulToggle.filter((id) => id !== clickedId),
+      }, () => console.log(this.state.helpfulToggle));
+    }
   }
 
   filterConditionExtractor(reviewComment) {
@@ -67,7 +81,7 @@ class ReviewsRender extends React.Component {
               <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
               {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : this.highlightAllMatchingCommentText(review)}
               <p>{review.rating}</p>
-              <p>{review.helpful}</p>
+              <button type="button" value={review.id} onClick={this.helpfulClicker}>{review.helpful}</button>
               {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
             </div>
           ))}
