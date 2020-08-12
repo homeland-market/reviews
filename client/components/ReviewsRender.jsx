@@ -1,84 +1,100 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const searchTermExtractor = (reviewComment, searchTerm) => {
-  const extractedMatches = [];
+class ReviewsRender extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      helpfulToggle: {},
+    };
+    this.filterConditionExtractor = this.filterConditionExtractor.bind(this);
+    this.highlightAllMatchingCommentText = this.highlightAllMatchingCommentText.bind(this);
+  }
 
-  const extractAllInstances = (text) => {
-    const textIgnoreCase = text.toLowerCase();
-    const startOfSearchTerm = textIgnoreCase.indexOf(searchTerm);
-    const endOfSearchTerm = startOfSearchTerm + searchTerm.length;
-    if (startOfSearchTerm === -1) { return extractedMatches; }
-    extractedMatches.push(text.substring(startOfSearchTerm, endOfSearchTerm));
-    return extractAllInstances(text.slice(startOfSearchTerm + 1));
-  };
+  filterConditionExtractor(reviewComment) {
+    const { filterCondition } = this.props;
+    const trimmedfilterConditionIgnoreCase = filterCondition.trim().toLowerCase();
+    const extractedMatches = [];
 
-  extractAllInstances(reviewComment);
-  return extractedMatches;
-};
+    const extractAllInstances = (text) => {
+      const textIgnoreCase = text.toLowerCase();
+      const startOffilterCondition = textIgnoreCase.indexOf(trimmedfilterConditionIgnoreCase);
+      const endOffilterCondition = startOffilterCondition + trimmedfilterConditionIgnoreCase.length;
+      if (startOffilterCondition === -1) { return extractedMatches; }
+      extractedMatches.push(text.substring(startOffilterCondition, endOffilterCondition));
+      return extractAllInstances(text.slice(startOffilterCondition + 1));
+    };
 
-const highlightAllMatchingCommentText = (review, searchTerm) => {
-  const searchTermMatches = [];
-  const arrayOfElements = [];
-  const trimmedSearchTermIgnoreCase = searchTerm.trim().toLowerCase();
-  const splitReviewText = review.comment.split(new RegExp(trimmedSearchTermIgnoreCase, 'ig'));
-  searchTermMatches.push(...searchTermExtractor(review.comment, trimmedSearchTermIgnoreCase));
-  splitReviewText.forEach((scentence, index) => {
-    arrayOfElements.push(
-      <span key={`${review.id}-${Math.random()}`}>
-        {scentence}
-        <mark>{searchTermMatches[index]}</mark>
-      </span>,
-    );
-  });
-  return <p>{arrayOfElements}</p>;
-};
+    extractAllInstances(reviewComment);
+    return extractedMatches;
+  }
 
-const ReviewsRender = ({
-  reviewDisplayCount,
-  seeMoreReviews,
-  resetReviewDisplayCount,
-  filteredReviews,
-  filterCondition,
-}) => (
-  <section>
-    <h1>
-      REVIEWS RENDER
-    </h1>
-    <div>
-      {filteredReviews.slice(0, reviewDisplayCount).map((review) => (
-        <div key={review.id}>
-          <p>{review.name}</p>
-          <p>{review.location}</p>
-          <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
-          {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : highlightAllMatchingCommentText(review, filterCondition)}
-          <p>{review.rating}</p>
-          <p>{review.helpful}</p>
-          {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
+  highlightAllMatchingCommentText(review) {
+    const { filterCondition } = this.props;
+    const filterConditionMatches = [];
+    const arrayOfElements = [];
+    const splitReviewText = review.comment.split(new RegExp(filterCondition, 'ig'));
+    filterConditionMatches.push(...this.filterConditionExtractor(review.comment));
+    splitReviewText.forEach((scentence, index) => {
+      arrayOfElements.push(
+        <span key={`${review.id}-${Math.random()}`}>
+          {scentence}
+          <mark>{filterConditionMatches[index]}</mark>
+        </span>,
+      );
+    });
+    return <p>{arrayOfElements}</p>;
+  }
+
+  render() {
+    const {
+      reviewDisplayCount,
+      seeMoreReviews,
+      resetReviewDisplayCount,
+      filteredReviews,
+      filterCondition,
+    } = this.props;
+    return (
+      <section>
+        <h1>
+          REVIEWS RENDER
+        </h1>
+        <div>
+          {filteredReviews.slice(0, reviewDisplayCount).map((review) => (
+            <div key={review.id}>
+              <p>{review.name}</p>
+              <p>{review.location}</p>
+              <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
+              {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : this.highlightAllMatchingCommentText(review)}
+              <p>{review.rating}</p>
+              <p>{review.helpful}</p>
+              {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-    {reviewDisplayCount < filteredReviews.length ? (
-      <button type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
-        Show
-        {' '}
-        {filteredReviews.length - reviewDisplayCount >= 10 ? 10
-          : filteredReviews.length - reviewDisplayCount}
-        {' '}
-        More Reviews
-      </button>
-    ) : null}
-    {reviewDisplayCount > 3 ? (
-      <button
-        type="button"
-        onClick={resetReviewDisplayCount}
-        onKeyPress={resetReviewDisplayCount}
-      >
-        Show Less
-      </button>
-    ) : null}
-  </section>
-);
+        {reviewDisplayCount < filteredReviews.length ? (
+          <button type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
+            Show
+            {' '}
+            {filteredReviews.length - reviewDisplayCount >= 10 ? 10
+              : filteredReviews.length - reviewDisplayCount}
+            {' '}
+            More Reviews
+          </button>
+        ) : null}
+        {reviewDisplayCount > 3 ? (
+          <button
+            type="button"
+            onClick={resetReviewDisplayCount}
+            onKeyPress={resetReviewDisplayCount}
+          >
+            Show Less
+          </button>
+        ) : null}
+      </section>
+    );
+  }
+}
 
 ReviewsRender.propTypes = {
   seeMoreReviews: PropTypes.func.isRequired,
