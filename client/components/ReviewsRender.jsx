@@ -10,7 +10,7 @@ const searchTermExtractor = (reviewComment, searchTerm) => {
     const endOfSearchTerm = startOfSearchTerm + searchTerm.length;
     if (startOfSearchTerm === -1) { return extractedMatches; }
     extractedMatches.push(text.substring(startOfSearchTerm, endOfSearchTerm));
-    return extractAllInstances(textIgnoreCase.slice(startOfSearchTerm + 1));
+    return extractAllInstances(text.slice(startOfSearchTerm + 1));
   };
 
   extractAllInstances(reviewComment);
