@@ -25,7 +25,7 @@ const highlightAllMatchingCommentText = (review, searchTerm) => {
   searchTermMatches.push(...searchTermExtractor(review.comment, trimmedSearchTermIgnoreCase));
   splitReviewText.forEach((scentence, index) => {
     arrayOfElements.push(
-      <span key={`${review.id}-${scentence.length}`}>
+      <span key={`${review.id}-${Math.random()}`}>
         {scentence}
         <mark>{searchTermMatches[index]}</mark>
       </span>,
