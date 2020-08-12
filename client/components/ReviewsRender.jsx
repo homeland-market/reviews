@@ -1,57 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const wordConditionFinder = (text, filterCondition) => {
-  const results = [];
-  const findAllInstances = (word) => {
-    const lowerCaseWord = word.toLowerCase();
-    const lowerFilterCondition = filterCondition.toLowerCase();
-    if (lowerCaseWord.indexOf(lowerFilterCondition) === -1) {
-      return results;
-    }
-    results.push(
-      word.substring(lowerCaseWord.indexOf(lowerFilterCondition),
-        lowerCaseWord.indexOf(lowerFilterCondition) + filterCondition.length),
-    );
-    return findAllInstances(lowerCaseWord.slice(lowerCaseWord.indexOf(lowerFilterCondition) + 1));
+const searchTermExtractor = (reviewComment, searchTerm) => {
+  const extractedMatches = [];
+
+  const extractAllInstances = (text) => {
+    const textIgnoreCase = text.toLowerCase();
+    const startOfSearchTerm = textIgnoreCase.indexOf(searchTerm);
+    const endOfSearchTerm = startOfSearchTerm + searchTerm.length;
+    if (startOfSearchTerm === -1) { return extractedMatches; }
+    extractedMatches.push(text.substring(startOfSearchTerm, endOfSearchTerm));
+    return extractAllInstances(textIgnoreCase.slice(startOfSearchTerm + 1));
   };
-  findAllInstances(text);
-  return results;
+
+  extractAllInstances(reviewComment);
+  return extractedMatches;
 };
 
-const textHighlighter = (review, filterCondition) => {
-  if (filterCondition === '' || typeof filterCondition === 'number') {
-    return (
-      <p>{review.comment}</p>
+const highlightAllMatchingCommentText = (review, searchTerm) => {
+  const searchTermMatches = [];
+  const arrayOfElements = [];
+  const trimmedSearchTermIgnoreCase = searchTerm.trim().toLowerCase();
+  const splitReviewText = review.comment.split(new RegExp(trimmedSearchTermIgnoreCase, 'ig'));
+  searchTermMatches.push(...searchTermExtractor(review.comment, trimmedSearchTermIgnoreCase));
+  splitReviewText.forEach((scentence, index) => {
+    arrayOfElements.push(
+      <span key={`${review.id}-${scentence.length}`}>
+        {scentence}
+        <mark>{searchTermMatches[index]}</mark>
+      </span>,
     );
-  }
-  const trimmedCondition = filterCondition.trim();
-  const matches = [];
-  const domElements = [];
-  const arrayOfMatchingInstances = [review.comment].filter((word) => word.toLowerCase()
-    .includes(trimmedCondition.toLowerCase()));
-  const arrayOfNoneMatchingInstances = review.comment.split(new RegExp(trimmedCondition, 'ig'));
-
-  arrayOfMatchingInstances.forEach((word) => matches.push(...wordConditionFinder(word,
-    trimmedCondition)));
-
-  for (let i = 0; i < arrayOfNoneMatchingInstances.length; i += 1) {
-    if (i === arrayOfNoneMatchingInstances.length - 1) {
-      domElements.push(<span key={i}>{arrayOfNoneMatchingInstances[i]}</span>);
-    } else {
-      domElements.push(
-        <span key={i}>
-          {arrayOfNoneMatchingInstances[i]}
-          <mark>{matches[i]}</mark>
-        </span>,
-      );
-    }
-  }
-  return (
-    <p key={review.id}>
-      {domElements}
-    </p>
-  );
+  });
+  return <p>{arrayOfElements}</p>;
 };
 
 const ReviewsRender = ({
@@ -71,7 +51,7 @@ const ReviewsRender = ({
           <p>{review.name}</p>
           <p>{review.location}</p>
           <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
-          {textHighlighter(review, filterCondition)}
+          {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : highlightAllMatchingCommentText(review, filterCondition)}
           <p>{review.rating}</p>
           <p>{review.helpful}</p>
           {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}

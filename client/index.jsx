@@ -65,6 +65,7 @@ class App extends React.Component {
 
   filterReviewsByText(value) {
     this.setState((prevState) => ({
+      reviewDisplayCount: 3,
       filterCondition: value,
       filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
         .includes(value.toLowerCase().trim())),
