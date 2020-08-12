@@ -4,22 +4,24 @@ import React from 'react';
 import axios from 'axios';
 import ReviewsOverview from './components/ReviewsOverview';
 import ReviewsRender from './components/ReviewsRender';
+import SearchReviews from './components/SearchReviews';
 import SortReviews from './components/SortReviews';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      urlId: window.location.pathname,
+      productId: window.location.pathname,
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
-      starRatingFilter: 0,
+      filterCondition: 0,
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
     this.sortReviewsBy = this.sortReviewsBy.bind(this);
+    this.filterReviewsByText = this.filterReviewsByText.bind(this);
   }
 
   componentDidMount() {
@@ -27,9 +29,9 @@ class App extends React.Component {
   }
 
   getReviews() {
-    const { urlId } = this.state;
-    if (urlId !== '/') {
-      axios.get(`/api/reviews${urlId}`)
+    const { productId } = this.state;
+    if (productId !== '/') {
+      axios.get(`/api/reviews${productId}`)
         .then((data) => {
           this.setState({
             reviews: data.data,
@@ -42,12 +44,12 @@ class App extends React.Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { starRatingFilter } = this.state;
-    if (starRatingFilter === value) {
+    const { filterCondition } = this.state;
+    if (filterCondition === value || value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        starRatingFilter: 0,
+        filterCondition: 0,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -55,10 +57,19 @@ class App extends React.Component {
         this.setState({
           reviewDisplayCount: 3,
           filteredReviews: filtered,
-          starRatingFilter: value,
+          filterCondition: value,
         });
       }
     }
+  }
+
+  filterReviewsByText(value) {
+    this.setState((prevState) => ({
+      reviewDisplayCount: 3,
+      filterCondition: value,
+      filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
+        .includes(value.toLowerCase().trim())),
+    }));
   }
 
   sortReviewsBy(value) {
@@ -94,7 +105,12 @@ class App extends React.Component {
   }
 
   render() {
-    const { reviews, reviewDisplayCount, filteredReviews } = this.state;
+    const {
+      reviews,
+      reviewDisplayCount,
+      filteredReviews,
+      filterCondition,
+    } = this.state;
     return (
       <div>
         <h1>
@@ -104,16 +120,22 @@ class App extends React.Component {
           reviews={reviews}
           filterReviews={this.filterReviews}
         />
+        <SearchReviews
+          filterReviewsByText={this.filterReviewsByText}
+        />
         <SortReviews
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           sortReviewsBy={this.sortReviewsBy}
+          filterCondition={filterCondition}
+          filterReviews={this.filterReviews}
         />
         <ReviewsRender
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
+          filterCondition={filterCondition}
         />
       </div>
     );
