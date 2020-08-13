@@ -35,12 +35,11 @@ class App extends Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { filterCondition } = this.state;
-    if (filterCondition === value || value === 0) {
+    if (value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        filterCondition: 0,
+        filterCondition: value,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -55,12 +54,13 @@ class App extends Component {
   }
 
   filterReviewsByText(value) {
-    this.setState((prevState) => ({
+    const { reviews } = this.state;
+    const filtered = reviews.filter((review) => review.comment.toLowerCase().includes(value));
+    this.setState({
       reviewDisplayCount: 3,
       filterCondition: value,
-      filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
-        .includes(value.toLowerCase().trim())),
-    }));
+      filteredReviews: filtered,
+    });
   }
 
   sortReviewsBy(value) {

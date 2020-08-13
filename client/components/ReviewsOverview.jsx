@@ -1,55 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ReviewsOverview = {
+import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
+import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
-  reviewScores: [5, 4, 3, 2, 1],
-
-  totalReviewsAverageRating(reviews) {
-    return (reviews.reduce((acc, review) => acc
-    + (review.rating || null), 0) / reviews.length).toFixed(1);
-  },
-
-  individualReviewScoreTotals(reviews, score) {
-    return reviews.reduce((acc, review) => acc + (review.rating === score ? 1 : 0), 0);
-  },
-
-  reviewsOverviewRender({ reviews, filterReviews }) {
-    return (
-      <section>
-        <h1>REVIEWS OVERVIEW</h1>
-        <div>
-          {reviews.length ? ReviewsOverview.totalReviewsAverageRating(reviews) : 0}
+const ReviewsOverview = ({ reviews, filterReviews }) => {
+  const reviewScores = [5, 4, 3, 2, 1];
+  return (
+    <section>
+      <h1>REVIEWS OVERVIEW</h1>
+      <ReviewAverageRating reviews={reviews} />
+      {reviewScores.map((score) => (
+        <div key={score}>
+          <RatingScoreButton reviews={reviews} score={score} filterReviews={filterReviews} />
         </div>
-        <div>
-          {reviews.length}
-          {' '}
-          Reviews
-        </div>
-        <div>
-          {ReviewsOverview.reviewScores.map((score) => (
-            <button
-              key={score}
-              type="button"
-              onClick={() => filterReviews(score)}
-              onKeyPress={() => filterReviews(score)}
-            >
-              <div>
-                {score}
-                {' '}
-                {ReviewsOverview.individualReviewScoreTotals(reviews, score)}
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-    );
-  },
+      ))}
+    </section>
+  );
 };
 
-ReviewsOverview.reviewsOverviewRender.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+ReviewsOverview.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    url_id: PropTypes.number,
+    name: PropTypes.string,
+    location: PropTypes.string,
+    date: PropTypes.string,
+    comment: PropTypes.string,
+    rating: PropTypes.number,
+    helpful: PropTypes.number,
+    img: PropTypes.string,
+  })).isRequired,
   filterReviews: PropTypes.func.isRequired,
 };
 
-export default ReviewsOverview.reviewsOverviewRender;
+export default ReviewsOverview;

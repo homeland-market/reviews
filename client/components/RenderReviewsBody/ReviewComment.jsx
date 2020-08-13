@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const filterConditionExtractor = (comment, filterCondition) => {
-  const filterConditionIgnoreCase = filterCondition.toLowerCase();
   const extractedMatches = [];
 
   const extractAllInstances = (text) => {
     const textIgnoreCase = text.toLowerCase();
-    const startIndex = textIgnoreCase.indexOf(filterConditionIgnoreCase);
-    const endIndex = startIndex + filterConditionIgnoreCase.length;
+    const startIndex = textIgnoreCase.indexOf(filterCondition);
+    const endIndex = startIndex + filterCondition.length;
     if (startIndex === -1) { return extractedMatches; }
     extractedMatches.push(text.substring(startIndex, endIndex));
     return extractAllInstances(text.slice(startIndex + 1));
