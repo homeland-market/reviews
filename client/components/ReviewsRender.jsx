@@ -1,31 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import HelpfulButton from './HelpfulButton';
 
 class ReviewsRender extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { helpfulToggle: [] };
-    this.helpfulClicker = this.helpfulClicker.bind(this);
     this.filterConditionExtractor = this.filterConditionExtractor.bind(this);
     this.highlightAllMatchingCommentText = this.highlightAllMatchingCommentText.bind(this);
-  }
-
-  helpfulClicker(review) {
-    const { helpfulToggle } = this.state;
-    const { updateReviewHelpfulness } = this.props;
-    const clickedId = review.id;
-    const propertyIndex = helpfulToggle.indexOf(clickedId);
-    if (propertyIndex === -1) {
-      updateReviewHelpfulness(review.helpful + 1, clickedId); // this might be buggy
-      this.setState({
-        helpfulToggle: [...helpfulToggle, clickedId],
-      });
-    } else {
-      this.setState({
-        helpfulToggle: helpfulToggle.filter((id) => id !== clickedId),
-      });
-      updateReviewHelpfulness(review.helpful, clickedId); // this might be buggy
-    }
   }
 
   filterConditionExtractor(reviewComment) {
@@ -70,6 +51,7 @@ class ReviewsRender extends React.Component {
       resetReviewDisplayCount,
       filteredReviews,
       filterCondition,
+      updateReviewHelpfulness,
     } = this.props;
     return (
       <section>
@@ -84,7 +66,7 @@ class ReviewsRender extends React.Component {
               <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
               {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : this.highlightAllMatchingCommentText(review)}
               <p>{review.rating}</p>
-              <button type="button" value={review} onClick={() => this.helpfulClicker(review)}>{review.helpful}</button>
+              <HelpfulButton review={review} updateReviewHelpfulness={updateReviewHelpfulness} />
               {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
             </div>
           ))}

@@ -44,18 +44,7 @@ class App extends React.Component {
   }
 
   updateReviewHelpfulness(helpfulCount, id) {
-  //   const { productId } = this.state;
-  //   axios.put(`/api/reviews${productId}`, {
-  //     id: id,
-  //     helpful: helpfulCount,
-  //   })
-  //   .then((data) => {
-  //       this.setState({
-  //         reviews: data.data,
-  //         filteredReviews: data.data.sort((a, b) => b.helpful - a.helpful),
-  //       });
-  //     })
-  //     .catch((err) => console.error(err));
+    console.log(helpfulCount, id);
   }
 
   filterReviews(value) {
