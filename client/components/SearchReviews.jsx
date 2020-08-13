@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class SearchReviews extends React.Component {
+class SearchReviews extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      query: '',
-    };
+    this.state = { query: '' };
   }
 
-  handleChange(event) {
+  handleSearchChange(event) {
     const queryIgnoreCaseTrim = event.target.value.toLowerCase().trim();
     this.setState({ query: queryIgnoreCaseTrim });
   }
 
-  searchReviewText() {
+  handleSearchClick() {
     const { query } = this.state;
     const { filterReviewsByText } = this.props;
     document.getElementById('search-bar').reset();
@@ -27,15 +25,13 @@ class SearchReviews extends React.Component {
         <h1> SEARCH REVIEWS </h1>
         <form id="search-bar">
           <input
-            onChange={(e) => this.handleChange(e)}
+            onChange={(e) => this.handleSearchChange(e)}
             type="text"
             className="input"
             id="searchReviews"
             placeholder="Search Reviews"
           />
-          <button type="button" onClick={() => this.searchReviewText()}>
-            Search Item
-          </button>
+          <button type="button" onClick={() => this.handleSearchClick()}>Search Item</button>
         </form>
       </section>
     );
