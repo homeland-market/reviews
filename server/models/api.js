@@ -13,4 +13,15 @@ module.exports = {
     });
   },
 
+  updateHelpful: (data, callback) => {
+    const queryString = 'UPDATE user_reviews SET helpful = ? WHERE id = ?';
+    db.query(queryString, data, (error, results) => {
+      if (error) {
+        callback(error);
+      } else {
+        callback(null, results);
+      }
+    });
+  },
+
 };

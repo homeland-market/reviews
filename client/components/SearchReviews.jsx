@@ -12,7 +12,7 @@ class SearchReviews extends React.Component {
   }
 
   handleChange(event) {
-    this.setState({ query: event.target.value });
+    this.setState({ query: event.target.value.trim() });
   }
 
   searchReviewText() {

@@ -1,17 +1,17 @@
-/* eslint-disable no-console */
 import ReactDOM from 'react-dom';
-import React from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
+
 import ReviewsOverview from './components/ReviewsOverview';
-import ReviewsRender from './components/ReviewsRender';
 import SearchReviews from './components/SearchReviews';
 import SortReviews from './components/SortReviews';
+import RenderReviews from './components/RenderReviews';
 
-class App extends React.Component {
+import { getAllReviews } from './lib/DatabaseRequests';
+
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: window.location.pathname,
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
@@ -25,21 +25,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews();
-  }
-
-  getReviews() {
-    const { productId } = this.state;
-    if (productId !== '/') {
-      axios.get(`/api/reviews${productId}`)
-        .then((data) => {
-          this.setState({
-            reviews: data.data,
-            filteredReviews: data.data.sort((a, b) => b.helpful - a.helpful),
-          });
-        })
-        .catch((err) => console.error(err));
-    }
+    getAllReviews((reviews) => {
+      this.setState({
+        reviews,
+        filteredReviews: reviews.sort((a, b) => b.helpful - a.helpful),
+      });
+    });
   }
 
   filterReviews(value) {
@@ -76,13 +67,13 @@ class App extends React.Component {
     if (value === 'Includes customer photos') {
       this.setState((prevState) => ({
         filteredReviews: prevState.filteredReviews.sort((a, b) => (a.img === null)
-        - (b.img === null) || +(a > b) || -(a < b)),
+          - (b.img === null) || +(a > b) || -(a < b)),
       }));
     }
     if (value === 'Most recent') {
       this.setState((prevState) => ({
         filteredReviews: prevState.filteredReviews.sort((a, b) => new Date(b.date)
-        - new Date(a.date)),
+          - new Date(a.date)),
       }));
     }
     if (value === 'Most helpful' || value === 'Most relevant') {
@@ -130,7 +121,7 @@ class App extends React.Component {
           filterCondition={filterCondition}
           filterReviews={this.filterReviews}
         />
-        <ReviewsRender
+        <RenderReviews
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
