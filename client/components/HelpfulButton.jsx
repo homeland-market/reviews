@@ -1,47 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { updateHelpfulCount } from '../lib/databaseRequests';
 
-class HelpfulButton extends React.Component {
+class HelpfulButton extends Component {
   constructor(props) {
     super(props);
-    const { review } = this.props;
-    this.state = {
-      helpfulToggle: false,
-      helpfulCount: review.helpful,
-    };
+    const { review: { helpful } } = this.props;
+    this.state = { helpfulToggle: false, helpfulCount: helpful };
   }
 
-  helpfulClicker(review) {
+  handleHelpfulClick() {
+    const { review: { helpful, id } } = this.props;
     const { helpfulToggle } = this.state;
-    const { updateReviewHelpfulness } = this.props;
-    const clickedId = review.id;
-    if (helpfulToggle === false) {
-      updateReviewHelpfulness(review.helpful + 1, clickedId); // this might be buggy
-      this.setState((prevState) => ({
-        helpfulToggle: true,
-        helpfulCount: prevState.helpfulCount + 1,
-      }));
+
+    if (!helpfulToggle) {
+      this.setState({ helpfulToggle: true, helpfulCount: helpful + 1 });
+      updateHelpfulCount(helpful + 1, id);
     } else {
-      this.setState((prevState) => ({
-        helpfulToggle: false,
-        helpfulCount: prevState.helpfulCount - 1,
-      }));
-      updateReviewHelpfulness(review.helpful, clickedId); // this might be buggy
+      this.setState({ helpfulToggle: false, helpfulCount: helpful });
+      updateHelpfulCount(helpful, id);
     }
   }
 
   render() {
-    const { review } = this.props;
     const { helpfulCount } = this.state;
-    return (
-      <button type="button" value={review} onClick={() => this.helpfulClicker(review)}>{helpfulCount}</button>
-    );
+    return <button type="submit" onClick={() => this.handleHelpfulClick()}>{helpfulCount}</button>;
   }
 }
 
 HelpfulButton.propTypes = {
-  updateReviewHelpfulness: PropTypes.func.isRequired,
-  review: PropTypes.object.isRequired,
+  review: PropTypes.shape({
+    id: PropTypes.number,
+    url_id: PropTypes.number,
+    name: PropTypes.string,
+    location: PropTypes.string,
+    date: PropTypes.string,
+    comment: PropTypes.string,
+    rating: PropTypes.number,
+    helpful: PropTypes.number,
+    img: PropTypes.string,
+  }).isRequired,
 };
 
 export default HelpfulButton;

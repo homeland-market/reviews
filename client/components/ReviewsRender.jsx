@@ -51,7 +51,6 @@ class ReviewsRender extends React.Component {
       resetReviewDisplayCount,
       filteredReviews,
       filterCondition,
-      updateReviewHelpfulness,
     } = this.props;
     return (
       <section>
@@ -66,7 +65,7 @@ class ReviewsRender extends React.Component {
               <p>{review.date.substring(0, review.date.indexOf('T'))}</p>
               {filterCondition === '' || typeof filterCondition === 'number' ? <p>{review.comment}</p> : this.highlightAllMatchingCommentText(review)}
               <p>{review.rating}</p>
-              <HelpfulButton review={review} updateReviewHelpfulness={updateReviewHelpfulness} />
+              <HelpfulButton review={review} />
               {review.img === null ? null : <p><img src={review.img} alt={review.id} /></p>}
             </div>
           ))}
@@ -96,7 +95,6 @@ class ReviewsRender extends React.Component {
 }
 
 ReviewsRender.propTypes = {
-  updateReviewHelpfulness: PropTypes.func.isRequired,
   seeMoreReviews: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,

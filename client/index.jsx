@@ -1,23 +1,23 @@
 /* eslint-disable no-console */
 import ReactDOM from 'react-dom';
 import React from 'react';
-import axios from 'axios';
-import ReviewsOverview from './components/ReviewsOverview';
+
+import SortReviews from './components/SortReviews';
 import ReviewsRender from './components/ReviewsRender';
 import SearchReviews from './components/SearchReviews';
-import SortReviews from './components/SortReviews';
+import ReviewsOverview from './components/ReviewsOverview';
+
+import { getAllReviews } from './lib/databaseRequests';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: window.location.pathname,
       reviews: [],
       reviewDisplayCount: 3,
       filteredReviews: [],
       filterCondition: 0,
     };
-    this.updateReviewHelpfulness = this.updateReviewHelpfulness.bind(this);
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
@@ -26,25 +26,12 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getReviews();
-  }
-
-  getReviews() {
-    const { productId } = this.state;
-    if (productId !== '/') {
-      axios.get(`/api/reviews${productId}`)
-        .then((data) => {
-          this.setState({
-            reviews: data.data,
-            filteredReviews: data.data.sort((a, b) => b.helpful - a.helpful),
-          });
-        })
-        .catch((err) => console.error(err));
-    }
-  }
-
-  updateReviewHelpfulness(helpfulCount, id) {
-    console.log(helpfulCount, id);
+    getAllReviews((reviews) => {
+      this.setState({
+        reviews,
+        filteredReviews: reviews.sort((a, b) => b.helpful - a.helpful),
+      });
+    });
   }
 
   filterReviews(value) {
@@ -136,7 +123,6 @@ class App extends React.Component {
           filterReviews={this.filterReviews}
         />
         <ReviewsRender
-          updateReviewHelpfulness={this.updateReviewHelpfulness}
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
