@@ -1,15 +1,14 @@
-/* eslint-disable no-console */
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { Component } from 'react';
 
-import SortReviews from './components/SortReviews';
-import ReviewsRender from './components/ReviewsRender';
-import SearchReviews from './components/SearchReviews';
 import ReviewsOverview from './components/ReviewsOverview';
+import SearchReviews from './components/SearchReviews';
+import SortReviews from './components/SortReviews';
+import RenderReviews from './components/RenderReviews';
 
 import { getAllReviews } from './lib/DatabaseRequests';
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -122,7 +121,7 @@ class App extends React.Component {
           filterCondition={filterCondition}
           filterReviews={this.filterReviews}
         />
-        <ReviewsRender
+        <RenderReviews
           seeMoreReviews={this.seeMoreReviews}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
