@@ -15,8 +15,7 @@ app.get('/api/reviews/:id', (req, res) => {
   const requestId = req.params.id;
   models.getAll([requestId], (error, reviews) => {
     if (error) {
-      console.error(error);
-      res.status(500).send('There was an error with your request');
+      res.status(500).send(error);
     } else {
       res.status(200).json(reviews);
     }
@@ -27,8 +26,7 @@ app.put('/api/reviews/helpful/:id', (req, res) => {
   const { helpful, id } = req.body;
   models.updateHelpful([helpful, id], (error, results) => {
     if (error) {
-      console.error(error);
-      res.status(500).json(helpful - 1);
+      res.status(500).json(error);
     } else {
       res.status(200).json(results);
     }

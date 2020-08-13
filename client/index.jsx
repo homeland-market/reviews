@@ -7,7 +7,7 @@ import ReviewsRender from './components/ReviewsRender';
 import SearchReviews from './components/SearchReviews';
 import ReviewsOverview from './components/ReviewsOverview';
 
-import { getAllReviews } from './lib/databaseRequests';
+import { getAllReviews } from './lib/DatabaseRequests';
 
 class App extends React.Component {
   constructor(props) {

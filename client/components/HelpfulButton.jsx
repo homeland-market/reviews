@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { updateHelpfulCount } from '../lib/databaseRequests';
+import { updateHelpfulCount } from '../lib/DatabaseRequests';
 
 class HelpfulButton extends Component {
   constructor(props) {
