@@ -11,6 +11,7 @@ const OverviewFullWrapper = styled.div`
 const OverviewContainer = styled.div`
   display: grid;
   grid-template-rows: 100px 2fr;
+  padding: 12px 4px;
 `;
 
 const RaitingsAndReviewsContainer = styled.div`
@@ -61,7 +62,6 @@ const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
           <ReviewsAverageContainer>
             <ReviewAverageRating reviews={reviews} />
           </ReviewsAverageContainer>
-
           <ReviewsScoresContainer>
             {reviewScores.map((score) => (
               <ReviewStarSpecificBlock key={score}>
@@ -74,7 +74,6 @@ const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
               </ReviewStarSpecificBlock>
             ))}
           </ReviewsScoresContainer>
-
         </OverviewBodyContainer>
       </OverviewContainer>
     </OverviewFullWrapper>

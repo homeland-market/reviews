@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Poppins', sans-serif;
         font-weight: 400;
         font-size: 16px;
-        text-size-adjust: 100%;
         -webkit-font-smoothing: antialiased;
         line-height: 1.5;
         color: #221924;
