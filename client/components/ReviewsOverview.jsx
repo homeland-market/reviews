@@ -5,7 +5,11 @@ import styled from 'styled-components';
 import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
-const OverviewWrapper = styled.div`
+const OverviewFullWrapper = styled.div`
+  display: block;
+`;
+
+const OverviewContainer = styled.div`
   display: grid;
   grid-template-rows: 100px 2fr;
 `;
@@ -36,6 +40,8 @@ const ReviewsAverageContainer = styled.div`
 
 const ReviewsScoresContainer = styled.div`
   display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
   flex-direction: column;
   grid-column: 2;
   justify-content: space-evenly;
@@ -43,34 +49,38 @@ const ReviewsScoresContainer = styled.div`
 `;
 
 const ReviewStarSpecificBlock = styled.div`
-  width: auto;
+  display: block;
 `;
 
 const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
-    <OverviewWrapper>
-      <RaitingsAndReviewsContainer>
-        <h1>Ratings & Reviews</h1>
-      </RaitingsAndReviewsContainer>
-      <OverviewBodyContainer>
-        <ReviewsAverageContainer>
-          <ReviewAverageRating reviews={reviews} />
-        </ReviewsAverageContainer>
-        <ReviewsScoresContainer>
-          {reviewScores.map((score) => (
-            <ReviewStarSpecificBlock key={score}>
-              <RatingScoreButton
-                reviews={reviews}
-                reviewPercentages={reviewPercentages[score]}
-                filterReviews={filterReviews}
-                score={score}
-              />
-            </ReviewStarSpecificBlock>
-          ))}
-        </ReviewsScoresContainer>
-      </OverviewBodyContainer>
-    </OverviewWrapper>
+    <OverviewFullWrapper>
+      <OverviewContainer>
+        <RaitingsAndReviewsContainer>
+          <h1>Ratings & Reviews</h1>
+        </RaitingsAndReviewsContainer>
+        <OverviewBodyContainer>
+          <ReviewsAverageContainer>
+            <ReviewAverageRating reviews={reviews} />
+          </ReviewsAverageContainer>
+
+          <ReviewsScoresContainer>
+            {reviewScores.map((score) => (
+              <ReviewStarSpecificBlock key={score}>
+                <RatingScoreButton
+                  reviews={reviews}
+                  reviewPercentages={reviewPercentages[score]}
+                  filterReviews={filterReviews}
+                  score={score}
+                />
+              </ReviewStarSpecificBlock>
+            ))}
+          </ReviewsScoresContainer>
+
+        </OverviewBodyContainer>
+      </OverviewContainer>
+    </OverviewFullWrapper>
   );
 };
 

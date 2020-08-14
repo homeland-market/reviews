@@ -12,10 +12,8 @@ import { getAllReviews } from './lib/DatabaseRequests';
 import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
 const FullWrapper = styled.div`
-  display: flex;
-  height: 100vw;
+  display: block;
   background-color: #f4f4f5;
-  overflow-y: scroll;
 `;
 
 const ReviewsContainer = styled.div`
@@ -23,7 +21,7 @@ const ReviewsContainer = styled.div`
   display: grid;
   grid-template-rows: 3fr 4fr 4fr 1fr;
   background-color: #f4f4f5;
-  margin-top: 20;
+  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 24px;
