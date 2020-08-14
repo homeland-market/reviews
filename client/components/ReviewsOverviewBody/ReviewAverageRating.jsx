@@ -14,7 +14,7 @@ const RatingAverageBlock = styled.span`
 
 const TotalReviewsBlock = styled.div`
   font-weight: 700;
-  margin-top: 16px;
+  margin-top: 6px;
 `;
 
 class ReviewAverageRating extends Component {

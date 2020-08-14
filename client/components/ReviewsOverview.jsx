@@ -9,40 +9,42 @@ const OverviewFullWrapper = styled.div`
 `;
 
 const OverviewContainer = styled.div`
-  display: grid;
-  grid-template-rows: 100px 2fr;
-  padding: 12px 4px;
+  display: block;
 `;
 
 const RaitingsAndReviewsContainer = styled.div`
-  grid-row: 1;
-  padding-bottom: 16px;
-  padding-top: 16px;
   background-color: #f4f4f5;
+  padding: 12px 4px;
+`;
+
+const GuidelinesLink = styled.a`
+  color: #7f187f;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const OverviewBodyContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   grid-template-columns: 1fr 1fr;
-  grid-row: 2;
   background-color: #fff;
   border-radius: 8px;
-  padding: 24px;
+  padding-top: 28px;
+  padding-bottom: 28px;
 `;
 
 const ReviewsAverageContainer = styled.div`
   display: flex;
-  grid-column: 1;
   justify-content: space-evenly;
   align-items: center;
 `;
 
 const ReviewsScoresContainer = styled.div`
   display: flex;
-  flex-grow: 1;
-  flex-shrink: 1;
   flex-direction: column;
-  grid-column: 2;
   justify-content: space-evenly;
   align-items: center;
 `;
@@ -57,6 +59,11 @@ const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
       <OverviewContainer>
         <RaitingsAndReviewsContainer>
           <h1>Ratings & Reviews</h1>
+          <span>Our </span>
+          <GuidelinesLink href="https://www.wayfair.com/help/article/wayfair_community_guidelines/EF7AA706-3B1D-423C-8A06-4A7BFEF194F5" target="_blank" rel="noopener noreferrer">
+            Community Guidelines
+          </GuidelinesLink>
+          <span> help customers write honest reviews.</span>
         </RaitingsAndReviewsContainer>
         <OverviewBodyContainer>
           <ReviewsAverageContainer>
