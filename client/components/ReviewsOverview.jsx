@@ -6,7 +6,6 @@ import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
 const OverviewFullWrapper = styled.div`
-  display: block;
 `;
 
 const OverviewContainer = styled.div`
@@ -15,7 +14,6 @@ const OverviewContainer = styled.div`
 `;
 
 const RaitingsAndReviewsContainer = styled.div`
-  display: block;
   grid-row: 1;
   padding-bottom: 16px;
   padding-top: 16px;
@@ -49,7 +47,6 @@ const ReviewsScoresContainer = styled.div`
 `;
 
 const ReviewStarSpecificBlock = styled.div`
-  display: block;
 `;
 
 const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {

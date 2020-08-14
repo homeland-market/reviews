@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import styled from 'styled-components';
+
+const SearchFullWrapper = styled.div`
+`;
+
 class SearchReviews extends Component {
   constructor(props) {
     super(props);
@@ -21,7 +26,7 @@ class SearchReviews extends Component {
 
   render() {
     return (
-      <section>
+      <SearchFullWrapper>
         <h1> SEARCH REVIEWS </h1>
         <form id="search-bar">
           <input
@@ -33,7 +38,7 @@ class SearchReviews extends Component {
           />
           <button type="button" onClick={() => this.handleSearchClick()}>Search Item</button>
         </form>
-      </section>
+      </SearchFullWrapper>
     );
   }
 }

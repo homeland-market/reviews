@@ -17,6 +17,12 @@ const GlobalStyle = createGlobalStyle`
         font-size: 25px;
         font-weight: 900;
         line-height: 1.25;
-    }`;
+    }
+    body {
+        display: block;
+        background-color: #f4f4f5;
+        margin: 0;
+        padding: 0;
+    `;
 
 export default GlobalStyle;

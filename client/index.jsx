@@ -11,21 +11,13 @@ import RenderReviews from './components/RenderReviews';
 import { getAllReviews } from './lib/DatabaseRequests';
 import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
-const FullWrapper = styled.div`
-  display: block;
-  background-color: #f4f4f5;
-`;
-
 const ReviewsContainer = styled.div`
   width: 90vw;
-  display: grid;
-  grid-template-rows: 3fr 4fr 4fr 1fr;
   background-color: #f4f4f5;
-  margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 24px;
-  padding-top: 20px;
+  padding: 0;
+  margin-top: 0;
 `;
 
 class App extends Component {
@@ -132,33 +124,31 @@ class App extends Component {
     return (
       <div>
         <GlobalStyle />
-        <FullWrapper>
-          <ReviewsContainer>
-            <ReviewsOverview
-              reviews={reviews}
-              reviewTotal={reviewTotal}
-              reviewPercentages={reviewPercentages}
-              filterReviews={this.filterReviews}
-            />
-            <SearchReviews
-              filterReviewsByText={this.filterReviewsByText}
-            />
-            <SortReviews
-              reviewDisplayCount={reviewDisplayCount}
-              filteredReviews={filteredReviews}
-              sortReviewsBy={this.sortReviewsBy}
-              filterCondition={filterCondition}
-              filterReviews={this.filterReviews}
-            />
-            <RenderReviews
-              seeMoreReviews={this.seeMoreReviews}
-              resetReviewDisplayCount={this.resetReviewDisplayCount}
-              reviewDisplayCount={reviewDisplayCount}
-              filteredReviews={filteredReviews}
-              filterCondition={filterCondition}
-            />
-          </ReviewsContainer>
-        </FullWrapper>
+        <ReviewsContainer>
+          <ReviewsOverview
+            reviews={reviews}
+            reviewTotal={reviewTotal}
+            reviewPercentages={reviewPercentages}
+            filterReviews={this.filterReviews}
+          />
+          <SearchReviews
+            filterReviewsByText={this.filterReviewsByText}
+          />
+          <SortReviews
+            reviewDisplayCount={reviewDisplayCount}
+            filteredReviews={filteredReviews}
+            sortReviewsBy={this.sortReviewsBy}
+            filterCondition={filterCondition}
+            filterReviews={this.filterReviews}
+          />
+          <RenderReviews
+            seeMoreReviews={this.seeMoreReviews}
+            resetReviewDisplayCount={this.resetReviewDisplayCount}
+            reviewDisplayCount={reviewDisplayCount}
+            filteredReviews={filteredReviews}
+            filterCondition={filterCondition}
+          />
+        </ReviewsContainer>
       </div>
     );
   }
