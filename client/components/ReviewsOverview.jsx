@@ -1,55 +1,82 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const ReviewsOverview = {
+import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
+import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
-  reviewScores: [5, 4, 3, 2, 1],
+const OverviewWrapper = styled.div`
+  display: grid;
+  grid-template-rows: 100px 2fr;
+`;
 
-  totalReviewsAverageRating(reviews) {
-    return (reviews.reduce((acc, review) => acc
-    + (review.rating || null), 0) / reviews.length).toFixed(1);
-  },
+const RaitingsAndReviewsContainer = styled.div`
+  display: block;
+  grid-row: 1;
+  padding-bottom: 16px;
+  padding-top: 16px;
+  background-color: #f4f4f5;
+`;
 
-  individualReviewScoreTotals(reviews, score) {
-    return reviews.reduce((acc, review) => acc + (review.rating === score ? 1 : 0), 0);
-  },
+const OverviewBodyContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-row: 2;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 24px;
+`;
 
-  reviewsOverviewRender({ reviews, filterReviews }) {
-    return (
-      <section>
-        <h1>REVIEWS OVERVIEW</h1>
-        <div>
-          {reviews.length ? ReviewsOverview.totalReviewsAverageRating(reviews) : 0}
-        </div>
-        <div>
-          {reviews.length}
-          {' '}
-          Reviews
-        </div>
-        <div>
-          {ReviewsOverview.reviewScores.map((score) => (
-            <button
-              key={score}
-              type="button"
-              onClick={() => filterReviews(score)}
-              onKeyPress={() => filterReviews(score)}
-            >
-              <div>
-                {score}
-                {' '}
-                {ReviewsOverview.individualReviewScoreTotals(reviews, score)}
-              </div>
-            </button>
+const ReviewsAverageContainer = styled.div`
+  display: flex;
+  grid-column: 1;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const ReviewsScoresContainer = styled.div`
+  display: flex;
+  grid-column: 2;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const ReviewsOverview = ({ reviews, filterReviews }) => {
+  const reviewScores = [5, 4, 3, 2, 1];
+  return (
+    <OverviewWrapper>
+      <RaitingsAndReviewsContainer>
+        <h1>Ratings & Reviews</h1>
+      </RaitingsAndReviewsContainer>
+      <OverviewBodyContainer>
+        <ReviewsAverageContainer>
+          <ReviewAverageRating reviews={reviews} />
+        </ReviewsAverageContainer>
+        <ReviewsScoresContainer>
+          {reviewScores.map((score) => (
+            <div key={score}>
+              <RatingScoreButton reviews={reviews} score={score} filterReviews={filterReviews} />
+            </div>
           ))}
-        </div>
-      </section>
-    );
-  },
+        </ReviewsScoresContainer>
+      </OverviewBodyContainer>
+    </OverviewWrapper>
+  );
 };
 
-ReviewsOverview.reviewsOverviewRender.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
+ReviewsOverview.propTypes = {
+  reviews: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    url_id: PropTypes.number,
+    name: PropTypes.string,
+    location: PropTypes.string,
+    date: PropTypes.string,
+    comment: PropTypes.string,
+    rating: PropTypes.number,
+    helpful: PropTypes.number,
+    img: PropTypes.string,
+  })).isRequired,
   filterReviews: PropTypes.func.isRequired,
 };
 
-export default ReviewsOverview.reviewsOverviewRender;
+export default ReviewsOverview;

@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import GlobalStyle from './assets/fonts';
 
 import ReviewsOverview from './components/ReviewsOverview';
 import SearchReviews from './components/SearchReviews';
@@ -7,6 +9,25 @@ import SortReviews from './components/SortReviews';
 import RenderReviews from './components/RenderReviews';
 
 import { getAllReviews } from './lib/DatabaseRequests';
+
+const FullWrapper = styled.div`
+  display: flex;
+  height: 100vw;
+  background-color: #f4f4f5;
+  overflow-y: scroll;
+`;
+
+const ReviewsContainer = styled.div`
+  width: 90vw;
+  display: grid;
+  grid-template-rows: 3fr 4fr 4fr 1fr;
+  background-color: #f4f4f5;
+  margin-top: 20;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 24px;
+  padding-top: 20px;
+`;
 
 class App extends Component {
   constructor(props) {
@@ -35,12 +56,11 @@ class App extends Component {
 
   filterReviews(value) {
     const { reviews } = this.state;
-    const { filterCondition } = this.state;
-    if (filterCondition === value || value === 0) {
+    if (value === 0) {
       this.setState({
         reviewDisplayCount: 3,
         filteredReviews: reviews,
-        filterCondition: 0,
+        filterCondition: value,
       });
     } else {
       const filtered = reviews.filter((review) => review.rating === value);
@@ -55,12 +75,13 @@ class App extends Component {
   }
 
   filterReviewsByText(value) {
-    this.setState((prevState) => ({
+    const { reviews } = this.state;
+    const filtered = reviews.filter((review) => review.comment.toLowerCase().includes(value));
+    this.setState({
       reviewDisplayCount: 3,
       filterCondition: value,
-      filteredReviews: prevState.reviews.filter((review) => review.comment.toLowerCase()
-        .includes(value.toLowerCase().trim())),
-    }));
+      filteredReviews: filtered,
+    });
   }
 
   sortReviewsBy(value) {
@@ -104,30 +125,32 @@ class App extends Component {
     } = this.state;
     return (
       <div>
-        <h1>
-          REVIEWS & RATINGS
-        </h1>
-        <ReviewsOverview
-          reviews={reviews}
-          filterReviews={this.filterReviews}
-        />
-        <SearchReviews
-          filterReviewsByText={this.filterReviewsByText}
-        />
-        <SortReviews
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-          sortReviewsBy={this.sortReviewsBy}
-          filterCondition={filterCondition}
-          filterReviews={this.filterReviews}
-        />
-        <RenderReviews
-          seeMoreReviews={this.seeMoreReviews}
-          resetReviewDisplayCount={this.resetReviewDisplayCount}
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-          filterCondition={filterCondition}
-        />
+        <GlobalStyle />
+        <FullWrapper>
+          <ReviewsContainer>
+            <ReviewsOverview
+              reviews={reviews}
+              filterReviews={this.filterReviews}
+            />
+            <SearchReviews
+              filterReviewsByText={this.filterReviewsByText}
+            />
+            <SortReviews
+              reviewDisplayCount={reviewDisplayCount}
+              filteredReviews={filteredReviews}
+              sortReviewsBy={this.sortReviewsBy}
+              filterCondition={filterCondition}
+              filterReviews={this.filterReviews}
+            />
+            <RenderReviews
+              seeMoreReviews={this.seeMoreReviews}
+              resetReviewDisplayCount={this.resetReviewDisplayCount}
+              reviewDisplayCount={reviewDisplayCount}
+              filteredReviews={filteredReviews}
+              filterCondition={filterCondition}
+            />
+          </ReviewsContainer>
+        </FullWrapper>
       </div>
     );
   }
