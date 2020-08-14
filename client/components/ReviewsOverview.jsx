@@ -35,8 +35,10 @@ const ReviewsAverageContainer = styled.div`
 `;
 
 const ReviewsScoresContainer = styled.div`
-  display: block;
+  display: flex;
   grid-column: 2;
+  justify-content: space-evenly;
+  align-items: center;
 `;
 
 const ReviewsOverview = ({ reviews, filterReviews }) => {
