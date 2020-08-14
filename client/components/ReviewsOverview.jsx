@@ -36,12 +36,17 @@ const ReviewsAverageContainer = styled.div`
 
 const ReviewsScoresContainer = styled.div`
   display: flex;
+  flex-direction: column;
   grid-column: 2;
   justify-content: space-evenly;
   align-items: center;
 `;
 
-const ReviewsOverview = ({ reviews, filterReviews }) => {
+const ReviewStarSpecificBlock = styled.div`
+  width: auto;
+`;
+
+const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
     <OverviewWrapper>
@@ -54,9 +59,14 @@ const ReviewsOverview = ({ reviews, filterReviews }) => {
         </ReviewsAverageContainer>
         <ReviewsScoresContainer>
           {reviewScores.map((score) => (
-            <div key={score}>
-              <RatingScoreButton reviews={reviews} score={score} filterReviews={filterReviews} />
-            </div>
+            <ReviewStarSpecificBlock key={score}>
+              <RatingScoreButton
+                reviews={reviews}
+                reviewPercentages={reviewPercentages[score]}
+                filterReviews={filterReviews}
+                score={score}
+              />
+            </ReviewStarSpecificBlock>
           ))}
         </ReviewsScoresContainer>
       </OverviewBodyContainer>
@@ -76,6 +86,13 @@ ReviewsOverview.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
+  reviewPercentages: PropTypes.shape({
+    1: PropTypes.string,
+    2: PropTypes.string,
+    3: PropTypes.string,
+    4: PropTypes.string,
+    5: PropTypes.string,
+  }).isRequired,
   filterReviews: PropTypes.func.isRequired,
 };
 

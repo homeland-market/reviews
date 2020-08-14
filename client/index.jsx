@@ -9,6 +9,7 @@ import SortReviews from './components/SortReviews';
 import RenderReviews from './components/RenderReviews';
 
 import { getAllReviews } from './lib/DatabaseRequests';
+import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
 const FullWrapper = styled.div`
   display: flex;
@@ -34,8 +35,10 @@ class App extends Component {
     super(props);
     this.state = {
       reviews: [],
-      reviewDisplayCount: 3,
+      reviewTotal: 0,
+      reviewPercentages: {},
       filteredReviews: [],
+      reviewDisplayCount: 3,
       filterCondition: 0,
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
@@ -47,8 +50,11 @@ class App extends Component {
 
   componentDidMount() {
     getAllReviews((reviews) => {
+      const reviewPercentages = getStartPercentagesFills(reviews);
       this.setState({
         reviews,
+        reviewTotal: reviews.length,
+        reviewPercentages,
         filteredReviews: reviews.sort((a, b) => b.helpful - a.helpful),
       });
     });
@@ -119,6 +125,8 @@ class App extends Component {
   render() {
     const {
       reviews,
+      reviewTotal,
+      reviewPercentages,
       reviewDisplayCount,
       filteredReviews,
       filterCondition,
@@ -130,6 +138,8 @@ class App extends Component {
           <ReviewsContainer>
             <ReviewsOverview
               reviews={reviews}
+              reviewTotal={reviewTotal}
+              reviewPercentages={reviewPercentages}
               filterReviews={this.filterReviews}
             />
             <SearchReviews
