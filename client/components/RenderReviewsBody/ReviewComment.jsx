@@ -1,6 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import styled from 'styled-components';
+
+const SearchHighlight = styled.mark`
+  background-color: #e6d3e4;
+`;
+
 const filterConditionExtractor = (comment, filterCondition) => {
   const extractedMatches = [];
 
@@ -26,7 +32,7 @@ const highlightAllMatchingCommentText = (comment, id, filterCondition) => {
     arrayOfElements.push(
       <span key={`${id}-${Math.random()}`}>
         {scentence}
-        <mark>{filterConditionMatches[index]}</mark>
+        <SearchHighlight>{filterConditionMatches[index]}</SearchHighlight>
       </span>,
     );
   });
