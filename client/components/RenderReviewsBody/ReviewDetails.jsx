@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { highlightAllMatchingCommentText } from '../../lib/ReviewFiltering';
-import { ProductUserComments } from '../../lib/ReviewFiltering';
+import { highlightAllMatchingCommentText, ProductUserComments } from '../../lib/ReviewFiltering';
 
 const StarRatingAndDateJustifySpace = styled.div`
   display: flex;
@@ -42,10 +41,10 @@ const ProductReviewCommentsWrapper = styled.div`
 `;
 
 const parseDate = (date) => {
-  const slitDate = date.substring(0, date.indexOf('T')).split('-');
-  const month = slitDate[1];
-  const day = slitDate[2];
-  const year = slitDate[0];
+  const splitDate = date.substring(0, date.indexOf('T')).split('-');
+  const month = splitDate[1];
+  const day = splitDate[2];
+  const year = splitDate[0];
   return `${month}/${day}/${year}`;
 };
 

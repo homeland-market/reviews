@@ -49,7 +49,13 @@ const ReviewsScoresContainer = styled.div`
 const ReviewStarSpecificBlock = styled.div`
 `;
 
-const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
+const ReviewsOverview = ({
+  reviews,
+  reviewAverage,
+  reviewStarPercentages,
+  filterReviews,
+  filterCondition,
+}) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
     <OverviewFullWrapper>
@@ -59,20 +65,24 @@ const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
         <GuidelinesLink href="https://www.wayfair.com/help/article/wayfair_community_guidelines/EF7AA706-3B1D-423C-8A06-4A7BFEF194F5" target="_blank" rel="noopener noreferrer">
           Community Guidelines
         </GuidelinesLink>
-        <span id="scroll"> help customers write honest reviews.</span>
+        <span> help customers write honest reviews.</span>
       </RaitingsAndReviewsContainer>
       <OverviewBodyContainer>
         <ReviewsAverageContainer>
-          <ReviewAverageRating reviews={reviews} />
+          <ReviewAverageRating
+            reviews={reviews}
+            reviewAverage={reviewAverage}
+          />
         </ReviewsAverageContainer>
         <ReviewsScoresContainer>
           {reviewScores.map((score) => (
             <ReviewStarSpecificBlock key={score}>
               <RatingScoreButton
                 reviews={reviews}
-                reviewPercentages={reviewPercentages[score]}
+                reviewStarPercentages={reviewStarPercentages[score]}
                 filterReviews={filterReviews}
                 score={score}
+                filterCondition={filterCondition}
               />
             </ReviewStarSpecificBlock>
           ))}
@@ -94,14 +104,20 @@ ReviewsOverview.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
-  reviewPercentages: PropTypes.shape({
+  reviewAverage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  reviewStarPercentages: PropTypes.shape({
     1: PropTypes.string,
     2: PropTypes.string,
     3: PropTypes.string,
     4: PropTypes.string,
     5: PropTypes.string,
-  }).isRequired,
+  }),
   filterReviews: PropTypes.func.isRequired,
+  filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
+ReviewsOverview.defaultProps = {
+  reviewStarPercentages: {},
 };
 
 export default ReviewsOverview;

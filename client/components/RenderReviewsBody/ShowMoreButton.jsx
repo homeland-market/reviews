@@ -37,16 +37,18 @@ const DownArrowSVGPath = styled.path`
   .1 1.4l4.5 4c.2.2.4.3.7.3s.5-.1.7-.3l4.5-4c.3-.4.3-1.1-.1-1.5z")
 `;
 
+const showMoreReviewsNumber = (filteredReviewsLength, reviewDisplayCount) => {
+  const remainingReviewAmount = filteredReviewsLength - reviewDisplayCount;
+  const showAmount = remainingReviewAmount >= 10 ? 10 : remainingReviewAmount;
+  return `Show ${showAmount} More Reviews`;
+};
+
 const ShowMoreButton = ({ seeMoreReviews, reviewDisplayCount, filteredReviews }) => {
-  if (reviewDisplayCount < filteredReviews.length) {
+  const filteredReviewsLength = filteredReviews.length;
+  if (reviewDisplayCount < filteredReviewsLength) {
     return (
       <ShowMoreButtonWrap type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
-        Show
-        {' '}
-        {filteredReviews.length - reviewDisplayCount >= 10 ? 10
-          : filteredReviews.length - reviewDisplayCount}
-        {' '}
-        More Reviews
+        {showMoreReviewsNumber(filteredReviewsLength, reviewDisplayCount)}
         <DownArrowSVGContainer
           viewBox="0 0 28 28"
           xmlns="http://www.w3.org/2000/svg"
