@@ -37,7 +37,9 @@ const UpArrowSVGContainer = styled.svg`
 `;
 
 const UpArrowSVGPath = styled.path`
-  d: path("M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1 .3 1.4-.1.4-.4.3-1-.1-1.4l-4.5-4c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-4.5 4c-.3.4-.3 1.1.1 1.5z")
+  d: path("M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1
+  .3 1.4-.1.4-.4.3-1-.1-1.4l-4.5-4c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-4.5 4c-.3.4-.3
+  1.1.1 1.5z")
 `;
 
 const ProductReviewListDivider = styled.div`
@@ -52,7 +54,7 @@ const ProductReviewListDivider = styled.div`
   text-align: center;
 `;
 
-const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
+const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
   if (reviewDisplayCount > 3) {
     return (
       <ShowLessButtonWrap
@@ -60,7 +62,7 @@ const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
       >
-        <ProductReviewListDivider />
+        {reviewDisplayCount < filteredReviews.length && <ProductReviewListDivider />}
         Show Less
         <UpArrowSVGContainer
           viewBox="0 0 28 28"
@@ -78,6 +80,7 @@ const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
 ShowLessButton.propTypes = {
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
+  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ShowLessButton;

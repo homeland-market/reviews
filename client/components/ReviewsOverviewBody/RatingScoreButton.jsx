@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const RatingScores = styled.div`
 `;
 
 const StarSVGContainer = styled.svg`
-  fill: ${(props) => (props.toggle ? '#520f54;' : '#f6b71d')};
+  fill: ${(props) => (props.filterCondition === props.score ? '#520f54;' : '#f6b71d')};
   width: 10%;
   height: 10%;
 `;
@@ -28,7 +28,7 @@ const HistogramBarContainer = styled.div`
 const ProductHistogramBar = styled.div`
   width: 100%;
   height: 24px;
-  background-color: ${(props) => (props.toggle ? '#b9b6bc' : '#d9d8db')};
+  background-color: ${(props) => (props.filterCondition === props.score ? '#b9b6bc' : '#d9d8db')};
   transition: background-color .1s cubic-bezier(.65,.05,.36,1);
   border-radius: 50vw;
   overflow: hidden;
@@ -39,7 +39,7 @@ const ProductHistogramBarHighlighted = styled.div`
   width: ${(props) => props.fillPercentage}%;
   height: 100%;
   transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),background-color .1s cubic-bezier(.65,.05,.36,1);
-  background-color: ${(props) => (props.toggle ? '#520f54' : '#7f187f')};
+  background-color: ${(props) => (props.filterCondition === props.score ? '#520f54' : '#7f187f')};
   border-radius: 50vw 0 0 50vw;
 `;
 
@@ -80,60 +80,54 @@ const RatingButtonWrapper = styled.button`
   }
 `;
 
-class RatingScoreButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ratingToggle: false };
-  }
+const ReviewScoreTotals = (reviews, score) => reviews.reduce((acc, review) => acc
+  + (review.rating === score ? 1 : 0), 0);
 
-  ReviewScoreTotals() {
-    const { reviews, score } = this.props;
-    return reviews.reduce((acc, review) => acc + (review.rating === score ? 1 : 0), 0);
+const handleRatingClick = (score, filterCondition, filterReviews) => {
+  if (filterCondition !== score) {
+    filterReviews(score);
+  } else {
+    filterReviews(0);
   }
+};
 
-  handleRatingClick() {
-    const { score, filterReviews } = this.props;
-    const { ratingToggle } = this.state;
-    if (!ratingToggle) {
-      this.setState({ ratingToggle: true });
-      filterReviews(score);
-    } else {
-      this.setState({ ratingToggle: false });
-      filterReviews(0);
-    }
-  }
-
-  render() {
-    const { score, reviewPercentages } = this.props;
-    const { ratingToggle } = this.state;
-    return (
-      <RatingButtonWrapper onClick={() => this.handleRatingClick()}>
-        <RatingScores>
-          {score}
-        </RatingScores>
-        <StarSVGContainer
-          toggle={ratingToggle}
-          viewBox="0 0 20 13"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlnsXlink="http://www.w3.org/1999/xlink"
-        >
-          <StarSVGContainerPath />
-        </StarSVGContainer>
-        <HistogramBarContainer>
-          <ProductHistogramBar toggle={ratingToggle}>
-            <ProductHistogramBarHighlighted
-              toggle={ratingToggle}
-              fillPercentage={reviewPercentages}
-            />
-          </ProductHistogramBar>
-        </HistogramBarContainer>
-        <ProductHistogramCount>
-          {this.ReviewScoreTotals()}
-        </ProductHistogramCount>
-      </RatingButtonWrapper >
-    );
-  }
-}
+const RatingScoreButton = ({
+  reviews,
+  score,
+  reviewStarPercentages,
+  filterCondition,
+  filterReviews,
+}) => (
+  <RatingButtonWrapper onClick={() => handleRatingClick(score, filterCondition, filterReviews)}>
+    <RatingScores>
+      {score}
+    </RatingScores>
+    <StarSVGContainer
+      filterCondition={filterCondition}
+      score={score}
+      viewBox="0 0 20 13"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <StarSVGContainerPath />
+    </StarSVGContainer>
+    <HistogramBarContainer>
+      <ProductHistogramBar
+        filterCondition={filterCondition}
+        score={score}
+      >
+        <ProductHistogramBarHighlighted
+          filterCondition={filterCondition}
+          score={score}
+          fillPercentage={reviewStarPercentages}
+        />
+      </ProductHistogramBar>
+    </HistogramBarContainer>
+    <ProductHistogramCount>
+      {ReviewScoreTotals(reviews, score)}
+    </ProductHistogramCount>
+  </RatingButtonWrapper>
+);
 
 RatingScoreButton.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape({
@@ -147,13 +141,14 @@ RatingScoreButton.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
-  reviewPercentages: PropTypes.string,
+  reviewStarPercentages: PropTypes.string,
   score: PropTypes.number.isRequired,
   filterReviews: PropTypes.func.isRequired,
+  filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 RatingScoreButton.defaultProps = {
-  reviewPercentages: '0',
+  reviewStarPercentages: '0',
 };
 
 export default RatingScoreButton;

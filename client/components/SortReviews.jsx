@@ -120,8 +120,8 @@ class SortReviews extends React.Component {
   }
 
   handleSumbit(value) {
-    const { sortReviewsBy } = this.props;
-    sortReviewsBy(value);
+    const { sortReviewsBy, filteredReviews } = this.props;
+    sortReviewsBy(value, filteredReviews);
   }
 
   showingReviewsOf() {

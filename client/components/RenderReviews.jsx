@@ -78,20 +78,21 @@ const renderReviewBody = (filteredReviews, filterCondition) => {
   let counter = 0;
   const elements = [];
   while (counter < filteredReviews.length) {
+    const review = filteredReviews[counter];
     elements.push(
-      <div key={filteredReviews[counter].id}>
+      <div key={review.id}>
         <ProductReviewGrid>
           <ProductReviewsReviewDetails>
-            <ReviewDetails review={filteredReviews[counter]} filterCondition={filterCondition} />
+            <ReviewDetails review={review} filterCondition={filterCondition} />
           </ProductReviewsReviewDetails>
           <ProductReviewsReviewPhotos>
-            <ReviewImage review={filteredReviews[counter]} />
+            <ReviewImage review={review} />
           </ProductReviewsReviewPhotos>
           <ProductReviewsCustomerInfo>
-            <ReviewNameAndLocation review={filteredReviews[counter]} />
+            <ReviewNameAndLocation review={review} />
           </ProductReviewsCustomerInfo>
           <ProductReviewsHelpfulButton>
-            <HelpfulButton review={filteredReviews[counter]} />
+            <HelpfulButton review={review} />
           </ProductReviewsHelpfulButton>
         </ProductReviewGrid>
         {counter < filteredReviews.length - 1 && <ProductReviewDivider />}
@@ -102,19 +103,18 @@ const renderReviewBody = (filteredReviews, filterCondition) => {
   return <div>{elements}</div>;
 };
 
-const RenderReviews = (props) => {
-  const {
-    seeMoreReviews,
-    resetReviewDisplayCount,
-    reviewDisplayCount,
-    filteredReviews,
-    filterCondition,
-  } = props;
+const RenderReviews = ({
+  seeMoreReviews,
+  resetReviewDisplayCount,
+  reviewDisplayCount,
+  filteredReviews,
+  filterCondition,
+}) => {
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   return (
     <div>
       <RenderReviewsContainer>
-        {filteredReviews.length && renderReviewBody(reviewsToRender, filterCondition)}
+        {filteredReviews.length > 0 && renderReviewBody(reviewsToRender, filterCondition)}
       </RenderReviewsContainer>
       <ShowMoreAndLessWrapper>
         <ShowMoreButton
@@ -125,6 +125,7 @@ const RenderReviews = (props) => {
         <ShowLessButton
           resetReviewDisplayCount={resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
         />
       </ShowMoreAndLessWrapper>
     </div>

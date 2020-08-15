@@ -64,3 +64,9 @@ export const getStartPercentagesFills = (reviews) => {
   }
   return starPercentages;
 };
+
+export const getTotalReviewAverageScore = (reviews) => {
+  const reviewTotal = reviews.reduce((acc, review) => acc + (review.rating || null), 0);
+  const totalReviewAverage = (reviewTotal / reviews.length).toFixed(1);
+  return totalReviewAverage;
+};
