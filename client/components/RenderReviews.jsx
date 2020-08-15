@@ -114,7 +114,7 @@ const RenderReviews = (props) => {
   return (
     <div>
       <RenderReviewsContainer>
-        {filteredReviews.length && renderReviewBody(reviewsToRender, filterCondition)}
+        {filteredReviews.length > 0 && renderReviewBody(reviewsToRender, filterCondition)}
       </RenderReviewsContainer>
       <ShowMoreAndLessWrapper>
         <ShowMoreButton
@@ -125,6 +125,7 @@ const RenderReviews = (props) => {
         <ShowLessButton
           resetReviewDisplayCount={resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
         />
       </ShowMoreAndLessWrapper>
     </div>

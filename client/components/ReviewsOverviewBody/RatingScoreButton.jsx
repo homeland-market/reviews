@@ -130,7 +130,7 @@ class RatingScoreButton extends Component {
         <ProductHistogramCount>
           {this.ReviewScoreTotals()}
         </ProductHistogramCount>
-      </RatingButtonWrapper >
+      </RatingButtonWrapper>
     );
   }
 }

@@ -54,7 +54,7 @@ const ProductReviewListDivider = styled.div`
   text-align: center;
 `;
 
-const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
+const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
   if (reviewDisplayCount > 3) {
     return (
       <ShowLessButtonWrap
@@ -62,7 +62,7 @@ const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
       >
-        <ProductReviewListDivider />
+        {reviewDisplayCount < filteredReviews.length && <ProductReviewListDivider />}
         Show Less
         <UpArrowSVGContainer
           viewBox="0 0 28 28"
@@ -80,6 +80,7 @@ const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount }) => {
 ShowLessButton.propTypes = {
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
+  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ShowLessButton;
