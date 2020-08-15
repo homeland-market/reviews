@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import styled from 'styled-components';
 import GlobalStyle from './assets/fonts';
 
@@ -9,33 +10,36 @@ import SortReviews from './components/SortReviews';
 import RenderReviews from './components/RenderReviews';
 
 import { getAllReviews } from './lib/DatabaseRequests';
+import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
-const FullWrapper = styled.div`
-  display: flex;
-  height: 100vw;
-  background-color: #f4f4f5;
-  overflow-y: scroll;
-`;
+const appearDuration = 800;
+const transitionName = 'loaderTransition';
 
 const ReviewsContainer = styled.div`
   width: 90vw;
-  display: grid;
-  grid-template-rows: 3fr 4fr 4fr 1fr;
   background-color: #f4f4f5;
-  margin-top: 20;
   margin-left: auto;
   margin-right: auto;
-  padding-bottom: 24px;
-  padding-top: 20px;
-`;
+  padding: 0;
+
+  &.${transitionName}-appear {
+    opacity: 0.05;
+  }
+
+  &.${transitionName}-appear-active {
+    opacity: 1;
+    transition: opacity ${appearDuration}ms ease-out;
+  }`;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       reviews: [],
-      reviewDisplayCount: 3,
+      reviewTotal: 0,
+      reviewPercentages: {},
       filteredReviews: [],
+      reviewDisplayCount: 3,
       filterCondition: 0,
     };
     this.seeMoreReviews = this.seeMoreReviews.bind(this);
@@ -47,8 +51,11 @@ class App extends Component {
 
   componentDidMount() {
     getAllReviews((reviews) => {
+      const reviewPercentages = getStartPercentagesFills(reviews);
       this.setState({
         reviews,
+        reviewTotal: reviews.length,
+        reviewPercentages,
         filteredReviews: reviews.sort((a, b) => b.helpful - a.helpful),
       });
     });
@@ -119,6 +126,8 @@ class App extends Component {
   render() {
     const {
       reviews,
+      reviewTotal,
+      reviewPercentages,
       reviewDisplayCount,
       filteredReviews,
       filterCondition,
@@ -126,12 +135,19 @@ class App extends Component {
     return (
       <div>
         <GlobalStyle />
-        <FullWrapper>
+        <CSSTransitionGroup
+          transitionName={transitionName}
+          transitionAppear={true}
+          transitionAppearTimeout={appearDuration}
+        >
           <ReviewsContainer>
             <ReviewsOverview
               reviews={reviews}
+              reviewTotal={reviewTotal}
+              reviewPercentages={reviewPercentages}
               filterReviews={this.filterReviews}
             />
+
             <SearchReviews
               filterReviewsByText={this.filterReviewsByText}
             />
@@ -150,7 +166,7 @@ class App extends Component {
               filterCondition={filterCondition}
             />
           </ReviewsContainer>
-        </FullWrapper>
+        </CSSTransitionGroup>
       </div>
     );
   }

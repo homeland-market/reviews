@@ -4,26 +4,17 @@ import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
 const RatingBlock = styled.div`
-  display: block;
   text-align: center;
+  font-weight: 500;
 `;
 
 const RatingAverageBlock = styled.span`
-  display: flex;
-  flex-direction column;
-  justify-content: space-between;
-  font-size: 3.815rem;
-`;
-
-const ReviewStarsMain = styled.div`
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
+  font-size: 3.85rem;
 `;
 
 const TotalReviewsBlock = styled.div`
   font-weight: 700;
-  margin-top: 16px;
+  margin-top: 6px;
 `;
 
 class ReviewAverageRating extends Component {
@@ -56,17 +47,15 @@ class ReviewAverageRating extends Component {
           {reviewAverage}
         </RatingAverageBlock>
         <div className="ReviewStartsWrapper">
-          <ReviewStarsMain>
-            <StarRatings
-              rating={Number(reviewAverage)}
-              starDimension="45px"
-              starSpacing="0px"
-              starRatedColor="#f6b71d"
-              starEmptyColor="#d9d8db"
-              svgIconPath="M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l.56-3.26-2.36-2.3c-.8-.78-.55-1.54.54-1.7L4.3 3.7 5.75.76c.5-1 1.28-1 1.77 0L9 3.7l3.26.48c1.1.16 1.34.92.55 1.7l-2.36 2.3.56 3.26c.2 1.1-.46 1.56-1.44 1.04l-2.92-1.54z"
-              svgIconViewBox="0 0 20 13"
-            />
-          </ReviewStarsMain>
+          <StarRatings
+            rating={Number(reviewAverage)}
+            starDimension="45px"
+            starSpacing="0"
+            starRatedColor="#f6b71d"
+            starEmptyColor="#d9d8db"
+            svgIconPath="M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l.56-3.26-2.36-2.3c-.8-.78-.55-1.54.54-1.7L4.3 3.7 5.75.76c.5-1 1.28-1 1.77 0L9 3.7l3.26.48c1.1.16 1.34.92.55 1.7l-2.36 2.3.56 3.26c.2 1.1-.46 1.56-1.44 1.04l-2.92-1.54z"
+            svgIconViewBox="0 0 20 13"
+          />
         </div>
         <TotalReviewsBlock>
           {this.totalReviews()}

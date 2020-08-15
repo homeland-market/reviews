@@ -5,48 +5,61 @@ import styled from 'styled-components';
 import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
-const OverviewWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 100px 2fr;
+const OverviewFullWrapper = styled.div`
+  display: block;
 `;
 
 const RaitingsAndReviewsContainer = styled.div`
-  display: block;
-  grid-row: 1;
-  padding-bottom: 16px;
-  padding-top: 16px;
   background-color: #f4f4f5;
+  padding: 12px 0;
+`;
+
+const GuidelinesLink = styled.a`
+  color: #7f187f;
+  text-decoration: underline;
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const OverviewBodyContainer = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
   grid-template-columns: 1fr 1fr;
-  grid-row: 2;
   background-color: #fff;
   border-radius: 8px;
-  padding: 24px;
+  padding-top: 28px;
+  padding-bottom: 28px;
 `;
 
 const ReviewsAverageContainer = styled.div`
   display: flex;
-  grid-column: 1;
   justify-content: space-evenly;
   align-items: center;
 `;
 
 const ReviewsScoresContainer = styled.div`
   display: flex;
-  grid-column: 2;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 `;
 
-const ReviewsOverview = ({ reviews, filterReviews }) => {
+const ReviewStarSpecificBlock = styled.div`
+`;
+
+const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
-    <OverviewWrapper>
+    <OverviewFullWrapper>
       <RaitingsAndReviewsContainer>
         <h1>Ratings & Reviews</h1>
+        <span>Our </span>
+        <GuidelinesLink href="https://www.wayfair.com/help/article/wayfair_community_guidelines/EF7AA706-3B1D-423C-8A06-4A7BFEF194F5" target="_blank" rel="noopener noreferrer">
+          Community Guidelines
+        </GuidelinesLink>
+        <span id="scroll"> help customers write honest reviews.</span>
       </RaitingsAndReviewsContainer>
       <OverviewBodyContainer>
         <ReviewsAverageContainer>
@@ -54,13 +67,18 @@ const ReviewsOverview = ({ reviews, filterReviews }) => {
         </ReviewsAverageContainer>
         <ReviewsScoresContainer>
           {reviewScores.map((score) => (
-            <div key={score}>
-              <RatingScoreButton reviews={reviews} score={score} filterReviews={filterReviews} />
-            </div>
+            <ReviewStarSpecificBlock key={score}>
+              <RatingScoreButton
+                reviews={reviews}
+                reviewPercentages={reviewPercentages[score]}
+                filterReviews={filterReviews}
+                score={score}
+              />
+            </ReviewStarSpecificBlock>
           ))}
         </ReviewsScoresContainer>
       </OverviewBodyContainer>
-    </OverviewWrapper>
+    </OverviewFullWrapper>
   );
 };
 
@@ -76,6 +94,13 @@ ReviewsOverview.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
+  reviewPercentages: PropTypes.shape({
+    1: PropTypes.string,
+    2: PropTypes.string,
+    3: PropTypes.string,
+    4: PropTypes.string,
+    5: PropTypes.string,
+  }).isRequired,
   filterReviews: PropTypes.func.isRequired,
 };
 
