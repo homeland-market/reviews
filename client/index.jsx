@@ -12,7 +12,7 @@ import RenderReviews from './components/RenderReviews';
 import { getAllReviews } from './lib/DatabaseRequests';
 import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
-const appearDuration = 800;
+const appearDuration = 400;
 const transitionName = 'loaderTransition';
 
 const ReviewsContainer = styled.div`

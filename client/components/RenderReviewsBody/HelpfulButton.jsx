@@ -83,7 +83,6 @@ class HelpfulButton extends Component {
 
   render() {
     const { helpfulCount, helpfulToggle } = this.state;
-    console.log(helpfulToggle);
     return (
       <ProductHelpfulVoteButton
         type="submit"

@@ -37,7 +37,9 @@ const UpArrowSVGContainer = styled.svg`
 `;
 
 const UpArrowSVGPath = styled.path`
-  d: path("M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1 .3 1.4-.1.4-.4.3-1-.1-1.4l-4.5-4c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-4.5 4c-.3.4-.3 1.1.1 1.5z")
+  d: path("M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1
+  .3 1.4-.1.4-.4.3-1-.1-1.4l-4.5-4c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-4.5 4c-.3.4-.3
+  1.1.1 1.5z")
 `;
 
 const ProductReviewListDivider = styled.div`
