@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 
 const SearchFullWrapper = styled.div`
+  margin-top: 24px;
   display: block;
 `;
 
 const ShowReviewsThatContainer = styled.div`
   display: block;
-  margin-top: 16px;
-  margin-bottom: 8px;
+  padding: 12px 0;
 `;
 
 const SearchBarContainer = styled.div`
@@ -100,6 +99,10 @@ const SearchHourGlass = styled.svg`
   fill: #fff;
 `;
 
+const SearchHourGlassPath = styled.path`
+  d: path("M21.7 20.3l-3.4-3.4c2-2.7 1.8-6.4-.6-8.9C15 5.3 10.6 5.3 8 8c-2.7 2.7-2.7 7 0 9.6 1.3 1.3 3.1 2 4.8 2 1.4 0 2.8-.5 4-1.3l3.4 3.4c.2.2.5.3.7.3s.5-.1.7-.3c.5-.4.5-1 .1-1.4zM9.4 16.2c-1.9-1.9-1.9-4.9 0-6.8.9-.9 2.2-1.4 3.4-1.4s2.5.5 3.4 1.4c1.9 1.9 1.9 4.9 0 6.8-1.9 1.9-4.9 1.9-6.8 0z")
+`;
+
 class SearchReviews extends Component {
   constructor(props) {
     super(props);
@@ -139,7 +142,6 @@ class SearchReviews extends Component {
                   onKeyDown={(e) => this.handleKeyPress(e)}
                   id="search_reviews"
                   type="text"
-                  name="Search Reviews"
                   placeholder="Search Reviews"
                 />
                 <TextInputButton type="button" onClick={() => this.handleSearchClick()}>
@@ -148,7 +150,7 @@ class SearchReviews extends Component {
                     xmlns="http://www.w3.org/2000/svg"
                     xmlnsXlink="http://www.w3.org/1999/xlink"
                   >
-                    <path d="M21.7 20.3l-3.4-3.4c2-2.7 1.8-6.4-.6-8.9C15 5.3 10.6 5.3 8 8c-2.7 2.7-2.7 7 0 9.6 1.3 1.3 3.1 2 4.8 2 1.4 0 2.8-.5 4-1.3l3.4 3.4c.2.2.5.3.7.3s.5-.1.7-.3c.5-.4.5-1 .1-1.4zM9.4 16.2c-1.9-1.9-1.9-4.9 0-6.8.9-.9 2.2-1.4 3.4-1.4s2.5.5 3.4 1.4c1.9 1.9 1.9 4.9 0 6.8-1.9 1.9-4.9 1.9-6.8 0z" />
+                    <SearchHourGlassPath />
                   </SearchHourGlass>
                 </TextInputButton>
               </TextInputLabel>

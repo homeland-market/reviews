@@ -6,15 +6,12 @@ import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import RatingScoreButton from './ReviewsOverviewBody/RatingScoreButton';
 
 const OverviewFullWrapper = styled.div`
-`;
-
-const OverviewContainer = styled.div`
   display: block;
 `;
 
 const RaitingsAndReviewsContainer = styled.div`
   background-color: #f4f4f5;
-  padding: 12px 4px;
+  padding: 12px 0;
 `;
 
 const GuidelinesLink = styled.a`
@@ -56,33 +53,31 @@ const ReviewsOverview = ({ reviews, reviewPercentages, filterReviews }) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
     <OverviewFullWrapper>
-      <OverviewContainer>
-        <RaitingsAndReviewsContainer>
-          <h1>Ratings & Reviews</h1>
-          <span>Our </span>
-          <GuidelinesLink href="https://www.wayfair.com/help/article/wayfair_community_guidelines/EF7AA706-3B1D-423C-8A06-4A7BFEF194F5" target="_blank" rel="noopener noreferrer">
-            Community Guidelines
-          </GuidelinesLink>
-          <span> help customers write honest reviews.</span>
-        </RaitingsAndReviewsContainer>
-        <OverviewBodyContainer>
-          <ReviewsAverageContainer>
-            <ReviewAverageRating reviews={reviews} />
-          </ReviewsAverageContainer>
-          <ReviewsScoresContainer>
-            {reviewScores.map((score) => (
-              <ReviewStarSpecificBlock key={score}>
-                <RatingScoreButton
-                  reviews={reviews}
-                  reviewPercentages={reviewPercentages[score]}
-                  filterReviews={filterReviews}
-                  score={score}
-                />
-              </ReviewStarSpecificBlock>
-            ))}
-          </ReviewsScoresContainer>
-        </OverviewBodyContainer>
-      </OverviewContainer>
+      <RaitingsAndReviewsContainer>
+        <h1>Ratings & Reviews</h1>
+        <span>Our </span>
+        <GuidelinesLink href="https://www.wayfair.com/help/article/wayfair_community_guidelines/EF7AA706-3B1D-423C-8A06-4A7BFEF194F5" target="_blank" rel="noopener noreferrer">
+          Community Guidelines
+        </GuidelinesLink>
+        <span id="scroll"> help customers write honest reviews.</span>
+      </RaitingsAndReviewsContainer>
+      <OverviewBodyContainer>
+        <ReviewsAverageContainer>
+          <ReviewAverageRating reviews={reviews} />
+        </ReviewsAverageContainer>
+        <ReviewsScoresContainer>
+          {reviewScores.map((score) => (
+            <ReviewStarSpecificBlock key={score}>
+              <RatingScoreButton
+                reviews={reviews}
+                reviewPercentages={reviewPercentages[score]}
+                filterReviews={filterReviews}
+                score={score}
+              />
+            </ReviewStarSpecificBlock>
+          ))}
+        </ReviewsScoresContainer>
+      </OverviewBodyContainer>
     </OverviewFullWrapper>
   );
 };

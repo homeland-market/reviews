@@ -1,13 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
 import styled from 'styled-components';
 
 const SearchHighlight = styled.mark`
   background-color: #e6d3e4;
+  font-weight: 700;
+  padding-top: 4px;
+  padding-bottom: 4px;
 `;
 
-const filterConditionExtractor = (comment, filterCondition) => {
+export const ProductUserComments = styled.div`
+  margin-bottom: 12px;
+  color: #615c65;
+  flex-direction: row;
+  display: block;
+`;
+
+export const filterConditionExtractor = (comment, filterCondition) => {
   const extractedMatches = [];
 
   const extractAllInstances = (text) => {
@@ -23,7 +31,7 @@ const filterConditionExtractor = (comment, filterCondition) => {
   return extractedMatches;
 };
 
-const highlightAllMatchingCommentText = (comment, id, filterCondition) => {
+export const highlightAllMatchingCommentText = (comment, id, filterCondition) => {
   const filterConditionMatches = [];
   const arrayOfElements = [];
   const splitReviewText = comment.split(new RegExp(filterCondition, 'ig'));
@@ -36,32 +44,23 @@ const highlightAllMatchingCommentText = (comment, id, filterCondition) => {
       </span>,
     );
   });
-  return <div>{arrayOfElements}</div>;
+  return <ProductUserComments>{arrayOfElements}</ProductUserComments>;
 };
 
-const ReviewComment = ({ review: { comment, id }, filterCondition }) => {
-  if (!filterCondition || typeof filterCondition === 'number') {
-    return <div>{comment}</div>;
+export const getStartPercentagesFills = (reviews) => {
+  let reviewStars = 5;
+  const starPercentages = {};
+  const reviewTotal = reviews.length;
+  const filter = (starNumber) => reviews.reduce((acc, review) => acc
+    + (review.rating === starNumber ? 1 : 0), 0);
+  while (reviewStars > 0) {
+    const starTotals = filter(reviewStars);
+    if (starTotals === 0) {
+      starPercentages[reviewStars] = '0';
+    } else {
+      starPercentages[reviewStars] = ((starTotals / reviewTotal) * 100).toFixed(1);
+    }
+    reviewStars -= 1;
   }
-  return highlightAllMatchingCommentText(comment, id, filterCondition);
+  return starPercentages;
 };
-
-ReviewComment.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number,
-    url_id: PropTypes.number,
-    name: PropTypes.string,
-    location: PropTypes.string,
-    date: PropTypes.string,
-    comment: PropTypes.string,
-    rating: PropTypes.number,
-    helpful: PropTypes.number,
-    img: PropTypes.string,
-  }).isRequired,
-  filterCondition: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]).isRequired,
-};
-
-export default ReviewComment;

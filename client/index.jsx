@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 import styled from 'styled-components';
 import GlobalStyle from './assets/fonts';
 
@@ -11,14 +12,24 @@ import RenderReviews from './components/RenderReviews';
 import { getAllReviews } from './lib/DatabaseRequests';
 import { getStartPercentagesFills } from './lib/ReviewFiltering';
 
+const appearDuration = 800;
+const transitionName = 'loaderTransition';
+
 const ReviewsContainer = styled.div`
   width: 90vw;
   background-color: #f4f4f5;
   margin-left: auto;
   margin-right: auto;
   padding: 0;
-  margin-top: 0;
-`;
+
+  &.${transitionName}-appear {
+    opacity: 0.05;
+  }
+
+  &.${transitionName}-appear-active {
+    opacity: 1;
+    transition: opacity ${appearDuration}ms ease-out;
+  }`;
 
 class App extends Component {
   constructor(props) {
@@ -124,31 +135,38 @@ class App extends Component {
     return (
       <div>
         <GlobalStyle />
-        <ReviewsContainer>
-          <ReviewsOverview
-            reviews={reviews}
-            reviewTotal={reviewTotal}
-            reviewPercentages={reviewPercentages}
-            filterReviews={this.filterReviews}
-          />
-          <SearchReviews
-            filterReviewsByText={this.filterReviewsByText}
-          />
-          <SortReviews
-            reviewDisplayCount={reviewDisplayCount}
-            filteredReviews={filteredReviews}
-            sortReviewsBy={this.sortReviewsBy}
-            filterCondition={filterCondition}
-            filterReviews={this.filterReviews}
-          />
-          <RenderReviews
-            seeMoreReviews={this.seeMoreReviews}
-            resetReviewDisplayCount={this.resetReviewDisplayCount}
-            reviewDisplayCount={reviewDisplayCount}
-            filteredReviews={filteredReviews}
-            filterCondition={filterCondition}
-          />
-        </ReviewsContainer>
+        <CSSTransitionGroup
+          transitionName={transitionName}
+          transitionAppear={true}
+          transitionAppearTimeout={appearDuration}
+        >
+          <ReviewsContainer>
+            <ReviewsOverview
+              reviews={reviews}
+              reviewTotal={reviewTotal}
+              reviewPercentages={reviewPercentages}
+              filterReviews={this.filterReviews}
+            />
+
+            <SearchReviews
+              filterReviewsByText={this.filterReviewsByText}
+            />
+            <SortReviews
+              reviewDisplayCount={reviewDisplayCount}
+              filteredReviews={filteredReviews}
+              sortReviewsBy={this.sortReviewsBy}
+              filterCondition={filterCondition}
+              filterReviews={this.filterReviews}
+            />
+            <RenderReviews
+              seeMoreReviews={this.seeMoreReviews}
+              resetReviewDisplayCount={this.resetReviewDisplayCount}
+              reviewDisplayCount={reviewDisplayCount}
+              filteredReviews={filteredReviews}
+              filterCondition={filterCondition}
+            />
+          </ReviewsContainer>
+        </CSSTransitionGroup>
       </div>
     );
   }

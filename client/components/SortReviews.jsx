@@ -4,10 +4,10 @@ import styled from 'styled-components';
 import Select from 'react-select';
 
 const SortReviewsWrapper = styled.div`
+  margin-top: 24px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-top: 32px;
 `;
 
 const ReviewsSearchSortFilterResults = styled.div`
@@ -32,6 +32,7 @@ const ClearFiltersButton = styled.div`
 const customStyles = {
   container: (provided) => ({
     ...provided,
+    borderRadius: '8px',
     display: 'flex',
     width: '250px',
     textAlign: 'left',
@@ -43,7 +44,7 @@ const customStyles = {
   control: (provided) => ({
     ...provided,
     borderRadius: '8px',
-    border: '2px solid #8d8a90',
+    border: '2px solid #b9b6bc',
     minHeight: '56px',
     height: '56px',
     minWidth: '100%',
@@ -107,7 +108,7 @@ const options = [
 class SortReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: 0 };
+    this.state = { selectedOption: { value: 'Most relevant', label: 'Most relevant' } };
     this.handleChange = this.handleChange.bind(this);
     this.handleSumbit = this.handleSumbit.bind(this);
   }
