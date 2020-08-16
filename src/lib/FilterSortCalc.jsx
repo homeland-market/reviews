@@ -1,33 +1,25 @@
 export const Filter = {
-
   byRating(reviews, target) {
     return reviews.filter((review) => review.rating === target);
   },
-
   byText(reviews, target) {
     return reviews.filter((review) => review.comment.toLowerCase().includes(target));
   },
-
 };
 
 export const Sort = {
-
   includesCustomerPhotos(reviews) {
     return reviews.sort((a, b) => (a.img === null) - (b.img === null) || +(a > b) || -(a < b));
   },
-
   mostRecent(reviews) {
     return reviews.sort((a, b) => new Date(b.date) - new Date(a.date));
   },
-
   mostHelpful(reviews) {
     return reviews.sort((a, b) => b.helpful - a.helpful);
   },
-
 };
 
 export const Calc = {
-
   getStartPercentagesFills(reviews) {
     let reviewStars = 5;
     const starPercentages = {};
@@ -45,11 +37,12 @@ export const Calc = {
     }
     return starPercentages;
   },
-
   getTotalReviewAverageScore(reviews) {
     const reviewTotal = reviews.reduce((acc, review) => acc + (review.rating || null), 0);
     const totalReviewAverage = (reviewTotal / reviews.length).toFixed(1);
     return totalReviewAverage;
   },
-
+  totalStarReviewCount(reviews, rating) {
+    return reviews.reduce((acc, review) => acc + (review.rating === rating ? 1 : 0), 0);
+  },
 };

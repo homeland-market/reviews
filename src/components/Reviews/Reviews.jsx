@@ -2,26 +2,26 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../../assets/fonts';
 
-import ReviewsOverview from '../ReviewsOverview';
-import ReviewsSearch from '../ReviewsSearch';
-import ReviewsSort from '../ReviewsSort';
-import ReviewsDisplay from '../ReviewsDisplay';
+import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
+import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
+import ReviewsSort from '../ReviewsSort/ReviewsSort';
+import ReviewsDisplay from '../ReviewsDisplay/ReviewsDisplay';
 
 import { getAllReviews } from '../../lib/DatabaseRequests';
 import { Filter, Sort, Calc } from '../../lib/FilterSortCalc';
 
 const ReviewsWrapper = styled.div`
-  width: 90vw;
   margin-left: auto;
   margin-right: auto;
+  width: 90vw;
 `;
 
-class App extends Component {
+class Reviews extends Component {
   constructor() {
     super();
     this.state = {
       reviews: [],
-      totalReviews: 0,
+      totalReviewsCount: 0,
       reviewStarPercentages: {},
       reviewAverageScore: 0,
       reviewDisplayCount: 3,
@@ -38,13 +38,13 @@ class App extends Component {
 
   componentDidMount() {
     getAllReviews((reviews) => {
-      const totalReviews = reviews.length;
+      const totalReviewsCount = reviews.length;
       const reviewStarPercentages = Calc.getStartPercentagesFills(reviews);
       const reviewAverageScore = Calc.getTotalReviewAverageScore(reviews);
       this.sortReviews(reviews);
       this.setState({
         reviews,
-        totalReviews,
+        totalReviewsCount,
         reviewAverageScore,
         reviewStarPercentages,
       });
@@ -101,7 +101,7 @@ class App extends Component {
   render() {
     const {
       reviews,
-      totalReviews,
+      totalReviewsCount,
       reviewStarPercentages,
       reviewAverageScore,
       reviewDisplayCount,
@@ -112,7 +112,7 @@ class App extends Component {
       <ReviewsWrapper>
         <ReviewsOverview
           reviews={reviews}
-          totalReviews={totalReviews}
+          totalReviewsCount={totalReviewsCount}
           reviewStarPercentages={reviewStarPercentages}
           reviewAverageScore={reviewAverageScore}
           filterCondition={filterCondition}
@@ -141,4 +141,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Reviews;

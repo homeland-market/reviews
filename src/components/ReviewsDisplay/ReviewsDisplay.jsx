@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import NameAndLocation from './ReviewsDisplayBody/NameAndLocation';
-import RatingAndDate from './ReviewsDisplayBody/RatingAndDate';
+import RatingDateComment from './ReviewsDisplayBody/RatingDateComment';
 import HelpfulButton from './ReviewsDisplayBody/HelpfulButton';
 import CustomerImage from './ReviewsDisplayBody/CustomerImage';
 import ShowMoreReviews from './ReviewsDisplayBody/ShowMoreReviews';
 import ShowLessReviews from './ReviewsDisplayBody/ShowLessReviews';
 
 const RenderReviewsContainer = styled.div`
+  background-color: #fff;
   display: block;
   border-radius: 8px;
-  background-color: #fff;
   margin-top: 24px;
   padding-right: 24px;
   padding-left: 24px;
@@ -83,7 +83,7 @@ const renderReviewsDisplayBody = (filteredReviews, filterCondition) => {
       <div key={review.id}>
         <ProductReviewGrid>
           <ProductReviewsReviewDetails>
-            <RatingAndDate review={review} filterCondition={filterCondition} />
+            <RatingDateComment review={review} filterCondition={filterCondition} />
           </ProductReviewsReviewDetails>
           <ProductReviewsReviewPhotos>
             <CustomerImage review={review} />
