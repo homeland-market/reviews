@@ -29,10 +29,10 @@ const reviewsTemplate = {
   },
 };
 
-const weightedRand = (spec) => {
+const weightedRand = (weightRules) => {
   let i; let j; const table = [];
-  for (i in spec) {
-    for (j = 0; j < spec[i] * 10; j++) {
+  for (i in weightRules) {
+    for (j = 0; j < weightRules[i] * 10; j++) {
       table.push(i);
     }
   }
