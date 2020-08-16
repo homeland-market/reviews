@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { updateHelpfulCount } from '../../lib/DatabaseRequests';
+import { updateHelpfulCount } from '../../../lib/DatabaseRequests';
 
 const ProductHelpfulVoteButton = styled.button`
   border-radius: 24px;

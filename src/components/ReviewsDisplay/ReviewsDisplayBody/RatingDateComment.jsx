@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { SearchText, ProductUserComments } from '../../lib/SearchText';
+import { SearchText, ProductUserComments } from '../../../lib/SearchText';
 
-const StarRatingAndDateJustifySpace = styled.div`
+const StarRatingDateCommentJustifySpace = styled.div`
   display: flex;
   margin-bottom: 12px;
   flex-wrap: wrap;
@@ -55,9 +55,9 @@ const renderComment = ({ review: { comment, id } }, filterCondition) => {
   return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
 };
 
-const RatingAndDate = ({ review, review: { rating, date }, filterCondition }) => (
+const RatingDateComment = ({ review, review: { rating, date }, filterCondition }) => (
   <div>
-    <StarRatingAndDateJustifySpace>
+    <StarRatingDateCommentJustifySpace>
       <ReviewStarWrapper>
         <ReviewStarStars>
           <StarRatings
@@ -74,7 +74,7 @@ const RatingAndDate = ({ review, review: { rating, date }, filterCondition }) =>
       <ReviewDateWrapper>
         {parseDate(date)}
       </ReviewDateWrapper>
-    </StarRatingAndDateJustifySpace>
+    </StarRatingDateCommentJustifySpace>
 
     <ProductReviewCommentsWrapper>
       {renderComment({ review }, filterCondition)}
@@ -82,7 +82,7 @@ const RatingAndDate = ({ review, review: { rating, date }, filterCondition }) =>
   </div>
 );
 
-RatingAndDate.propTypes = {
+RatingDateComment.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -100,4 +100,4 @@ RatingAndDate.propTypes = {
   ]).isRequired,
 };
 
-export default RatingAndDate;
+export default RatingDateComment;

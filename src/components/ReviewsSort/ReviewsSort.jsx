@@ -129,8 +129,8 @@ class ReviewsSort extends React.Component {
     const prefix = filteredReviews.length ? '1-' : '0-';
     const suffix = reviewDisplayCount > filteredReviews.length
       ? filteredReviews.length : reviewDisplayCount;
-    const totalReviews = filteredReviews.length;
-    return `Showing ${prefix}${suffix} of ${totalReviews} `;
+    const totalReviewsCount = filteredReviews.length;
+    return `Showing ${prefix}${suffix} of ${totalReviewsCount} `;
   }
 
   renderReviewsWith() {

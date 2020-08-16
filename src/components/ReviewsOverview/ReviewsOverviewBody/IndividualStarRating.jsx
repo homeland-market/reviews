@@ -91,7 +91,7 @@ const handleRatingClick = (score, filterCondition, filterReviewsByStarRating) =>
   }
 };
 
-const RatingScoreButton = ({
+const IndividualStarRating = ({
   reviews,
   score,
   reviewStarPercentages,
@@ -129,7 +129,7 @@ const RatingScoreButton = ({
   </RatingButtonWrapper>
 );
 
-RatingScoreButton.propTypes = {
+IndividualStarRating.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -147,8 +147,8 @@ RatingScoreButton.propTypes = {
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-RatingScoreButton.defaultProps = {
+IndividualStarRating.defaultProps = {
   reviewStarPercentages: '0',
 };
 
-export default RatingScoreButton;
+export default IndividualStarRating;

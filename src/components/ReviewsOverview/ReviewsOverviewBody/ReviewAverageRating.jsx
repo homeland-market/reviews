@@ -12,12 +12,12 @@ const RatingAverageBlock = styled.span`
   font-size: 3.85rem;
 `;
 
-const TotalReviewsBlock = styled.div`
+const totalReviewsCountBlock = styled.div`
   font-weight: 700;
   margin-top: 6px;
 `;
 
-const ReviewAverageRating = ({ reviewAverageScore, totalReviews }) => (
+const ReviewAverageRating = ({ reviewAverageScore, totalReviewsCount }) => (
   <RatingBlock>
     <RatingAverageBlock>
       {reviewAverageScore}
@@ -33,15 +33,15 @@ const ReviewAverageRating = ({ reviewAverageScore, totalReviews }) => (
         svgIconViewBox="0 0 20 13"
       />
     </div>
-    <TotalReviewsBlock>
-      {`${totalReviews} Reviews`}
-    </TotalReviewsBlock>
+    <totalReviewsCountBlock>
+      {`${totalReviewsCount} Reviews`}
+    </totalReviewsCountBlock>
   </RatingBlock>
 );
 
 ReviewAverageRating.propTypes = {
   reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  totalReviews: PropTypes.number.isRequired,
+  totalReviewsCount: PropTypes.number.isRequired,
 };
 
 export default ReviewAverageRating;
