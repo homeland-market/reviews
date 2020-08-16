@@ -43,11 +43,11 @@ const showMoreReviewsNumber = (filteredReviewsLength, reviewDisplayCount) => {
   return `Show ${showAmount} More Reviews`;
 };
 
-const ShowMoreReviews = ({ seeMoreReviews, reviewDisplayCount, filteredReviews }) => {
+const ShowMoreReviews = ({ increaseReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
   const filteredReviewsLength = filteredReviews.length;
   if (reviewDisplayCount < filteredReviewsLength) {
     return (
-      <ShowMoreReviewsWrap type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
+      <ShowMoreReviewsWrap type="button" onClick={increaseReviewDisplayCount} onKeyPress={increaseReviewDisplayCount}>
         {showMoreReviewsNumber(filteredReviewsLength, reviewDisplayCount)}
         <DownArrowSVGContainer
           viewBox="0 0 28 28"
@@ -63,7 +63,7 @@ const ShowMoreReviews = ({ seeMoreReviews, reviewDisplayCount, filteredReviews }
 };
 
 ShowMoreReviews.propTypes = {
-  seeMoreReviews: PropTypes.func.isRequired,
+  increaseReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };

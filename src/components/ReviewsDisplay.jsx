@@ -104,7 +104,7 @@ const renderReviewsDisplayBody = (filteredReviews, filterCondition) => {
 };
 
 const ReviewsDisplay = ({
-  seeMoreReviews,
+  increaseReviewDisplayCount,
   resetReviewDisplayCount,
   reviewDisplayCount,
   filteredReviews,
@@ -118,7 +118,7 @@ const ReviewsDisplay = ({
       </RenderReviewsContainer>
       <ShowMoreAndLessWrapper>
         <ShowMoreReviews
-          seeMoreReviews={seeMoreReviews}
+          increaseReviewDisplayCount={increaseReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
         />
@@ -133,7 +133,7 @@ const ReviewsDisplay = ({
 };
 
 ReviewsDisplay.propTypes = {
-  seeMoreReviews: PropTypes.func.isRequired,
+  increaseReviewDisplayCount: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,

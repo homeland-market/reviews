@@ -120,8 +120,8 @@ class ReviewsSort extends React.Component {
   }
 
   handleSumbit(value) {
-    const { sortReviewsBy, filteredReviews } = this.props;
-    sortReviewsBy(value, filteredReviews);
+    const { sortReviews, filteredReviews } = this.props;
+    sortReviews(filteredReviews, value);
   }
 
   showingReviewsOf() {
@@ -186,7 +186,7 @@ class ReviewsSort extends React.Component {
 ReviewsSort.propTypes = {
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sortReviewsBy: PropTypes.func.isRequired,
+  sortReviews: PropTypes.func.isRequired,
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   filterReviewsByStarRating: PropTypes.func.isRequired,
 };

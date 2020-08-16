@@ -10,12 +10,10 @@ import ReviewsDisplay from '../ReviewsDisplay';
 import { getAllReviews } from '../../lib/DatabaseRequests';
 import { Filter, Sort, Calc } from '../../lib/FilterSortCalc';
 
-const ReviewsContainer = styled.div`
+const ReviewsWrapper = styled.div`
   width: 90vw;
-  background-color: #f4f4f5;
   margin-left: auto;
   margin-right: auto;
-  padding: 0;
 `;
 
 class App extends Component {
@@ -33,18 +31,17 @@ class App extends Component {
     };
     this.filterReviewsByStarRating = this.filterReviewsByStarRating.bind(this);
     this.filterReviewsByText = this.filterReviewsByText.bind(this);
-    this.sortReviewsBy = this.sortReviewsBy.bind(this);
-    this.seeMoreReviews = this.seeMoreReviews.bind(this);
+    this.sortReviews = this.sortReviews.bind(this);
+    this.increaseReviewDisplayCount = this.increaseReviewDisplayCount.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
   }
 
   componentDidMount() {
     getAllReviews((reviews) => {
-      const { sortCondition } = this.state;
       const totalReviews = reviews.length;
       const reviewStarPercentages = Calc.getStartPercentagesFills(reviews);
       const reviewAverageScore = Calc.getTotalReviewAverageScore(reviews);
-      this.sortReviewsBy(sortCondition, reviews);
+      this.sortReviews(reviews);
       this.setState({
         reviews,
         totalReviews,
@@ -55,47 +52,45 @@ class App extends Component {
   }
 
   filterReviewsByStarRating(value) {
-    const { reviews, sortCondition } = this.state;
-    this.sortReviewsBy(sortCondition, reviews);
+    const { reviews } = this.state;
     if (value === 0) {
-      this.setState({
-        filterCondition: value,
-      });
+      this.sortReviews(reviews);
+      this.setState({ filterCondition: value });
     } else {
       const filtered = Filter.byRating(reviews, value);
-      this.sortReviewsBy(sortCondition, filtered);
-      if (filtered.length) {
-        this.setState({ filterCondition: value });
-      }
+      this.sortReviews(filtered);
+      if (filtered.length) { this.setState({ filterCondition: value }); }
     }
   }
 
   filterReviewsByText(value) {
-    const { reviews, sortCondition } = this.state;
+    const { reviews } = this.state;
     const filtered = Filter.byText(reviews, value);
-    this.sortReviewsBy(sortCondition, filtered);
+    this.sortReviews(filtered);
     this.setState({ filterCondition: value });
   }
 
-  sortReviewsBy(value, reviews) {
-    if (value === 'Includes customer photos') {
+  sortReviews(reviews, value) {
+    const { sortCondition } = this.state;
+    const condition = value || sortCondition;
+    if (condition === 'Includes customer photos') {
       const filteredReviews = Sort.includesCustomerPhotos(reviews);
       this.resetReviewDisplayCount();
-      this.setState({ filteredReviews, sortCondition: value });
+      this.setState({ filteredReviews, sortCondition: condition });
       return;
     }
     if (value === 'Most recent') {
       const filteredReviews = Sort.mostRecent(reviews);
       this.resetReviewDisplayCount();
-      this.setState({ filteredReviews, sortCondition: value });
+      this.setState({ filteredReviews, sortCondition: condition });
       return;
     }
     const filteredReviews = Sort.mostHelpful(reviews);
     this.resetReviewDisplayCount();
-    this.setState({ filteredReviews, sortCondition: value });
+    this.setState({ filteredReviews, sortCondition: condition });
   }
 
-  seeMoreReviews() {
+  increaseReviewDisplayCount() {
     this.setState((prevState) => ({ reviewDisplayCount: prevState.reviewDisplayCount + 10 }));
   }
 
@@ -108,42 +103,40 @@ class App extends Component {
       reviews,
       totalReviews,
       reviewStarPercentages,
+      reviewAverageScore,
       reviewDisplayCount,
       filteredReviews,
       filterCondition,
-      reviewAverageScore,
     } = this.state;
     return (
-      <div>
-        <ReviewsContainer>
-          <ReviewsOverview
-            reviews={reviews}
-            totalReviews={totalReviews}
-            reviewAverageScore={reviewAverageScore}
-            reviewStarPercentages={reviewStarPercentages}
-            filterReviewsByStarRating={this.filterReviewsByStarRating}
-            filterCondition={filterCondition}
-          />
-          <ReviewsSearch
-            filterReviewsByText={this.filterReviewsByText}
-          />
-          <ReviewsSort
-            reviewDisplayCount={reviewDisplayCount}
-            filteredReviews={filteredReviews}
-            sortReviewsBy={this.sortReviewsBy}
-            filterCondition={filterCondition}
-            filterReviewsByStarRating={this.filterReviewsByStarRating}
-          />
-          <ReviewsDisplay
-            seeMoreReviews={() => this.seeMoreReviews()}
-            resetReviewDisplayCount={this.resetReviewDisplayCount}
-            reviewDisplayCount={reviewDisplayCount}
-            filteredReviews={filteredReviews}
-            filterCondition={filterCondition}
-          />
-          <GlobalStyle />
-        </ReviewsContainer>
-      </div>
+      <ReviewsWrapper>
+        <ReviewsOverview
+          reviews={reviews}
+          totalReviews={totalReviews}
+          reviewStarPercentages={reviewStarPercentages}
+          reviewAverageScore={reviewAverageScore}
+          filterCondition={filterCondition}
+          filterReviewsByStarRating={this.filterReviewsByStarRating}
+        />
+        <ReviewsSearch
+          filterReviewsByText={this.filterReviewsByText}
+        />
+        <ReviewsSort
+          reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
+          filterCondition={filterCondition}
+          filterReviewsByStarRating={this.filterReviewsByStarRating}
+          sortReviews={this.sortReviews}
+        />
+        <ReviewsDisplay
+          reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
+          filterCondition={filterCondition}
+          increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+          resetReviewDisplayCount={this.resetReviewDisplayCount}
+        />
+        <GlobalStyle />
+      </ReviewsWrapper>
     );
   }
 }
