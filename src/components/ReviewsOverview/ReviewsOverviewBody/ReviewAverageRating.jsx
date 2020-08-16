@@ -3,45 +3,54 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-const RatingBlock = styled.div`
+import { fiveStarsSVGPath } from '../../../assets/svg';
+
+const AverageRatingScoreWrapper = styled.div`
   text-align: center;
-  font-weight: 500;
 `;
 
-const RatingAverageBlock = styled.span`
+const AverageScoreContainer = styled.span`
   font-size: 3.85rem;
 `;
 
-const totalReviewsCountBlock = styled.div`
+const TotalReviewCountContainer = styled.div`
   font-weight: 700;
   margin-top: 6px;
 `;
 
-const ReviewAverageRating = ({ reviewAverageScore, totalReviewsCount }) => (
-  <RatingBlock>
-    <RatingAverageBlock>
+const ReviewAverageRating = ({ totalReviewsCount, reviewAverageScore }) => (
+  <AverageRatingScoreWrapper>
+    <AverageScoreContainer>
       {reviewAverageScore}
-    </RatingAverageBlock>
-    <div className="ReviewStartsWrapper">
+    </AverageScoreContainer>
+    <section>
       <StarRatings
         rating={Number(reviewAverageScore)}
         starDimension="45px"
         starSpacing="0"
         starRatedColor="#f6b71d"
         starEmptyColor="#d9d8db"
-        svgIconPath="M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l.56-3.26-2.36-2.3c-.8-.78-.55-1.54.54-1.7L4.3 3.7 5.75.76c.5-1 1.28-1 1.77 0L9 3.7l3.26.48c1.1.16 1.34.92.55 1.7l-2.36 2.3.56 3.26c.2 1.1-.46 1.56-1.44 1.04l-2.92-1.54z"
+        svgIconPath={fiveStarsSVGPath}
         svgIconViewBox="0 0 20 13"
       />
-    </div>
-    <totalReviewsCountBlock>
+    </section>
+    <TotalReviewCountContainer>
       {`${totalReviewsCount} Reviews`}
-    </totalReviewsCountBlock>
-  </RatingBlock>
+    </TotalReviewCountContainer>
+  </AverageRatingScoreWrapper>
 );
 
+ReviewAverageRating.defaultProps = {
+  totalReviewsCount: 2,
+  reviewAverageScore: '2.2',
+};
+
 ReviewAverageRating.propTypes = {
-  reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  totalReviewsCount: PropTypes.number.isRequired,
+  totalReviewsCount: PropTypes.number,
+  reviewAverageScore: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 export default ReviewAverageRating;

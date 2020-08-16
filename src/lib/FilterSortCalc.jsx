@@ -42,4 +42,7 @@ export const Calc = {
     const totalReviewAverage = (reviewTotal / reviews.length).toFixed(1);
     return totalReviewAverage;
   },
+  totalStarReviewCount(reviews, rating) {
+    return reviews.reduce((acc, review) => acc + (review.rating === rating ? 1 : 0), 0);
+  },
 };

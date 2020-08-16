@@ -37,11 +37,11 @@ const stars = [5, 4, 3, 2, 1];
 
 const ReviewsOverview = ({
   reviews,
-  reviewAverageScore,
-  reviewStarPercentages,
-  filterReviewsByStarRating,
-  filterCondition,
   totalReviewsCount,
+  reviewStarPercentages,
+  reviewAverageScore,
+  filterCondition,
+  filterReviewsByStarRating,
 }) => (
   <OverviewWrapper>
     <HeaderAndLink />
@@ -53,12 +53,12 @@ const ReviewsOverview = ({
         />
       </AverageScoreContainer>
       <StarRatingContainer>
-        {stars.map((score) => (
-          <section key={score}>
+        {stars.map((rating) => (
+          <section key={rating}>
             <IndividualStarRating
-              score={score}
+              rating={rating}
               reviews={reviews}
-              reviewStarPercentages={reviewStarPercentages[score]}
+              reviewStarPercentages={reviewStarPercentages[rating]}
               filterCondition={filterCondition}
               filterReviewsByStarRating={filterReviewsByStarRating}
             />
@@ -81,6 +81,7 @@ ReviewsOverview.defaultProps = {
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
   },
+  totalReviewsCount: 0,
   reviewStarPercentages: {
     1: '20',
     2: '20',
@@ -88,8 +89,8 @@ ReviewsOverview.defaultProps = {
     4: '20',
     5: '20',
   },
-  totalReviewsCount: 222,
   reviewAverageScore: '2.2',
+  filterCondition: 0,
 };
 
 ReviewsOverview.propTypes = {
@@ -119,7 +120,7 @@ ReviewsOverview.propTypes = {
   filterCondition: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ]).isRequired,
+  ]),
   filterReviewsByStarRating: PropTypes.func.isRequired,
 };
 

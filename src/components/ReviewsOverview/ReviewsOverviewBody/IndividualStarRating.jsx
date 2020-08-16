@@ -2,134 +2,134 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const RatingScores = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  justify-content: space-between;
+import { Calc } from '../../../lib/FilterSortCalc';
+
+import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
+import { StrippedButton } from '../../../assets/styles';
+
+const StarNumber = styled.div`
   color: #000;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
   width: 2em;
 `;
 
-const StarSVGContainer = styled.svg`
-  fill: ${(props) => (props.filterCondition === props.score ? '#520f54;' : '#f6b71d')};
-  width: 10%;
-  height: 10%;
-`;
-
-const StarSVGContainerPath = styled.path`
-  d: path("M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l.56-3.26-2.36-2.3c-.8-.78-.55-1.54.54-1.7L4.3 3.7 5.75.76c.5-1 1.28-1 1.77 0L9 3.7l3.26.48c1.1.16 1.34.92.55 1.7l-2.36 2.3.56 3.26c.2 1.1-.46 1.56-1.44 1.04l-2.92-1.54z");
-`;
-
-const HistogramBarContainer = styled.div`
+const FillBarContainer = styled.div`
   width: 100%;
 `;
 
-const ProductHistogramBar = styled.div`
-  width: 100%;
-  height: 24px;
-  background-color: ${(props) => (props.filterCondition === props.score ? '#b9b6bc' : '#d9d8db')};
-  transition: background-color .1s cubic-bezier(.65,.05,.36,1);
+const FillBarBackground = styled.div`
+  background-color: ${(props) => (props.filterCondition === props.rating ? '#b9b6bc' : '#d9d8db')};
   border-radius: 50vw;
+  height: 24px;
   overflow: hidden;
+  transition: background-color .1s cubic-bezier(.65,.05,.36,1);
 }
 `;
 
-const ProductHistogramBarHighlighted = styled.div`
-  width: ${(props) => props.fillPercentage}%;
-  height: 100%;
-  transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),background-color .1s cubic-bezier(.65,.05,.36,1);
-  background-color: ${(props) => (props.filterCondition === props.score ? '#520f54' : '#7f187f')};
+const FillBarFill = styled.div`
+  background-color: ${(props) => (props.filterCondition === props.rating ? '#520f54' : '#7f187f')};
   border-radius: 50vw 0 0 50vw;
+  height: 100%;
+  width: ${(props) => props.reviewStarPercentages}%;
+  transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),
+              background-color .1s cubic-bezier(.65,.05,.36,1);
 `;
 
-const ProductHistogramCount = styled.div`
-  width: 2em;
-  flex-shrink: 0;
+const StarReviewCount = styled.div`
   padding-left: 12px;
+  width: 2em;
 `;
 
-const RatingButtonWrapper = styled.button`
-  display: flex;
-  min-width: 300px;
-  max-width: 350px;
-  flex-direction: row;
-  flex-grow: 1;
-  flex-shrink: 1;
-  justify-content: space-evenly;
+const RatingButtonWrapper = styled(StrippedButton)`
   align-items: center;
-  cursor: pointer;
-  background: none;
-  outline: inherit;
-  border: none;
-  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  max-width: 350px;
+  min-width: 300px;
 
-  &:hover ${ProductHistogramBarHighlighted} {
-    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),background-color .1s cubic-bezier(.65,.05,.36,1);
+  &:hover ${FillBarFill} {
     background-color: #520f54;
+    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),
+                background-color .1s cubic-bezier(.65,.05,.36,1);
   }
 
-  &:hover ${ProductHistogramBar} {
-    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),background-color .1s cubic-bezier(.65,.05,.36,1);
+  &:hover ${FillBarBackground} {
     background-color: #b9b6bc;
+    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),
+                background-color .1s cubic-bezier(.65,.05,.36,1);
   }
 
-  &:hover ${StarSVGContainer} {
-    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),background-color .1s cubic-bezier(.65,.05,.36,1);
+  &:hover ${SmallStarSVG} {
     fill: #520f54;
+    transition: width .5s cubic-bezier(0.65, 0.05, 0.36, 1),
+                background-color .1s cubic-bezier(.65,.05,.36,1);
   }
 `;
-
-const ReviewScoreTotals = (reviews, score) => reviews.reduce((acc, review) => acc
-  + (review.rating === score ? 1 : 0), 0);
-
-const handleRatingClick = (score, filterCondition, filterReviewsByStarRating) => {
-  if (filterCondition !== score) {
-    filterReviewsByStarRating(score);
-  } else {
-    filterReviewsByStarRating(0);
-  }
-};
 
 const IndividualStarRating = ({
+  rating,
   reviews,
-  score,
   reviewStarPercentages,
   filterCondition,
   filterReviewsByStarRating,
 }) => (
-  <RatingButtonWrapper onClick={() => handleRatingClick(score, filterCondition, filterReviewsByStarRating)}>
-    <RatingScores>
-      {score}
-    </RatingScores>
-    <StarSVGContainer
+  <RatingButtonWrapper
+    onClick={() => (filterCondition !== rating ? filterReviewsByStarRating(rating)
+      : filterReviewsByStarRating(0))}
+  >
+    <StarNumber>
+      {rating}
+    </StarNumber>
+    <SmallStarSVG
+      rating={rating}
       filterCondition={filterCondition}
-      score={score}
       viewBox="0 0 20 13"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <StarSVGContainerPath />
-    </StarSVGContainer>
-    <HistogramBarContainer>
-      <ProductHistogramBar
+      <StarSVGPath />
+    </SmallStarSVG>
+    <FillBarContainer>
+      <FillBarBackground
+        rating={rating}
         filterCondition={filterCondition}
-        score={score}
       >
-        <ProductHistogramBarHighlighted
+        <FillBarFill
+          rating={rating}
+          reviewStarPercentages={reviewStarPercentages}
           filterCondition={filterCondition}
-          score={score}
-          fillPercentage={reviewStarPercentages}
         />
-      </ProductHistogramBar>
-    </HistogramBarContainer>
-    <ProductHistogramCount>
-      {ReviewScoreTotals(reviews, score)}
-    </ProductHistogramCount>
+      </FillBarBackground>
+    </FillBarContainer>
+    <StarReviewCount>
+      {Calc.totalStarReviewCount(reviews, rating)}
+    </StarReviewCount>
   </RatingButtonWrapper>
 );
 
+IndividualStarRating.defaultProps = {
+  rating: 2,
+  reviews: {
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  },
+  reviewStarPercentages: '0',
+  filterCondition: 2,
+};
+
 IndividualStarRating.propTypes = {
+  rating: PropTypes.number,
   reviews: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -140,15 +140,13 @@ IndividualStarRating.propTypes = {
     rating: PropTypes.number,
     helpful: PropTypes.number,
     img: PropTypes.string,
-  })).isRequired,
+  })),
   reviewStarPercentages: PropTypes.string,
-  score: PropTypes.number.isRequired,
+  filterCondition: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   filterReviewsByStarRating: PropTypes.func.isRequired,
-  filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-};
-
-IndividualStarRating.defaultProps = {
-  reviewStarPercentages: '0',
 };
 
 export default IndividualStarRating;
