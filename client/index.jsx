@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import GlobalStyle from './assets/fonts';
 
 import ReviewsOverview from './components/ReviewsOverview';
-import SearchReviews from './components/SearchReviews';
-import SortReviews from './components/SortReviews';
-import RenderReviews from './components/RenderReviews';
+import ReviewsSearch from './components/ReviewsSearch';
+import ReviewsSort from './components/ReviewsSort';
+import ReviewsDisplay from './components/ReviewsDisplay';
 
 import { getAllReviews } from './lib/DatabaseRequests';
 import { getStartPercentagesFills, getTotalReviewAverageScore } from './lib/ReviewFiltering';
@@ -25,10 +25,10 @@ class App extends Component {
     this.state = {
       reviews: [],
       reviewTotal: 0,
-      reviewAverage: 0,
+      reviewAverageScore: 0,
+      reviewDisplayCount: 3,
       reviewStarPercentages: {},
       filteredReviews: [],
-      reviewDisplayCount: 3,
       filterCondition: 0,
       sortCondition: 'Most helpful',
     };
@@ -43,12 +43,12 @@ class App extends Component {
     getAllReviews((reviews) => {
       const { sortCondition } = this.state;
       const reviewStarPercentages = getStartPercentagesFills(reviews);
-      const reviewAverage = getTotalReviewAverageScore(reviews);
+      const reviewAverageScore = getTotalReviewAverageScore(reviews);
       this.sortReviewsBy(sortCondition, reviews);
       this.setState({
         reviews,
         reviewTotal: reviews.length,
-        reviewAverage,
+        reviewAverageScore,
         reviewStarPercentages,
       });
     });
@@ -59,7 +59,6 @@ class App extends Component {
     this.sortReviewsBy(sortCondition, reviews);
     if (value === 0) {
       this.setState({
-        reviewDisplayCount: 3,
         filterCondition: value,
       });
     } else {
@@ -67,7 +66,6 @@ class App extends Component {
       this.sortReviewsBy(sortCondition, filtered);
       if (filtered.length) {
         this.setState({
-          reviewDisplayCount: 3,
           filterCondition: value,
         });
       }
@@ -79,7 +77,6 @@ class App extends Component {
     const filtered = reviews.filter((review) => review.comment.toLowerCase().includes(value));
     this.sortReviewsBy(sortCondition, filtered);
     this.setState({
-      reviewDisplayCount: 3,
       filterCondition: value,
     });
   }
@@ -87,27 +84,31 @@ class App extends Component {
   sortReviewsBy(value, reviews) {
     if (value === 'Includes customer photos') {
       const sorted = reviews.sort((a, b) => (a.img === null)
-      - (b.img === null) || +(a > b) || -(a < b));
+        - (b.img === null) || +(a > b) || -(a < b));
       this.setState({
         filteredReviews: sorted,
         sortCondition: value,
+        reviewDisplayCount: 3,
       });
+      return;
     }
     if (value === 'Most recent') {
       const sorted = reviews.sort((a, b) => new Date(b.date)
-      - new Date(a.date));
+        - new Date(a.date));
       this.setState({
         filteredReviews: sorted,
         sortCondition: value,
+        reviewDisplayCount: 3,
       });
+      return;
     }
-    if (value === 'Most helpful' || value === 'Most relevant') {
-      const sorted = reviews.sort((a, b) => b.helpful - a.helpful);
-      this.setState({
-        filteredReviews: sorted,
-        sortCondition: value,
-      });
-    }
+    // value must === 'Most helpful' || 'Most relevant'
+    const sorted = reviews.sort((a, b) => b.helpful - a.helpful);
+    this.setState({
+      filteredReviews: sorted,
+      sortCondition: value,
+      reviewDisplayCount: 3,
+    });
   }
 
   seeMoreReviews() {
@@ -130,7 +131,7 @@ class App extends Component {
       reviewDisplayCount,
       filteredReviews,
       filterCondition,
-      reviewAverage,
+      reviewAverageScore,
     } = this.state;
     return (
       <div>
@@ -139,22 +140,22 @@ class App extends Component {
           <ReviewsOverview
             reviews={reviews}
             reviewTotal={reviewTotal}
-            reviewAverage={reviewAverage}
+            reviewAverageScore={reviewAverageScore}
             reviewStarPercentages={reviewStarPercentages}
             filterReviews={this.filterReviews}
             filterCondition={filterCondition}
           />
-          <SearchReviews
+          <ReviewsSearch
             filterReviewsByText={this.filterReviewsByText}
           />
-          <SortReviews
+          <ReviewsSort
             reviewDisplayCount={reviewDisplayCount}
             filteredReviews={filteredReviews}
             sortReviewsBy={this.sortReviewsBy}
             filterCondition={filterCondition}
             filterReviews={this.filterReviews}
           />
-          <RenderReviews
+          <ReviewsDisplay
             seeMoreReviews={this.seeMoreReviews}
             resetReviewDisplayCount={this.resetReviewDisplayCount}
             reviewDisplayCount={reviewDisplayCount}

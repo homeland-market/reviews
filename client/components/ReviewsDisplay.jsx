@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ReviewNameAndLocation from './RenderReviewsBody/ReviewNameAndLocation';
-import ReviewDetails from './RenderReviewsBody/ReviewDetails';
-import HelpfulButton from './RenderReviewsBody/HelpfulButton';
-import ReviewImage from './RenderReviewsBody/ReviewImage';
-import ShowMoreButton from './RenderReviewsBody/ShowMoreButton';
-import ShowLessButton from './RenderReviewsBody/ShowLessButton';
+import NameAndLocation from './ReviewsDisplayBody/NameAndLocation';
+import RatingAndDate from './ReviewsDisplayBody/RatingAndDate';
+import HelpfulButton from './ReviewsDisplayBody/HelpfulButton';
+import CustomerImage from './ReviewsDisplayBody/CustomerImage';
+import ShowMoreReviews from './ReviewsDisplayBody/ShowMoreReviews';
+import ShowLessReviews from './ReviewsDisplayBody/ShowLessReviews';
 
 const RenderReviewsContainer = styled.div`
   display: block;
@@ -74,7 +74,7 @@ const ShowMoreAndLessWrapper = styled.div`
   padding: 24px;
 `;
 
-const renderReviewBody = (filteredReviews, filterCondition) => {
+const renderReviewsDisplayBody = (filteredReviews, filterCondition) => {
   let counter = 0;
   const elements = [];
   while (counter < filteredReviews.length) {
@@ -83,13 +83,13 @@ const renderReviewBody = (filteredReviews, filterCondition) => {
       <div key={review.id}>
         <ProductReviewGrid>
           <ProductReviewsReviewDetails>
-            <ReviewDetails review={review} filterCondition={filterCondition} />
+            <RatingAndDate review={review} filterCondition={filterCondition} />
           </ProductReviewsReviewDetails>
           <ProductReviewsReviewPhotos>
-            <ReviewImage review={review} />
+            <CustomerImage review={review} />
           </ProductReviewsReviewPhotos>
           <ProductReviewsCustomerInfo>
-            <ReviewNameAndLocation review={review} />
+            <NameAndLocation review={review} />
           </ProductReviewsCustomerInfo>
           <ProductReviewsHelpfulButton>
             <HelpfulButton review={review} />
@@ -103,7 +103,7 @@ const renderReviewBody = (filteredReviews, filterCondition) => {
   return <div>{elements}</div>;
 };
 
-const RenderReviews = ({
+const ReviewsDisplay = ({
   seeMoreReviews,
   resetReviewDisplayCount,
   reviewDisplayCount,
@@ -114,15 +114,15 @@ const RenderReviews = ({
   return (
     <div>
       <RenderReviewsContainer>
-        {filteredReviews.length > 0 && renderReviewBody(reviewsToRender, filterCondition)}
+        {filteredReviews.length > 0 && renderReviewsDisplayBody(reviewsToRender, filterCondition)}
       </RenderReviewsContainer>
       <ShowMoreAndLessWrapper>
-        <ShowMoreButton
+        <ShowMoreReviews
           seeMoreReviews={seeMoreReviews}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
         />
-        <ShowLessButton
+        <ShowLessReviews
           resetReviewDisplayCount={resetReviewDisplayCount}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
@@ -132,7 +132,7 @@ const RenderReviews = ({
   );
 };
 
-RenderReviews.propTypes = {
+ReviewsDisplay.propTypes = {
   seeMoreReviews: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
@@ -140,4 +140,4 @@ RenderReviews.propTypes = {
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export default RenderReviews;
+export default ReviewsDisplay;

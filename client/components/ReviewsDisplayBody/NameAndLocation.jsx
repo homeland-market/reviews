@@ -20,6 +20,7 @@ const CustomerName = styled.p`
   font-size: 1.25rem;
   font-weight: 700;
   line-height: 1.5;
+  margin-top: 0;
   margin-bottom: 12px;
   padding: 0;
 `;
@@ -55,7 +56,7 @@ const ProductReviewComplianceBadge = styled.button`
   padding: 0;
 `;
 
-const ReviewNameAndLocation = ({ review: { name, location } }) => (
+const NameAndLocation = ({ review: { name, location } }) => (
   <ProductReviewCustomerInfo>
     <CustomerNameAndLocation>
       <CustomerName>
@@ -76,7 +77,7 @@ const ReviewNameAndLocation = ({ review: { name, location } }) => (
   </ProductReviewCustomerInfo>
 );
 
-ReviewNameAndLocation.propTypes = {
+NameAndLocation.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -90,4 +91,4 @@ ReviewNameAndLocation.propTypes = {
   }).isRequired,
 };
 
-export default ReviewNameAndLocation;
+export default NameAndLocation;

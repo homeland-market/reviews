@@ -98,14 +98,14 @@ const customStyles = {
   }),
 };
 
-const options = [
+const sortByOptions = [
   { value: 'Most relevant', label: 'Most relevant' },
   { value: 'Includes customer photos', label: 'Includes customer photos' },
   { value: 'Most recent', label: 'Most recent' },
   { value: 'Most helpful', label: 'Most helpful' },
 ];
 
-class SortReviews extends React.Component {
+class ReviewsSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedOption: { value: 'Most relevant', label: 'Most relevant' } };
@@ -167,7 +167,7 @@ class SortReviews extends React.Component {
           defaultValue={selectedOption}
           value={selectedOption}
           onChange={this.handleChange}
-          options={options}
+          sortByOptions={sortByOptions}
           placeholder="Sort by"
           theme={(theme) => ({
             ...theme,
@@ -183,7 +183,7 @@ class SortReviews extends React.Component {
   }
 }
 
-SortReviews.propTypes = {
+ReviewsSort.propTypes = {
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortReviewsBy: PropTypes.func.isRequired,
@@ -191,4 +191,4 @@ SortReviews.propTypes = {
   filterReviews: PropTypes.func.isRequired,
 };
 
-export default SortReviews;
+export default ReviewsSort;

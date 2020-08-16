@@ -55,7 +55,7 @@ const renderComment = ({ review: { comment, id } }, filterCondition) => {
   return highlightAllMatchingCommentText(comment, id, filterCondition);
 };
 
-const ReviewDetails = ({ review, review: { rating, date }, filterCondition }) => (
+const RatingAndDate = ({ review, review: { rating, date }, filterCondition }) => (
   <div>
     <StarRatingAndDateJustifySpace>
       <ReviewStarWrapper>
@@ -82,7 +82,7 @@ const ReviewDetails = ({ review, review: { rating, date }, filterCondition }) =>
   </div>
 );
 
-ReviewDetails.propTypes = {
+RatingAndDate.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -100,4 +100,4 @@ ReviewDetails.propTypes = {
   ]).isRequired,
 };
 
-export default ReviewDetails;
+export default RatingAndDate;

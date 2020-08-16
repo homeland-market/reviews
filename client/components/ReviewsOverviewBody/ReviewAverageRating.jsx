@@ -17,14 +17,14 @@ const TotalReviewsBlock = styled.div`
   margin-top: 6px;
 `;
 
-const ReviewAverageRating = ({ reviews, reviewAverage }) => (
+const ReviewAverageRating = ({ reviews, reviewAverageScore }) => (
   <RatingBlock>
     <RatingAverageBlock>
-      {reviewAverage}
+      {reviewAverageScore}
     </RatingAverageBlock>
     <div className="ReviewStartsWrapper">
       <StarRatings
-        rating={Number(reviewAverage)}
+        rating={Number(reviewAverageScore)}
         starDimension="45px"
         starSpacing="0"
         starRatedColor="#f6b71d"
@@ -51,7 +51,7 @@ ReviewAverageRating.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
-  reviewAverage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
 export default ReviewAverageRating;

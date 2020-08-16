@@ -51,7 +51,7 @@ const ReviewStarSpecificBlock = styled.div`
 
 const ReviewsOverview = ({
   reviews,
-  reviewAverage,
+  reviewAverageScore,
   reviewStarPercentages,
   filterReviews,
   filterCondition,
@@ -71,7 +71,7 @@ const ReviewsOverview = ({
         <ReviewsAverageContainer>
           <ReviewAverageRating
             reviews={reviews}
-            reviewAverage={reviewAverage}
+            reviewAverageScore={reviewAverageScore}
           />
         </ReviewsAverageContainer>
         <ReviewsScoresContainer>
@@ -104,7 +104,7 @@ ReviewsOverview.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
-  reviewAverage: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   reviewStarPercentages: PropTypes.shape({
     1: PropTypes.string,
     2: PropTypes.string,
