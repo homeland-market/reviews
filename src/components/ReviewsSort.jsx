@@ -147,7 +147,7 @@ class ReviewsSort extends React.Component {
   render() {
     const {
       filterCondition,
-      filterReviews,
+      filterReviewsByStarRating,
     } = this.props;
     const { selectedOption } = this.state;
     return (
@@ -156,7 +156,7 @@ class ReviewsSort extends React.Component {
           {this.showingReviewsOf()}
           {this.renderReviewsWith()}
           {filterCondition !== 0 && filterCondition !== '' ? (
-            <ClearFiltersButton type="button" onClick={() => filterReviews(0)} onKeyPress={() => filterReviews(0)}>
+            <ClearFiltersButton type="button" onClick={() => filterReviewsByStarRating(0)} onKeyPress={() => filterReviewsByStarRating(0)}>
               Clear
             </ClearFiltersButton>
           ) : null}
@@ -167,7 +167,7 @@ class ReviewsSort extends React.Component {
           defaultValue={selectedOption}
           value={selectedOption}
           onChange={this.handleChange}
-          sortByOptions={sortByOptions}
+          options={sortByOptions}
           placeholder="Sort by"
           theme={(theme) => ({
             ...theme,
@@ -188,7 +188,7 @@ ReviewsSort.propTypes = {
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
   sortReviewsBy: PropTypes.func.isRequired,
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  filterReviews: PropTypes.func.isRequired,
+  filterReviewsByStarRating: PropTypes.func.isRequired,
 };
 
 export default ReviewsSort;

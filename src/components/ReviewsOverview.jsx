@@ -53,8 +53,9 @@ const ReviewsOverview = ({
   reviews,
   reviewAverageScore,
   reviewStarPercentages,
-  filterReviews,
+  filterReviewsByStarRating,
   filterCondition,
+  totalReviews,
 }) => {
   const reviewScores = [5, 4, 3, 2, 1];
   return (
@@ -70,8 +71,8 @@ const ReviewsOverview = ({
       <OverviewBodyContainer>
         <ReviewsAverageContainer>
           <ReviewAverageRating
-            reviews={reviews}
             reviewAverageScore={reviewAverageScore}
+            totalReviews={totalReviews}
           />
         </ReviewsAverageContainer>
         <ReviewsScoresContainer>
@@ -80,7 +81,7 @@ const ReviewsOverview = ({
               <RatingScoreButton
                 reviews={reviews}
                 reviewStarPercentages={reviewStarPercentages[score]}
-                filterReviews={filterReviews}
+                filterReviewsByStarRating={filterReviewsByStarRating}
                 score={score}
                 filterCondition={filterCondition}
               />
@@ -104,6 +105,7 @@ ReviewsOverview.propTypes = {
     helpful: PropTypes.number,
     img: PropTypes.string,
   })).isRequired,
+  totalReviews: PropTypes.number.isRequired,
   reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   reviewStarPercentages: PropTypes.shape({
     1: PropTypes.string,
@@ -112,7 +114,7 @@ ReviewsOverview.propTypes = {
     4: PropTypes.string,
     5: PropTypes.string,
   }),
-  filterReviews: PropTypes.func.isRequired,
+  filterReviewsByStarRating: PropTypes.func.isRequired,
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 

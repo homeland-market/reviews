@@ -17,7 +17,7 @@ const TotalReviewsBlock = styled.div`
   margin-top: 6px;
 `;
 
-const ReviewAverageRating = ({ reviews, reviewAverageScore }) => (
+const ReviewAverageRating = ({ reviewAverageScore, totalReviews }) => (
   <RatingBlock>
     <RatingAverageBlock>
       {reviewAverageScore}
@@ -34,24 +34,14 @@ const ReviewAverageRating = ({ reviews, reviewAverageScore }) => (
       />
     </div>
     <TotalReviewsBlock>
-      {`${reviews.length} Reviews`}
+      {`${totalReviews} Reviews`}
     </TotalReviewsBlock>
   </RatingBlock>
 );
 
 ReviewAverageRating.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    url_id: PropTypes.number,
-    name: PropTypes.string,
-    location: PropTypes.string,
-    date: PropTypes.string,
-    comment: PropTypes.string,
-    rating: PropTypes.number,
-    helpful: PropTypes.number,
-    img: PropTypes.string,
-  })).isRequired,
   reviewAverageScore: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  totalReviews: PropTypes.number.isRequired,
 };
 
 export default ReviewAverageRating;
