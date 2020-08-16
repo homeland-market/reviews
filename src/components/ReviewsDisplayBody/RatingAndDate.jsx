@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { highlightAllMatchingCommentText, ProductUserComments } from '../../lib/ReviewFiltering';
+import { SearchText, ProductUserComments } from '../../lib/SearchText';
 
 const StarRatingAndDateJustifySpace = styled.div`
   display: flex;
@@ -52,10 +52,10 @@ const renderComment = ({ review: { comment, id } }, filterCondition) => {
   if (!filterCondition || typeof filterCondition === 'number') {
     return <ProductUserComments>{comment}</ProductUserComments>;
   }
-  return highlightAllMatchingCommentText(comment, id, filterCondition);
+  return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
 };
 
-const ReviewDetails = ({ review, review: { rating, date }, filterCondition }) => (
+const RatingAndDate = ({ review, review: { rating, date }, filterCondition }) => (
   <div>
     <StarRatingAndDateJustifySpace>
       <ReviewStarWrapper>
@@ -82,7 +82,7 @@ const ReviewDetails = ({ review, review: { rating, date }, filterCondition }) =>
   </div>
 );
 
-ReviewDetails.propTypes = {
+RatingAndDate.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -100,4 +100,4 @@ ReviewDetails.propTypes = {
   ]).isRequired,
 };
 
-export default ReviewDetails;
+export default RatingAndDate;

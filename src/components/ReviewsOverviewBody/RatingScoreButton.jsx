@@ -83,11 +83,11 @@ const RatingButtonWrapper = styled.button`
 const ReviewScoreTotals = (reviews, score) => reviews.reduce((acc, review) => acc
   + (review.rating === score ? 1 : 0), 0);
 
-const handleRatingClick = (score, filterCondition, filterReviews) => {
+const handleRatingClick = (score, filterCondition, filterReviewsByStarRating) => {
   if (filterCondition !== score) {
-    filterReviews(score);
+    filterReviewsByStarRating(score);
   } else {
-    filterReviews(0);
+    filterReviewsByStarRating(0);
   }
 };
 
@@ -96,9 +96,9 @@ const RatingScoreButton = ({
   score,
   reviewStarPercentages,
   filterCondition,
-  filterReviews,
+  filterReviewsByStarRating,
 }) => (
-  <RatingButtonWrapper onClick={() => handleRatingClick(score, filterCondition, filterReviews)}>
+  <RatingButtonWrapper onClick={() => handleRatingClick(score, filterCondition, filterReviewsByStarRating)}>
     <RatingScores>
       {score}
     </RatingScores>
@@ -143,7 +143,7 @@ RatingScoreButton.propTypes = {
   })).isRequired,
   reviewStarPercentages: PropTypes.string,
   score: PropTypes.number.isRequired,
-  filterReviews: PropTypes.func.isRequired,
+  filterReviewsByStarRating: PropTypes.func.isRequired,
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 

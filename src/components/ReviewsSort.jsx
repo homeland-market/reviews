@@ -98,14 +98,14 @@ const customStyles = {
   }),
 };
 
-const options = [
+const sortByOptions = [
   { value: 'Most relevant', label: 'Most relevant' },
   { value: 'Includes customer photos', label: 'Includes customer photos' },
   { value: 'Most recent', label: 'Most recent' },
   { value: 'Most helpful', label: 'Most helpful' },
 ];
 
-class SortReviews extends React.Component {
+class ReviewsSort extends React.Component {
   constructor(props) {
     super(props);
     this.state = { selectedOption: { value: 'Most relevant', label: 'Most relevant' } };
@@ -120,8 +120,8 @@ class SortReviews extends React.Component {
   }
 
   handleSumbit(value) {
-    const { sortReviewsBy, filteredReviews } = this.props;
-    sortReviewsBy(value, filteredReviews);
+    const { sortReviews, filteredReviews } = this.props;
+    sortReviews(filteredReviews, value);
   }
 
   showingReviewsOf() {
@@ -147,7 +147,7 @@ class SortReviews extends React.Component {
   render() {
     const {
       filterCondition,
-      filterReviews,
+      filterReviewsByStarRating,
     } = this.props;
     const { selectedOption } = this.state;
     return (
@@ -156,7 +156,7 @@ class SortReviews extends React.Component {
           {this.showingReviewsOf()}
           {this.renderReviewsWith()}
           {filterCondition !== 0 && filterCondition !== '' ? (
-            <ClearFiltersButton type="button" onClick={() => filterReviews(0)} onKeyPress={() => filterReviews(0)}>
+            <ClearFiltersButton type="button" onClick={() => filterReviewsByStarRating(0)} onKeyPress={() => filterReviewsByStarRating(0)}>
               Clear
             </ClearFiltersButton>
           ) : null}
@@ -167,7 +167,7 @@ class SortReviews extends React.Component {
           defaultValue={selectedOption}
           value={selectedOption}
           onChange={this.handleChange}
-          options={options}
+          options={sortByOptions}
           placeholder="Sort by"
           theme={(theme) => ({
             ...theme,
@@ -183,12 +183,12 @@ class SortReviews extends React.Component {
   }
 }
 
-SortReviews.propTypes = {
+ReviewsSort.propTypes = {
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sortReviewsBy: PropTypes.func.isRequired,
+  sortReviews: PropTypes.func.isRequired,
   filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  filterReviews: PropTypes.func.isRequired,
+  filterReviewsByStarRating: PropTypes.func.isRequired,
 };
 
-export default SortReviews;
+export default ReviewsSort;

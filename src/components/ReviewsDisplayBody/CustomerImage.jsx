@@ -19,7 +19,7 @@ const ProductReviewItem = styled.div`
   margin: 4px;
 `;
 
-const ProductReviewImageHolder = styled.div`
+const CustomerImageHolder = styled.div`
   padding-bottom: 100%;
   border-radius: 4px;
   overflow: hidden;
@@ -37,23 +37,23 @@ const ProductImageComponent = styled.div`
   margin: auto;
 `;
 
-const ReviewImage = ({ review: { img, id } }) => (
+const CustomerImage = ({ review: { img, id } }) => (
   img === null ? null : (
     <ImageContainerFullWidth>
       <ProductReviewPhoto>
         <ProductReviewItem>
-          <ProductReviewImageHolder>
+          <CustomerImageHolder>
             <ProductImageComponent>
               <img src={img} alt={id} />
             </ProductImageComponent>
-          </ProductReviewImageHolder>
+          </CustomerImageHolder>
         </ProductReviewItem>
       </ProductReviewPhoto>
     </ImageContainerFullWidth>
   )
 );
 
-ReviewImage.propTypes = {
+CustomerImage.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,
     url_id: PropTypes.number,
@@ -67,4 +67,4 @@ ReviewImage.propTypes = {
   }).isRequired,
 };
 
-export default ReviewImage;
+export default CustomerImage;

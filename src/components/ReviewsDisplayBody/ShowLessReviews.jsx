@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ShowLessButtonWrap = styled.button`
+const ShowLessReviewsWrap = styled.button`
   color: #7f187f;
   background-color: transparent;
   display: flex;
@@ -54,10 +54,10 @@ const ProductReviewListDivider = styled.div`
   text-align: center;
 `;
 
-const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
+const ShowLessReviews = ({ resetReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
   if (reviewDisplayCount > 3) {
     return (
-      <ShowLessButtonWrap
+      <ShowLessReviewsWrap
         type="button"
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
@@ -71,16 +71,16 @@ const ShowLessButton = ({ resetReviewDisplayCount, reviewDisplayCount, filteredR
         >
           <UpArrowSVGPath />
         </UpArrowSVGContainer>
-      </ShowLessButtonWrap>
+      </ShowLessReviewsWrap>
     );
   }
   return null;
 };
 
-ShowLessButton.propTypes = {
+ShowLessReviews.propTypes = {
   resetReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ShowLessButton;
+export default ShowLessReviews;

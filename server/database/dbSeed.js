@@ -1,3 +1,6 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 const mocker = require('mocker-data-generator').default;
 const db = require('./index.js');
@@ -22,8 +25,18 @@ const reviewsTemplate = {
     faker: 'random.number({"min": 1, "max": 5})',
   },
   helpful: {
-    faker: 'random.number({"min": 0, "max": 15})',
+    faker: 'random.number({"min": 0, "max": 20})',
   },
+};
+
+const weightedRand = (weightRules) => {
+  let i; let j; const table = [];
+  for (i in weightRules) {
+    for (j = 0; j < weightRules[i] * 10; j++) {
+      table.push(i);
+    }
+  }
+  return table[Math.floor(Math.random() * table.length)];
 };
 
 // inserts raw review data into the database
@@ -45,6 +58,21 @@ const reviewGenerator = (moonId, singleMoonEntry) => mocker()
   .then((info) => {
     const insertionPromises = [];
     info.reviewsTemplate.forEach((review) => {
+      const databaseData = [moonId || review.url_id, review.name, review.location, review.date,
+        review.comment, review.rating, review.helpful];
+      insertionPromises.push(databaseRawDataInserion(databaseData));
+    });
+    return Promise.all(insertionPromises)
+      .catch((err) => console.error(err));
+  });
+
+const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
+  .schema('reviewsTemplate', reviewsTemplate, singleMoonEntry || Math.floor(Math.random() * 100))
+  .build()
+  .then((info) => {
+    const insertionPromises = [];
+    info.reviewsTemplate.forEach((review) => {
+      review.rating = weightedRand({ 1: 0.0005, 2: 0.005, 3: 0.1, 4: 0.3, 5: 0.95 });
       const databaseData = [moonId || review.url_id, review.name, review.location, review.date,
         review.comment, review.rating, review.helpful];
       insertionPromises.push(databaseRawDataInserion(databaseData));
@@ -82,24 +110,30 @@ const promiseCompiler = (counter, func, arg1, arg2) => {
 
 // main database seed function
 const databaseSeeder = () => {
-  const mainReviewCounter = Math.floor(Math.random() * 25) + 10;
+  const mainReviewCounter = Math.floor(Math.random() * 100) + 40;
   return Promise.all(promiseCompiler(mainReviewCounter, reviewGenerator))
     .then(() => console.log('🚀🚀 review database seeded!'))
     .then(() => {
-      const imageCounter = Math.floor(Math.random() * 300) + 100;
+      const imageCounter = Math.floor(Math.random() * 600) + 300;
       return Promise.all(promiseCompiler(imageCounter, databaseImageInsertion))
         .then(() => console.log('🚀🚀 review images seeded!'))
         .catch((err) => console.error(err));
     })
     .then(() => {
-      const moonReviewsCount = 25;
-      return Promise.all(promiseCompiler(moonReviewsCount, reviewGenerator, '0', 1))
-        .then(() => console.log('🌜🌜 moon reviews seeded!'))
+      const moonReviewWeighted = 500;
+      return Promise.all(promiseCompiler(moonReviewWeighted, moonReviewGenerator, '0', 1))
+        .then(() => console.log('🌜🌜 moon weighted reviews seeded!'))
         .catch((err) => console.error(err));
     })
     .then(() => {
-      const moonImageCount = 5;
-      return Promise.all(promiseCompiler(moonImageCount, databaseImageInsertion, '0', 'loop'))
+      let counter = 10;
+      const imagePromises = [];
+      while (counter > 0) {
+        const moonImageCount = 5;
+        imagePromises.push(promiseCompiler(moonImageCount, databaseImageInsertion, '0', 'loop'));
+        counter -= 1;
+      }
+      return Promise.all(imagePromises)
         .then(() => console.log('🌜🌜 moon images seeded!'))
         .catch((err) => console.error(err));
     })

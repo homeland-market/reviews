@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ShowMoreButtonWrap = styled.button`
+const ShowMoreReviewsWrap = styled.button`
   color: #7f187f;
   background-color: transparent;
   display: inline-block;
@@ -43,11 +43,11 @@ const showMoreReviewsNumber = (filteredReviewsLength, reviewDisplayCount) => {
   return `Show ${showAmount} More Reviews`;
 };
 
-const ShowMoreButton = ({ seeMoreReviews, reviewDisplayCount, filteredReviews }) => {
+const ShowMoreReviews = ({ increaseReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
   const filteredReviewsLength = filteredReviews.length;
   if (reviewDisplayCount < filteredReviewsLength) {
     return (
-      <ShowMoreButtonWrap type="button" onClick={seeMoreReviews} onKeyPress={seeMoreReviews}>
+      <ShowMoreReviewsWrap type="button" onClick={increaseReviewDisplayCount} onKeyPress={increaseReviewDisplayCount}>
         {showMoreReviewsNumber(filteredReviewsLength, reviewDisplayCount)}
         <DownArrowSVGContainer
           viewBox="0 0 28 28"
@@ -56,16 +56,16 @@ const ShowMoreButton = ({ seeMoreReviews, reviewDisplayCount, filteredReviews })
         >
           <DownArrowSVGPath />
         </DownArrowSVGContainer>
-      </ShowMoreButtonWrap>
+      </ShowMoreReviewsWrap>
     );
   }
   return null;
 };
 
-ShowMoreButton.propTypes = {
-  seeMoreReviews: PropTypes.func.isRequired,
+ShowMoreReviews.propTypes = {
+  increaseReviewDisplayCount: PropTypes.func.isRequired,
   reviewDisplayCount: PropTypes.number.isRequired,
   filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default ShowMoreButton;
+export default ShowMoreReviews;

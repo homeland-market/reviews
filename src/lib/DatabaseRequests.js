@@ -1,15 +1,15 @@
 import axios from 'axios';
 
+const productIdExtract = () => window.location.pathname.split('/')[2];
+
 export const updateHelpfulCount = (helpful, id) => {
-  const { pathname } = window.location;
-  axios.put(`/api/reviews/helpful${pathname}`, { helpful, id })
+  axios.put(`/api/reviews/helpful/${productIdExtract()}`, { helpful, id })
     .catch((err) => console.error(err));
 };
 
 export const getAllReviews = (callback) => {
-  const { pathname } = window.location;
-  if (pathname !== '/') {
-    axios.get(`/api/reviews${pathname}`)
+  if (productIdExtract() !== '/') {
+    axios.get(`/api/reviews/${productIdExtract()}`)
       .then((reviews) => {
         callback(reviews.data);
       })
