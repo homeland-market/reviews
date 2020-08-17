@@ -3,7 +3,7 @@
 import styled from 'styled-components';
 
 export const SmallStarSVG = styled.svg`
-  fill: ${(props) => (props.filterCondition === props.score ? '#520f54;' : '#f6b71d')};
+  fill: ${(props) => (props.filterCondition === props.rating ? '#520f54;' : '#f6b71d')};
   width: 10%;
   height: 10%;
 `;

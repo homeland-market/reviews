@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const RatingsAndReviewsContainer = styled.div`
+const RatingsAndReviewsWrapper = styled.div`
   padding: 12px 0;
 `;
 
@@ -15,14 +15,14 @@ const GuidelinesLink = styled.a`
 `;
 
 const HeaderAndLink = () => (
-  <RatingsAndReviewsContainer>
+  <RatingsAndReviewsWrapper>
     <h1>Ratings & Reviews</h1>
     <span>Our </span>
     <GuidelinesLink href="https://bit.ly/3kSiQIb" target="_blank">
       Community Guidelines
     </GuidelinesLink>
     <span> help customers write honest reviews.</span>
-  </RatingsAndReviewsContainer>
+  </RatingsAndReviewsWrapper>
 );
 
 export default HeaderAndLink;

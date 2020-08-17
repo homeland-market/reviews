@@ -110,6 +110,7 @@ class Reviews extends Component {
     } = this.state;
     return (
       <ReviewsWrapper>
+        <GlobalStyle />
         <ReviewsOverview
           reviews={reviews}
           totalReviewsCount={totalReviewsCount}
@@ -135,7 +136,6 @@ class Reviews extends Component {
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />
-        <GlobalStyle />
       </ReviewsWrapper>
     );
   }

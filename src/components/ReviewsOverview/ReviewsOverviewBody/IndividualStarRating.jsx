@@ -8,7 +8,6 @@ import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
 import { StrippedButton } from '../../../assets/styles';
 
 const StarNumber = styled.div`
-  color: #000;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -39,6 +38,7 @@ const FillBarFill = styled.div`
 `;
 
 const StarReviewCount = styled.div`
+  flex-shrink: 0;
   padding-left: 12px;
   width: 2em;
 `;
@@ -112,7 +112,7 @@ const IndividualStarRating = ({
 );
 
 IndividualStarRating.defaultProps = {
-  rating: 2,
+  rating: 0,
   reviews: {
     id: 2,
     url_id: 2,
