@@ -113,7 +113,7 @@ const IndividualStarRating = ({
 
 IndividualStarRating.defaultProps = {
   rating: 0,
-  reviews: {
+  reviews: [{
     id: 2,
     url_id: 2,
     name: 'Yu-Lin',
@@ -123,24 +123,27 @@ IndividualStarRating.defaultProps = {
     rating: 2,
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
-  },
+  }],
   reviewStarPercentages: '0',
   filterCondition: 2,
 };
 
 IndividualStarRating.propTypes = {
   rating: PropTypes.number,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    url_id: PropTypes.number,
-    name: PropTypes.string,
-    location: PropTypes.string,
-    date: PropTypes.string,
-    comment: PropTypes.string,
-    rating: PropTypes.number,
-    helpful: PropTypes.number,
-    img: PropTypes.string,
-  })),
+  reviews: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      url_id: PropTypes.number,
+      name: PropTypes.string,
+      location: PropTypes.string,
+      date: PropTypes.string,
+      comment: PropTypes.string,
+      rating: PropTypes.number,
+      helpful: PropTypes.number,
+      img: PropTypes.string,
+    }),
+    PropTypes.array),
+  ]),
   reviewStarPercentages: PropTypes.string,
   filterCondition: PropTypes.oneOfType([
     PropTypes.string,

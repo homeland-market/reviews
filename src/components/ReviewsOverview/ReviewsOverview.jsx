@@ -6,10 +6,6 @@ import HeaderAndLink from './ReviewsOverviewBody/HeaderAndLink';
 import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import IndividualStarRating from './ReviewsOverviewBody/IndividualStarRating';
 
-const OverviewWrapper = styled.div`
-  display: block;
-`;
-
 const OverviewBodyContainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
@@ -43,7 +39,7 @@ const ReviewsOverview = ({
   filterCondition,
   filterReviewsByStarRating,
 }) => (
-  <OverviewWrapper>
+  <section>
     <HeaderAndLink />
     <OverviewBodyContainer>
       <AverageScoreContainer>
@@ -66,11 +62,11 @@ const ReviewsOverview = ({
         ))}
       </StarRatingContainer>
     </OverviewBodyContainer>
-  </OverviewWrapper>
+  </section>
 );
 
 ReviewsOverview.defaultProps = {
-  reviews: {
+  reviews: [{
     id: 2,
     url_id: 2,
     name: 'Yu-Lin',
@@ -80,7 +76,7 @@ ReviewsOverview.defaultProps = {
     rating: 2,
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
-  },
+  }],
   totalReviewsCount: 0,
   reviewStarPercentages: {
     1: '20',
@@ -94,17 +90,20 @@ ReviewsOverview.defaultProps = {
 };
 
 ReviewsOverview.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    url_id: PropTypes.number,
-    name: PropTypes.string,
-    location: PropTypes.string,
-    date: PropTypes.string,
-    comment: PropTypes.string,
-    rating: PropTypes.number,
-    helpful: PropTypes.number,
-    img: PropTypes.string,
-  })),
+  reviews: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      url_id: PropTypes.number,
+      name: PropTypes.string,
+      location: PropTypes.string,
+      date: PropTypes.string,
+      comment: PropTypes.string,
+      rating: PropTypes.number,
+      helpful: PropTypes.number,
+      img: PropTypes.string,
+    }),
+    PropTypes.array),
+  ]),
   totalReviewsCount: PropTypes.number,
   reviewStarPercentages: PropTypes.shape({
     1: PropTypes.string,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { SearchText, ProductUserComments } from '../../../lib/SearchText';
+import { SearchText, ProductUserComments } from '../../../../lib/SearchText';
 
 const StarRatingDateCommentJustifySpace = styled.div`
   display: flex;
