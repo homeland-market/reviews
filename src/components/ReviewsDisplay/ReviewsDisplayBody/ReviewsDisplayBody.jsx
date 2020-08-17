@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import RatingDateComment from './ReviewsBodyContent/RatingDateComment';
-import CustomerImage from './ReviewsBodyContent/CustomerImage';
-import NameAndLocation from './ReviewsBodyContent/NameAndLocation';
-import HelpfulButton from './ReviewsBodyContent/HelpfulButton';
+import RatingDateComment from './ReviewsDisplayBodyContent/RatingDateComment';
+import CustomerImage from './ReviewsDisplayBodyContent/CustomerImage';
+import NameAndLocation from './ReviewsDisplayBodyContent/NameAndLocation';
+import HelpfulButton from './ReviewsDisplayBodyContent/HelpfulButton';
 
 const ProductReviewGrid = styled.article`
   align-items: start;

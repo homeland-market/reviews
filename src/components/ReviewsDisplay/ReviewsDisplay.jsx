@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ReviewsBody from './ReviewsBody/ReviewsBody';
+import ReviewsBody from './ReviewsDisplayBody/ReviewsDisplayBody';
 
 const ReviewsDisplayContainer = styled.div`
   background-color: #fff;

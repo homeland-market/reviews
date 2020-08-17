@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express');
 const models = require('./models/api.js');
 
-const PORT = 2373;
+const PORT = 5004;
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
