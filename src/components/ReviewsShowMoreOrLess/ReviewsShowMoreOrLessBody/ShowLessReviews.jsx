@@ -29,7 +29,7 @@ const ShowLessReviews = ({
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
       >
-        {reviewDisplayCount < filteredReviewsLength.length && <ShowMoreAndLessDivider />}
+        {reviewDisplayCount < filteredReviewsLength && <ShowMoreAndLessDivider />}
         Show Less
         <UpArrowSVG
           viewBox="0 0 28 28"
