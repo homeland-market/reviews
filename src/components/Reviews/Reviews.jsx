@@ -6,6 +6,7 @@ import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
 import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
 import ReviewsSort from '../ReviewsSort/ReviewsSort';
 import ReviewsDisplay from '../ReviewsDisplay/ReviewsDisplay';
+import ReviewsShowMoreOrLess from '../ReviewsShowMoreOrLess/ReviewsShowMoreOrLess';
 
 import { getAllReviews } from '../../lib/DatabaseRequests';
 import { Filter, Sort, Calc } from '../../lib/FilterSortCalc';
@@ -133,6 +134,12 @@ class Reviews extends Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           filterCondition={filterCondition}
+          increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+          resetReviewDisplayCount={this.resetReviewDisplayCount}
+        />
+        <ReviewsShowMoreOrLess
+          reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />

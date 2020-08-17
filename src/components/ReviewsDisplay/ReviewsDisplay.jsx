@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ReviewsBody from './ReviewsBody/ReviewsBody';
-import ShowMoreReviews from './ShowMoreReviews';
-import ShowLessReviews from './ShowLessReviews';
 
 const ReviewsDisplayContainer = styled.div`
   background-color: #fff;
@@ -15,21 +13,10 @@ const ReviewsDisplayContainer = styled.div`
   padding-right: 24px;
 `;
 
-const ShowMoreAndLessContainer = styled.div`
-  background-color: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 24px;
-  text-align: center;
-`;
-
 const ReviewsDisplay = ({
   reviewDisplayCount,
   filteredReviews,
   filterCondition,
-  increaseReviewDisplayCount,
-  resetReviewDisplayCount,
 }) => {
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   return (
@@ -42,18 +29,6 @@ const ReviewsDisplay = ({
         />
         )}
       </ReviewsDisplayContainer>
-      <ShowMoreAndLessContainer>
-        <ShowMoreReviews
-          increaseReviewDisplayCount={increaseReviewDisplayCount}
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-        />
-        <ShowLessReviews
-          resetReviewDisplayCount={resetReviewDisplayCount}
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-        />
-      </ShowMoreAndLessContainer>
     </section>
   );
 };
@@ -94,8 +69,6 @@ ReviewsDisplay.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  increaseReviewDisplayCount: PropTypes.func.isRequired,
-  resetReviewDisplayCount: PropTypes.func.isRequired,
 };
 
 export default ReviewsDisplay;

@@ -129,35 +129,37 @@ class ReviewsSearch extends Component {
 
   render() {
     return (
-      <SearchFullWrapper>
-        <ShowReviewsThatContainer>
-          Show reviews that mention
-        </ShowReviewsThatContainer>
-        <SearchBarContainer>
-          <TextInputFieldWrap>
-            <TextInputLabelWrap>
-              <TextInputLabel>
-                <TextInput
-                  onChange={(e) => this.handleSearchChange(e)}
-                  onKeyDown={(e) => this.handleKeyPress(e)}
-                  id="search_reviews"
-                  type="text"
-                  placeholder="Search Reviews"
-                />
-                <TextInputButton type="button" onClick={() => this.handleSearchClick()}>
-                  <SearchHourGlass
-                    viewBox="0 0 28 28"
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlnsXlink="http://www.w3.org/1999/xlink"
-                  >
-                    <SearchHourGlassPath />
-                  </SearchHourGlass>
-                </TextInputButton>
-              </TextInputLabel>
-            </TextInputLabelWrap>
-          </TextInputFieldWrap>
-        </SearchBarContainer>
-      </SearchFullWrapper>
+      <section>
+        <SearchFullWrapper>
+          <ShowReviewsThatContainer>
+            Show reviews that mention
+          </ShowReviewsThatContainer>
+          <SearchBarContainer>
+            <TextInputFieldWrap>
+              <TextInputLabelWrap>
+                <TextInputLabel>
+                  <TextInput
+                    onChange={(e) => this.handleSearchChange(e)}
+                    onKeyDown={(e) => this.handleKeyPress(e)}
+                    id="search_reviews"
+                    type="text"
+                    placeholder="Search Reviews"
+                  />
+                  <TextInputButton type="button" onClick={() => this.handleSearchClick()}>
+                    <SearchHourGlass
+                      viewBox="0 0 28 28"
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlnsXlink="http://www.w3.org/1999/xlink"
+                    >
+                      <SearchHourGlassPath />
+                    </SearchHourGlass>
+                  </TextInputButton>
+                </TextInputLabel>
+              </TextInputLabelWrap>
+            </TextInputFieldWrap>
+          </SearchBarContainer>
+        </SearchFullWrapper>
+      </section>
     );
   }
 }

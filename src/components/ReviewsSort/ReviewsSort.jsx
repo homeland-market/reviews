@@ -151,34 +151,36 @@ class ReviewsSort extends React.Component {
     } = this.props;
     const { selectedOption } = this.state;
     return (
-      <SortReviewsWrapper>
-        <ReviewsSearchSortFilterResults>
-          {this.showingReviewsOf()}
-          {this.renderReviewsWith()}
-          {filterCondition !== 0 && filterCondition !== '' ? (
-            <ClearFiltersButton type="button" onClick={() => filterReviewsByStarRating(0)} onKeyPress={() => filterReviewsByStarRating(0)}>
-              Clear
-            </ClearFiltersButton>
-          ) : null}
-        </ReviewsSearchSortFilterResults>
-        <Select
-          components={{ IndicatorSeparator: () => null }}
-          styles={customStyles}
-          defaultValue={selectedOption}
-          value={selectedOption}
-          onChange={this.handleChange}
-          options={sortByOptions}
-          placeholder="Sort by"
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...theme.colors,
-              primary25: '#e6d3e4',
-              primary: '#d9d8db',
-            },
-          })}
-        />
-      </SortReviewsWrapper>
+      <section>
+        <SortReviewsWrapper>
+          <ReviewsSearchSortFilterResults>
+            {this.showingReviewsOf()}
+            {this.renderReviewsWith()}
+            {filterCondition !== 0 && filterCondition !== '' ? (
+              <ClearFiltersButton type="button" onClick={() => filterReviewsByStarRating(0)} onKeyPress={() => filterReviewsByStarRating(0)}>
+                Clear
+              </ClearFiltersButton>
+            ) : null}
+          </ReviewsSearchSortFilterResults>
+          <Select
+            components={{ IndicatorSeparator: () => null }}
+            styles={customStyles}
+            defaultValue={selectedOption}
+            value={selectedOption}
+            onChange={this.handleChange}
+            options={sortByOptions}
+            placeholder="Sort by"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: '#e6d3e4',
+                primary: '#d9d8db',
+              },
+            })}
+          />
+        </SortReviewsWrapper>
+      </section>
     );
   }
 }

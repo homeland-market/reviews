@@ -3,55 +3,69 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 
-const ImageContainerFullWidth = styled.div`
+const ImagesContainer = styled.div`
   margine: -4px -4px 0;
 `;
 
-const ProductReviewPhoto = styled.div`
+const ProductReviewPhotosContainer = styled.div`
   display: flex;
-  justify-content: start;
   flex-wrap: wrap;
+  justify-content: start;
 `;
 
-const ProductReviewItem = styled.div`
-  width: 64px;
+const ProductReviewSingleImageWindow = styled.div`
   height: 64px;
   margin: 4px;
+  width: 64px;
 `;
 
 const CustomerImageHolder = styled.div`
-  padding-bottom: 100%;
   border-radius: 4px;
-  overflow: hidden;
+  padding-bottom: 100%;
   position: relative;
+  overflow: hidden;
 `;
 
-const ProductImageComponent = styled.div`
+const CustomerImageSizer = styled.div`
+  bottom: 0;
+  left: 0;
+  margin: auto;
   max-height: 100%;
   max-width: 100%;
   position: absolute;
-  top: 0;
-  left: 0;
   right: 0;
-  bottom: 0;
-  margin: auto;
+  top: 0;
 `;
 
 const CustomerImage = ({ review: { img, id } }) => (
   img === null ? null : (
-    <ImageContainerFullWidth>
-      <ProductReviewPhoto>
-        <ProductReviewItem>
+    <ImagesContainer>
+      <ProductReviewPhotosContainer>
+        <ProductReviewSingleImageWindow>
           <CustomerImageHolder>
-            <ProductImageComponent>
+            <CustomerImageSizer>
               <img src={img} alt={id} />
-            </ProductImageComponent>
+            </CustomerImageSizer>
           </CustomerImageHolder>
-        </ProductReviewItem>
-      </ProductReviewPhoto>
-    </ImageContainerFullWidth>
+        </ProductReviewSingleImageWindow>
+      </ProductReviewPhotosContainer>
+    </ImagesContainer>
   )
 );
+
+CustomerImage.defaultProps = {
+  review: {
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  },
+};
 
 CustomerImage.propTypes = {
   review: PropTypes.shape({
@@ -64,7 +78,7 @@ CustomerImage.propTypes = {
     rating: PropTypes.number,
     helpful: PropTypes.number,
     img: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default CustomerImage;
