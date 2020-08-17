@@ -61,14 +61,30 @@ export const UpArrowSVGPath = 'M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1 
 
 // show more down arrow
 export const DownArrowSVG = styled.svg`
-  width: 28px;
-  height: 28px;
   display: inline-block;
   fill: #7f187f;
-  vertical-align: middle;
-  pointer-events: none;
+  height: 28px;
   overflow: hidden;
+  pointer-events: none;
+  vertical-align: middle;
+  width: 28px;
 `;
 
 export const DownArrowSVGPath = 'M19.2 11.3c-.4-.4-1-.4-1.4-.1L14 14.7l-3.8-3.4c-.4-.\
 4-1-.3-1.4.1-.4.4-.3 1 .1 1.4l4.5 4c.2.2.4.3.7.3s.5-.1.7-.3l4.5-4c.3-.4.3-1.1-.1-1.5z';
+
+// image carousel
+export const ArrowSVG = styled.svg`
+  display: inline-block;
+  fill: currentColor;
+  height: 28px;
+  left: 1px;
+  overflow: hidden;
+  pointer-events: none;
+  position: relative;
+  vertical-align: middle;
+  width: 28px;
+`;
+
+export const ArrowSVGPath = 'M11.3 8.9c-.4.4-.4 1-.1 1.4l3.5 3.8-3.4 3.8c-.4.4-.3 1 \
+.1 1.4.4.4 1 .3 1.4-.1l4-4.5c.2-.2.3-.4.3-.7s-.1-.5-.3-.7l-4-4.5c-.4-.3-1.1-.3-1.5.1z';

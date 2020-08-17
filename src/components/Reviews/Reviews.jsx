@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GlobalStyle from '../../assets/fonts';
 
 import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
+import ReviewsCustomerPhotos from '../ReviewsCustomerPhotos/ReviewsCustomerPhotos';
 import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
 import ReviewsSort from '../ReviewsSort/ReviewsSort';
 import ReviewsDisplay from '../ReviewsDisplay/ReviewsDisplay';
@@ -120,6 +121,7 @@ class Reviews extends Component {
           filterCondition={filterCondition}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
         />
+        <ReviewsCustomerPhotos />
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}
         />

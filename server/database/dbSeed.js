@@ -63,6 +63,7 @@ const reviewGenerator = (moonId, singleMoonEntry) => mocker()
       insertionPromises.push(databaseRawDataInserion(databaseData));
     });
     return Promise.all(insertionPromises)
+      .then(() => console.log('test 1 '))
       .catch((err) => console.error(err));
   });
 
@@ -78,6 +79,7 @@ const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
       insertionPromises.push(databaseRawDataInserion(databaseData));
     });
     return Promise.all(insertionPromises)
+      .then(() => console.log('test 2 '))
       .catch((err) => console.error(err));
   });
 
@@ -85,9 +87,15 @@ const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
 const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resolve, reject) => {
   const randomIdIndex = Math.floor(Math.random() * 99) + 1;
   const randomImgIndex = Math.floor(Math.random() * 46) + 5;
-  const imageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/small_images/${moonImageIndex || randomImgIndex}.jpg`;
-  const queryString = 'update user_reviews set img = ? where url_id = ? and img is NULL order by rand() limit 1';
-  db.query(queryString, [imageURL, moonIndex || randomIdIndex],
+
+  const smallImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/small_images/${moonImageIndex || randomImgIndex}.jpg`;
+
+  const mediumImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/medium_images/${moonImageIndex || randomImgIndex}.jpg`;
+
+  const queryString = 'update user_reviews set img = ?, imgmedium = ? where url_id = ? and img is NULL order by rand() limit 1';
+
+  const images = [smallImageURL, mediumImageURL, moonIndex || randomIdIndex];
+  db.query(queryString, [images],
     (err, success) => {
       if (err) {
         reject(err);
@@ -120,13 +128,13 @@ const databaseSeeder = () => {
         .catch((err) => console.error(err));
     })
     .then(() => {
-      const moonReviewWeighted = 500;
+      const moonReviewWeighted = 1;
       return Promise.all(promiseCompiler(moonReviewWeighted, moonReviewGenerator, '0', 1))
         .then(() => console.log('🌜🌜 moon weighted reviews seeded!'))
         .catch((err) => console.error(err));
     })
     .then(() => {
-      let counter = 10;
+      let counter = 1;
       const imagePromises = [];
       while (counter > 0) {
         const moonImageCount = 5;
