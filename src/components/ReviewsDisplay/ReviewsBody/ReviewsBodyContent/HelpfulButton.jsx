@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { updateHelpfulCount } from '../../../../lib/DatabaseRequests';
 
 import { StrippedButton } from '../../../../assets/styles';
-import { HelpfulSVGPath } from '../../../../assets/svg';
+import { HelpfulSVG, HelpfulSVGPath } from '../../../../assets/svg';
 
 const HelpfulReviewButton = styled(StrippedButton)`
   background-color: ${(props) => (props.helpfulToggle ? '#7f187f;' : '#fff')};
@@ -32,16 +32,6 @@ const HelpfulButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   height: 100%;
-`;
-
-const HelpfulSVGContainer = styled.svg`
-  display: inline-block;
-  fill: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
-  height: 28px;
-  oveflow: hidden;
-  pointer-events: none;
-  vertical-align: middle;
-  width: 28px;
 `;
 
 const HelpfulButtonText = styled.span`
@@ -83,14 +73,14 @@ class HelpfulButton extends Component {
         helpfulToggle={helpfulToggle}
       >
         <HelpfulButtonContainer>
-          <HelpfulSVGContainer
+          <HelpfulSVG
             viewBox="0 0 28 28"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             helpfulToggle={helpfulToggle}
           >
             <HelpfulSVGPath />
-          </HelpfulSVGContainer>
+          </HelpfulSVG>
           <HelpfulButtonText helpfulToggle={helpfulToggle}>
             Helpful
           </HelpfulButtonText>

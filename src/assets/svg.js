@@ -25,6 +25,16 @@ export const fiveStarsSVGPath = 'M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l
 
 // helpful button
 
+export const HelpfulSVG = styled.svg`
+  display: inline-block;
+  fill: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
+  height: 28px;
+  oveflow: hidden;
+  pointer-events: none;
+  vertical-align: middle;
+  width: 28px;
+`;
+
 export const HelpfulSVGPath = styled.path`
   d: path("M 21.5 11.8 c -0.5 -0.5 -1 -0.8 -1.5 -0.8 h -2.6 c 0.2 -0.8 0.2 -1.9
   -0.3 -3.1 c -0.6 -1.7 -1.7 -1.9 -2.3 -1.9 c -0.8 0 -1.7 0.6 -1.9 1.3 c 0 0.2
