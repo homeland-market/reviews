@@ -4,62 +4,44 @@ import styled from 'styled-components';
 
 import { updateHelpfulCount } from '../../../../lib/DatabaseRequests';
 
-const ProductHelpfulVoteButton = styled.button`
-  border-radius: 24px;
+import { StrippedButton } from '../../../../assets/styles';
+import { HelpfulSVGPath } from '../../../../assets/svg';
+
+const HelpfulReviewButton = styled(StrippedButton)`
+  background-color: ${(props) => (props.helpfulToggle ? '#7f187f;' : '#fff')};
   border: 1px solid #8d8a90;
+  border-radius: 24px;
+  color: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
   display: inline-block;
-  padding: 3px 16px;
-  position: relative;
   height: 32px;
   line-height: 1;
-  cursor: pointer;
-  outline: 0;
-  color: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
+  padding: 3px 16px;
+  position: relative;
   text-decoration: none;
-  transition: border-color 1ms cubic-bezier(.22,.61,.36,1),background-color 1ms cubic-bezier(.22,.61,.36,1);
-  background-color: ${(props) => (props.helpfulToggle ? '#7f187f;' : '#fff')};
+  transition: .25ms cubic-bezier(.65,.05,.36,1);
 
   &:hover {
     background-color: ${(props) => (props.helpfulToggle ? '#691568;' : '#d9d8db')};
-    transition-duration: 0s,0s,.25s
-    box-shadow: 0 0 0 1px #47404a,0 0 4px #47404a;
     border-color: #47404a;
+    transition-duration: 0s, 0s, .25s;
   }
 `;
 
-const HelpfulButtonContentWrap = styled.div`
-  display: flex;
-  pointer-events: none;
-  -ms-flex-align: center;
+const HelpfulButtonContainer = styled.div`
   align-items: center;
-  -ms-flex-pack: center;
+  display: flex;
   justify-content: center;
   height: 100%;
 `;
 
-const HelpfulSVGPath = styled.path`
-  d: path("M 21.5 11.8 c -0.5 -0.5 -1 -0.8 -1.5 -0.8 h -2.6 c 0.2 -0.8 0.2 -1.9
-  -0.3 -3.1 c -0.6 -1.7 -1.7 -1.9 -2.3 -1.9 c -0.8 0 -1.7 0.6 -1.9 1.3 c 0 0.2
-  -0.1 0.4 -0.1 0.6 c -0.1 1.1 -0.4 2.3 -1 3.5 c -0.2 -0.2 -0.5 -0.4 -0.8 -0.4
-  H 7 c -0.6 0 -1 0.4 -1 1 v 9 c 0 0.6 0.4 1 1 1 h 4 c 0.6 0 1 -0.4 1 -1 v -0.1
-  c 0.6 0.4 1.2 0.8 1.6 1 c 0.1 0.1 0.3 0.1 0.4 0.1 h 4 c 0.1 0 0.2 0 0.4 -0.1 h
-  0.1 c 0.8 -0.3 1.8 -1.4 2.1 -2.3 c 0.3 -0.8 1.3 -5.6 1.4 -6.2 c 0.1 -0.5 -0.1 -1.1
-  -0.5 -1.6 Z M 10 20 H 8 v -7 h 2 v 7 Z m 8.6 -1 c -0.1 0.3 -0.6 0.8 -0.9 1 h -3.5
-  c -0.5 -0.3 -1.5 -1 -2.2 -1.6 v -4.3 c 0.6 -0.2 0.8 -0.4 0.9 -0.5 c 0.1 -0.1 0.3
-  -0.3 0.5 -0.9 c 0.8 -1.6 1.2 -3.1 1.4 -4.6 V 8 h 0.1 s 0.2 0.1 0.4 0.6 c 0.6 1.5
-  -0.1 2.8 -0.2 2.8 v 0.1 c 0 0.1 -0.1 0.1 -0.1 0.2 v 0.6 c 0 0.1 0 0.1 0.1 0.2 c 0
-  0.1 0.1 0.1 0.1 0.2 s 0.1 0.1 0.1 0.1 s 0 0.1 0.1 0.1 h 0.1 c 0.1 0 0.1 0.1 0.2
-  0.1 h 4.2 s 0.1 0.1 0.1 0.2 c -0.4 2 -1.2 5.2 -1.4 5.8 Z");
-`;
-
 const HelpfulSVGContainer = styled.svg`
-  width: 28px;
-  height: 28px;
   display: inline-block;
   fill: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
-  vertical-align: middle;
-  pointer-events: none;
+  height: 28px;
   oveflow: hidden;
+  pointer-events: none;
+  vertical-align: middle;
+  width: 28px;
 `;
 
 const HelpfulButtonText = styled.span`
@@ -67,9 +49,9 @@ const HelpfulButtonText = styled.span`
 `;
 
 const HelpfulCountContainer = styled.span`
-  margin-left: 8px;
-  flex-direction: row;
   color: ${(props) => (props.helpfulToggle ? '#fff;' : '#221924')};
+  flex-direction: row;
+  margin-left: 8px;
 `;
 
 class HelpfulButton extends Component {
@@ -95,12 +77,12 @@ class HelpfulButton extends Component {
   render() {
     const { helpfulCount, helpfulToggle } = this.state;
     return (
-      <ProductHelpfulVoteButton
+      <HelpfulReviewButton
         type="submit"
         onClick={() => this.handleHelpfulClick()}
         helpfulToggle={helpfulToggle}
       >
-        <HelpfulButtonContentWrap>
+        <HelpfulButtonContainer>
           <HelpfulSVGContainer
             viewBox="0 0 28 28"
             xmlns="http://www.w3.org/2000/svg"
@@ -115,11 +97,25 @@ class HelpfulButton extends Component {
           <HelpfulCountContainer helpfulToggle={helpfulToggle}>
             {helpfulCount}
           </HelpfulCountContainer>
-        </HelpfulButtonContentWrap>
-      </ProductHelpfulVoteButton>
+        </HelpfulButtonContainer>
+      </HelpfulReviewButton>
     );
   }
 }
+
+HelpfulButton.defaultProps = {
+  review: {
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  },
+};
 
 HelpfulButton.propTypes = {
   review: PropTypes.shape({
@@ -132,7 +128,7 @@ HelpfulButton.propTypes = {
     rating: PropTypes.number,
     helpful: PropTypes.number,
     img: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default HelpfulButton;

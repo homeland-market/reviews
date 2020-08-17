@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ShowLessReviews from './ReviewsShowMoreOrLessBody/ShowLessReviews';
 import ShowMoreReviews from './ReviewsShowMoreOrLessBody/ShowMoreReviews';
+import ShowLessReviews from './ReviewsShowMoreOrLessBody/ShowLessReviews';
 
 const ShowMoreAndLessContainer = styled.div`
   background-color: none;

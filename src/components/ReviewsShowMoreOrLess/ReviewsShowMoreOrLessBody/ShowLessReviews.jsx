@@ -2,85 +2,76 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const ShowLessReviewsWrap = styled.button`
-  color: #7f187f;
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  transition-duration: .25s;
-  transition-timing-function: cubic-bezier(.65,.05,.36,1);
-  transition-property: background-color,transform,color,border-color;
-  border: none;
-  padding: 0;
-  font: inherit;
-  cursor: pointer;
-  outline: inherit;
-  text-decoration: underline;
-  transition: opacity 500ms ease-in-out 0s;
-  opacity: 1;
+import { ShowMoreOrLessButton } from '../../../assets/styles';
+import { UpArrowSVG, UpArrowSVGPath } from '../../../assets/svg';
 
-  &:hover {
-    text-decoration: none;
-  }
-`;
-
-const UpArrowSVGContainer = styled.svg`
-  width: 28px;
-  height: 28px;
-  display: inline-block;
-  fill: #7f187f;
-  vertical-align: middle;
-  pointer-events: none;
-  overflow: hidden;
-`;
-
-const UpArrowSVGPath = styled.path`
-  d: path("M8.9 16.8c.4.4 1 .4 1.4.1l3.8-3.5 3.8 3.4c.4.4 1
-  .3 1.4-.1.4-.4.3-1-.1-1.4l-4.5-4c-.2-.2-.4-.3-.7-.3s-.5.1-.7.3l-4.5 4c-.3.4-.3
-  1.1.1 1.5z")
-`;
-
-const ProductReviewListDivider = styled.div`
+const ShowMoreAndLessDivider = styled.div`
   background: #615c65;
   border-radius: 0;
+  display: flex;
   height: 28px;
-  width: 1px;
+  justify-content: center;
   margin-left: 16px;
   margin-right: 16px;
-  display: flex;
-  justify-content: center;
   text-align: center;
+  width: 1px;
 `;
 
-const ShowLessReviews = ({ resetReviewDisplayCount, reviewDisplayCount, filteredReviews }) => {
+const ShowLessReviews = ({ reviewDisplayCount, filteredReviews, resetReviewDisplayCount }) => {
   if (reviewDisplayCount > 3) {
     return (
-      <ShowLessReviewsWrap
+      <ShowMoreOrLessButton
         type="button"
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
       >
-        {reviewDisplayCount < filteredReviews.length && <ProductReviewListDivider />}
+        {reviewDisplayCount < filteredReviews.length && <ShowMoreAndLessDivider />}
         Show Less
-        <UpArrowSVGContainer
+        <UpArrowSVG
           viewBox="0 0 28 28"
           xmlns="http://www.w3.org/2000/svg"
           xmlnsXlink="http://www.w3.org/1999/xlink"
         >
           <UpArrowSVGPath />
-        </UpArrowSVGContainer>
-      </ShowLessReviewsWrap>
+        </UpArrowSVG>
+      </ShowMoreOrLessButton>
     );
   }
   return null;
 };
 
+ShowLessReviews.defaultProps = {
+  reviewDisplayCount: 3,
+  filteredReviews: [{
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  }],
+};
+
 ShowLessReviews.propTypes = {
+  reviewDisplayCount: PropTypes.number,
+  filteredReviews: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      url_id: PropTypes.number,
+      name: PropTypes.string,
+      location: PropTypes.string,
+      date: PropTypes.string,
+      comment: PropTypes.string,
+      rating: PropTypes.number,
+      helpful: PropTypes.number,
+      img: PropTypes.string,
+    }),
+    PropTypes.array),
+  ]),
   resetReviewDisplayCount: PropTypes.func.isRequired,
-  reviewDisplayCount: PropTypes.number.isRequired,
-  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ShowLessReviews;

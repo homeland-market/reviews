@@ -60,7 +60,7 @@ const ReviewsBody = ({ reviewsToRender, filterCondition }) => {
   while (counter < totalAmountOfReviews) {
     const review = reviewsToRender[counter];
     elements.push(
-      <section key={review.id}>
+      <div key={review.id}>
         <ProductReviewGrid>
           <RatingDateCommentContainer>
             <RatingDateComment
@@ -85,7 +85,7 @@ const ReviewsBody = ({ reviewsToRender, filterCondition }) => {
           </HelpfulButtonContainer>
         </ProductReviewGrid>
         {counter < (totalAmountOfReviews - 1) && <ProductReviewDivider />}
-      </section>,
+      </div>,
     );
     counter += 1;
   }

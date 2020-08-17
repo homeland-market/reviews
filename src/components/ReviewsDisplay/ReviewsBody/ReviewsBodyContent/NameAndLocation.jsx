@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-boolean-value */
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-import styled from 'styled-components';
+import { StrippedButton } from '../../../../assets/styles';
 
-const ProductReviewCustomerInfo = styled.header`
+const ProductReviewCustomerInfoContainer = styled.header`
   display: block;
 `;
 
@@ -17,47 +18,41 @@ const CustomerNameAndLocation = styled.div`
 
 const CustomerName = styled.p`
   color: #221924;
-  font-size: 1.25rem;
   font-weight: 700;
+  font-size: 1.25rem;
   line-height: 1.5;
-  margin-top: 0;
   margin-bottom: 12px;
+  margin-top: 0;
   padding: 0;
 `;
 
 const CustomerLocation = styled.p`
+  color: #615c65;
   font-size: 13px;
   line-height: 1;
-  color: #615c65;
   margin: 0;
   padding: 0;
 `;
 
 const ReviewComplianceBadge = styled.h5`
-  position: relative;
-  font-size: 100%;
+  display: block;
   font-weight: 400;
+  font-size: 100%;
   margin: 0;
   padding: 0;
-  display: block;
+  position: relative;
 `;
 
-const ProductReviewComplianceBadge = styled.button`
+const ProductReviewComplianceBadge = styled(StrippedButton)`
   color: #615c65;
   font-size: 13px;
-  text-transform: uppercase;
-  text-align: left;
-  -webkit-tap-highlight-color: transparent;
-  outline: none;
-  background: 0;
-  cursor: pointer;
-  border: 0;
   margin: 0;
   padding: 0;
+  text-transform: uppercase;
 `;
 
 const NameAndLocation = ({ review: { name, location } }) => (
-  <ProductReviewCustomerInfo>
+  <ProductReviewCustomerInfoContainer>
     <CustomerNameAndLocation>
       <CustomerName>
         {name}
@@ -67,15 +62,39 @@ const NameAndLocation = ({ review: { name, location } }) => (
       </CustomerLocation>
     </CustomerNameAndLocation>
     <ReviewComplianceBadge>
-      <ProductReviewComplianceBadge data-tip="This reviewer purchased this item <br>from Wayfair." data-for="wayfair-tt" data-delay-hide="100" data-delay-show="200">
+      <ProductReviewComplianceBadge
+        data-tip="This reviewer purchased this item <br>from Unfair."
+        data-for="unfair-tt"
+        data-delay-hide="100"
+        data-delay-show="200"
+      >
         Verified Buyer
       </ProductReviewComplianceBadge>
       <center>
-        <ReactTooltip id="wayfair-tt" place="right" effect="solid" html={true} />
+        <ReactTooltip
+          id="unfair-tt"
+          place="right"
+          effect="solid"
+          html={true}
+        />
       </center>
     </ReviewComplianceBadge>
-  </ProductReviewCustomerInfo>
+  </ProductReviewCustomerInfoContainer>
 );
+
+NameAndLocation.defaultProps = {
+  review: {
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  },
+};
 
 NameAndLocation.propTypes = {
   review: PropTypes.shape({
@@ -88,7 +107,7 @@ NameAndLocation.propTypes = {
     rating: PropTypes.number,
     helpful: PropTypes.number,
     img: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default NameAndLocation;

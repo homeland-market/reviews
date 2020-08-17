@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Calc } from '../../../lib/FilterSortCalc';
+import { Calc } from '../../../lib/FilterSortCalcParse';
 
-import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
 import { StrippedButton } from '../../../assets/styles';
+import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
 
 const StarNumber = styled.div`
   display: flex;

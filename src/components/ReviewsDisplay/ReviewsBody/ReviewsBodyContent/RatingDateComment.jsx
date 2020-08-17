@@ -3,84 +3,87 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { SearchText, ProductUserComments } from '../../../../lib/SearchText';
+import { Parse } from '../../../../lib/FilterSortCalcParse';
+import { SearchText } from '../../../../lib/SearchText';
+
+import { fiveStarsSVGPath } from '../../../../assets/svg';
 
 const StarRatingDateCommentJustifySpace = styled.div`
   display: flex;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
   flex-direction: row;
-  min-width: 0;
+  flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 12px;
+  min-width: 0;
 `;
 
-const ReviewStarWrapper = styled.div`
-  display: block;
-  line-height: 1;
+const ReviewStarContainer = styled.div`
   font-size: 14px;
+  line-height: 1;
 `;
 
-const ReviewStarStars = styled.div`
-  position: relative;
+const ReviewStars = styled.div`
   display: inline-block;
-  vertical-align: middle;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 7em;
   height: 1em;
+  position: relative;
+  vertical-align: middle;
+  width: 7em;
 `;
 
-const ReviewDateWrapper = styled.p`
+const ReviewDateContainer = styled.p`
   font-size: 13px;
   margin: 0;
   padding: 0;
 `;
 
-const ProductReviewCommentsWrapper = styled.div`
-  display: block;
+const ProductReviewCommentsContainer = styled.div`
+  padding-top: 8px;
 `;
 
-const parseDate = (date) => {
-  const splitDate = date.substring(0, date.indexOf('T')).split('-');
-  const month = splitDate[1];
-  const day = splitDate[2];
-  const year = splitDate[0];
-  return `${month}/${day}/${year}`;
-};
-
-const renderComment = ({ review: { comment, id } }, filterCondition) => {
-  if (!filterCondition || typeof filterCondition === 'number') {
-    return <ProductUserComments>{comment}</ProductUserComments>;
-  }
-  return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
-};
-
-const RatingDateComment = ({ review, review: { rating, date }, filterCondition }) => (
+const RatingDateComment = ({
+  review,
+  review: { rating, date },
+  filterCondition,
+}) => (
   <div>
     <StarRatingDateCommentJustifySpace>
-      <ReviewStarWrapper>
-        <ReviewStarStars>
+      <ReviewStarContainer>
+        <ReviewStars>
           <StarRatings
             rating={rating}
             starDimension="20px"
             starSpacing="0"
             starRatedColor="#f6b71d"
             starEmptyColor="#d9d8db"
-            svgIconPath="M6.64 10.94L3.7 12.48c-.97.52-1.6.05-1.43-1.04l.56-3.26-2.36-2.3c-.8-.78-.55-1.54.54-1.7L4.3 3.7 5.75.76c.5-1 1.28-1 1.77 0L9 3.7l3.26.48c1.1.16 1.34.92.55 1.7l-2.36 2.3.56 3.26c.2 1.1-.46 1.56-1.44 1.04l-2.92-1.54z"
+            svgIconPath={fiveStarsSVGPath}
             svgIconViewBox="0 0 20 13"
           />
-        </ReviewStarStars>
-      </ReviewStarWrapper>
-      <ReviewDateWrapper>
-        {parseDate(date)}
-      </ReviewDateWrapper>
+        </ReviewStars>
+      </ReviewStarContainer>
+      <ReviewDateContainer>
+        {Parse.parseDate(date)}
+      </ReviewDateContainer>
     </StarRatingDateCommentJustifySpace>
-
-    <ProductReviewCommentsWrapper>
-      {renderComment({ review }, filterCondition)}
-    </ProductReviewCommentsWrapper>
+    <ProductReviewCommentsContainer>
+      {SearchText.renderComment({ review }, filterCondition)}
+    </ProductReviewCommentsContainer>
   </div>
 );
+
+RatingDateComment.defaultProps = {
+  review: {
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  },
+  filterCondition: 0,
+};
 
 RatingDateComment.propTypes = {
   review: PropTypes.shape({
@@ -93,11 +96,11 @@ RatingDateComment.propTypes = {
     rating: PropTypes.number,
     helpful: PropTypes.number,
     img: PropTypes.string,
-  }).isRequired,
+  }),
   filterCondition: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-  ]).isRequired,
+  ]),
 };
 
 export default RatingDateComment;
