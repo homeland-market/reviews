@@ -17,7 +17,11 @@ const ShowMoreAndLessDivider = styled.div`
   width: 1px;
 `;
 
-const ShowLessReviews = ({ reviewDisplayCount, filteredReviews, resetReviewDisplayCount }) => {
+const ShowLessReviews = ({
+  reviewDisplayCount,
+  filteredReviewsLength,
+  resetReviewDisplayCount,
+}) => {
   if (reviewDisplayCount > 3) {
     return (
       <ShowMoreOrLessButton
@@ -25,7 +29,7 @@ const ShowLessReviews = ({ reviewDisplayCount, filteredReviews, resetReviewDispl
         onClick={resetReviewDisplayCount}
         onKeyPress={resetReviewDisplayCount}
       >
-        {reviewDisplayCount < filteredReviews.length && <ShowMoreAndLessDivider />}
+        {reviewDisplayCount < filteredReviewsLength.length && <ShowMoreAndLessDivider />}
         Show Less
         <UpArrowSVG
           viewBox="0 0 28 28"
@@ -42,35 +46,12 @@ const ShowLessReviews = ({ reviewDisplayCount, filteredReviews, resetReviewDispl
 
 ShowLessReviews.defaultProps = {
   reviewDisplayCount: 3,
-  filteredReviews: [{
-    id: 2,
-    url_id: 2,
-    name: 'Yu-Lin',
-    location: 'California',
-    date: '2020-20-20T20:20:20.000Z',
-    comment: 'Reviews are fun',
-    rating: 2,
-    helpful: 2,
-    img: 'https://bit.ly/3kMfzKt',
-  }],
+  filteredReviewsLength: 0,
 };
 
 ShowLessReviews.propTypes = {
   reviewDisplayCount: PropTypes.number,
-  filteredReviews: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      url_id: PropTypes.number,
-      name: PropTypes.string,
-      location: PropTypes.string,
-      date: PropTypes.string,
-      comment: PropTypes.string,
-      rating: PropTypes.number,
-      helpful: PropTypes.number,
-      img: PropTypes.string,
-    }),
-    PropTypes.array),
-  ]),
+  filteredReviewsLength: PropTypes.number,
   resetReviewDisplayCount: PropTypes.func.isRequired,
 };
 

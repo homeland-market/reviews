@@ -139,7 +139,7 @@ class Reviews extends Component {
         />
         <ReviewsShowMoreOrLess
           reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
+          filteredReviewsLength={filteredReviews.length}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />

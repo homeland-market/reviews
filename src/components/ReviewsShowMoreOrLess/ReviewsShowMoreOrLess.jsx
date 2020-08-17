@@ -16,7 +16,7 @@ const ShowMoreAndLessContainer = styled.div`
 
 const ReviewsShowMoreOrLess = ({
   reviewDisplayCount,
-  filteredReviews,
+  filteredReviewsLength,
   increaseReviewDisplayCount,
   resetReviewDisplayCount,
 }) => (
@@ -24,12 +24,12 @@ const ReviewsShowMoreOrLess = ({
     <ShowMoreAndLessContainer>
       <ShowMoreReviews
         reviewDisplayCount={reviewDisplayCount}
-        filteredReviews={filteredReviews}
+        filteredReviewsLength={filteredReviewsLength}
         increaseReviewDisplayCount={increaseReviewDisplayCount}
       />
       <ShowLessReviews
         reviewDisplayCount={reviewDisplayCount}
-        filteredReviews={filteredReviews}
+        filteredReviewsLength={filteredReviewsLength}
         resetReviewDisplayCount={resetReviewDisplayCount}
       />
     </ShowMoreAndLessContainer>
@@ -38,35 +38,12 @@ const ReviewsShowMoreOrLess = ({
 
 ReviewsShowMoreOrLess.defaultProps = {
   reviewDisplayCount: 3,
-  filteredReviews: [{
-    id: 2,
-    url_id: 2,
-    name: 'Yu-Lin',
-    location: 'California',
-    date: '2020-20-20T20:20:20.000Z',
-    comment: 'Reviews are fun',
-    rating: 2,
-    helpful: 2,
-    img: 'https://bit.ly/3kMfzKt',
-  }],
+  filteredReviewsLength: 0,
 };
 
 ReviewsShowMoreOrLess.propTypes = {
   reviewDisplayCount: PropTypes.number,
-  filteredReviews: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      url_id: PropTypes.number,
-      name: PropTypes.string,
-      location: PropTypes.string,
-      date: PropTypes.string,
-      comment: PropTypes.string,
-      rating: PropTypes.number,
-      helpful: PropTypes.number,
-      img: PropTypes.string,
-    }),
-    PropTypes.array),
-  ]),
+  filteredReviewsLength: PropTypes.number,
   increaseReviewDisplayCount: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
 };

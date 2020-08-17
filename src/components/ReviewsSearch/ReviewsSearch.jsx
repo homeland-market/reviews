@@ -65,12 +65,12 @@ const TextInputButton = styled(StrippedButton)`
 
   &:hover {
     background-color: #934398;
-    box-shadow: 0 0 0 1px #1364f1, 0 0 4px #1364f1;
+    box-shadow: 0 0 0 1px #1364f1;
     transition-duration: 0s,0s,.25s
   }
 
   &:focus {
-    box-shadow: 0 0 0 1px #1364f1, 0 0 4px #1364f1;
+    box-shadow: 0 0 0 1px #1364f1;
     z-index: 1;
 
 `;

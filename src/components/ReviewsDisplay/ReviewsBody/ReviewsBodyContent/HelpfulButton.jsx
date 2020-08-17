@@ -23,8 +23,13 @@ const HelpfulReviewButton = styled(StrippedButton)`
   &:hover {
     background-color: ${(props) => (props.helpfulToggle ? '#691568;' : '#d9d8db')};
     border-color: #47404a;
-    transition-duration: 0s, 0s, .25s;
+    box-shadow: 0 0 0 1px #1364f1;
+    transition-duration: 0s,0s,.25s;
   }
+
+  &:focus {
+    box-shadow: 0 0 0 1px #1364f1;
+    z-index: 1;
 `;
 
 const HelpfulButtonContainer = styled.div`
