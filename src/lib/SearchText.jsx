@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SearchHighlight = styled.mark`
-  background-color: #e6d3e4;
-  font-weight: 700;
-  padding-top: 4px;
-  padding-bottom: 4px;
-`;
-
 export const ProductUserComments = styled.div`
   margin-bottom: 12px;
   color: #615c65;
   flex-direction: row;
   display: block;
+`;
+
+const SearchHighlight = styled.mark`
+  background-color: #e6d3e4;
+  font-weight: 700;
+  padding-top: 4px;
+  padding-bottom: 4px;
 `;
 
 export const SearchText = {
@@ -45,6 +45,13 @@ export const SearchText = {
       );
     });
     return <ProductUserComments>{arrayOfElements}</ProductUserComments>;
+  },
+
+  renderComment({ review: { comment, id } }, filterCondition) {
+    if (!filterCondition || typeof filterCondition === 'number') {
+      return <ProductUserComments>{comment}</ProductUserComments>;
+    }
+    return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
   },
 
 };

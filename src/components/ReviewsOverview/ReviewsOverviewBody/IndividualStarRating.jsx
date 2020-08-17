@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Calc } from '../../../lib/FilterSortCalc';
+import { Calc } from '../../../lib/FilterSortCalcParse';
 
-import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
 import { StrippedButton } from '../../../assets/styles';
+import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
 
 const StarNumber = styled.div`
-  color: #000;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -39,6 +38,7 @@ const FillBarFill = styled.div`
 `;
 
 const StarReviewCount = styled.div`
+  flex-shrink: 0;
   padding-left: 12px;
   width: 2em;
 `;
@@ -112,8 +112,8 @@ const IndividualStarRating = ({
 );
 
 IndividualStarRating.defaultProps = {
-  rating: 2,
-  reviews: {
+  rating: 0,
+  reviews: [{
     id: 2,
     url_id: 2,
     name: 'Yu-Lin',
@@ -123,24 +123,27 @@ IndividualStarRating.defaultProps = {
     rating: 2,
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
-  },
+  }],
   reviewStarPercentages: '0',
   filterCondition: 2,
 };
 
 IndividualStarRating.propTypes = {
   rating: PropTypes.number,
-  reviews: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
-    url_id: PropTypes.number,
-    name: PropTypes.string,
-    location: PropTypes.string,
-    date: PropTypes.string,
-    comment: PropTypes.string,
-    rating: PropTypes.number,
-    helpful: PropTypes.number,
-    img: PropTypes.string,
-  })),
+  reviews: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      url_id: PropTypes.number,
+      name: PropTypes.string,
+      location: PropTypes.string,
+      date: PropTypes.string,
+      comment: PropTypes.string,
+      rating: PropTypes.number,
+      helpful: PropTypes.number,
+      img: PropTypes.string,
+    }),
+    PropTypes.array),
+  ]),
   reviewStarPercentages: PropTypes.string,
   filterCondition: PropTypes.oneOfType([
     PropTypes.string,

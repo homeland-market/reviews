@@ -6,9 +6,10 @@ import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
 import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
 import ReviewsSort from '../ReviewsSort/ReviewsSort';
 import ReviewsDisplay from '../ReviewsDisplay/ReviewsDisplay';
+import ReviewsShowMoreOrLess from '../ReviewsShowMoreOrLess/ReviewsShowMoreOrLess';
 
 import { getAllReviews } from '../../lib/DatabaseRequests';
-import { Filter, Sort, Calc } from '../../lib/FilterSortCalc';
+import { Filter, Sort, Calc } from '../../lib/FilterSortCalcParse';
 
 const ReviewsWrapper = styled.div`
   margin-left: auto;
@@ -110,6 +111,7 @@ class Reviews extends Component {
     } = this.state;
     return (
       <ReviewsWrapper>
+        <GlobalStyle />
         <ReviewsOverview
           reviews={reviews}
           totalReviewsCount={totalReviewsCount}
@@ -135,7 +137,12 @@ class Reviews extends Component {
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />
-        <GlobalStyle />
+        <ReviewsShowMoreOrLess
+          reviewDisplayCount={reviewDisplayCount}
+          filteredReviews={filteredReviews}
+          increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+          resetReviewDisplayCount={this.resetReviewDisplayCount}
+        />
       </ReviewsWrapper>
     );
   }

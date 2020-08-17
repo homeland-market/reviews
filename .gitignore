@@ -28,5 +28,4 @@ build/
 dist/
 
 #Files
-### ADD AWSCONFIG HERE ###
-### TEST ###
+public/bundle.js

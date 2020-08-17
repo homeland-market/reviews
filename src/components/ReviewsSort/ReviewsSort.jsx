@@ -3,11 +3,15 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Select from 'react-select';
 
+import { Parse } from '../../lib/FilterSortCalcParse';
+
+import { customSortBar } from '../../assets/styles';
+
 const SortReviewsWrapper = styled.div`
-  margin-top: 24px;
-  display: flex;
   align-items: flex-end;
+  display: flex;
   justify-content: space-between;
+  margin-top: 24px;
 `;
 
 const ReviewsSearchSortFilterResults = styled.div`
@@ -15,88 +19,19 @@ const ReviewsSearchSortFilterResults = styled.div`
 `;
 
 const ClearFiltersButton = styled.div`
-  color: #7f187f;
-  display: inline-block;
-  cursor: pointer;
   background: none;
-  outline: inherit;
   border: none;
+  color: #7f187f;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
   padding-left 5px;
   text-decoration: underline;
-  font-size: 16px;
+
   &:hover {
     text-decoration: none;
   }
 `;
-
-const customStyles = {
-  container: (provided) => ({
-    ...provided,
-    borderRadius: '8px',
-    display: 'flex',
-    width: '250px',
-    textAlign: 'left',
-    minHeight: '56px',
-    position: 'relative',
-    minWidth: '40%',
-    background: '#fff',
-  }),
-  control: (provided) => ({
-    ...provided,
-    borderRadius: '8px',
-    border: '2px solid #b9b6bc',
-    minHeight: '56px',
-    height: '56px',
-    minWidth: '100%',
-    fontWeight: 900,
-    color: '#221924',
-    transition: 'border-color .25s cubic-bezier(.65,.05,.36,1)',
-    '&:hover': {
-      transitionDuration: '0s,0s,.25s',
-      borderColor: '#47404a',
-    },
-  }),
-  option: (provided) => ({
-    ...provided,
-    color: '#221924',
-    borderRadius: '8px',
-    marginLeft: '8px',
-    marginRight: '8px',
-    marginTop: '8px',
-    marginBottom: '8px',
-    width: 'auto',
-  }),
-  input: (provided) => ({
-    ...provided,
-    minHeight: '1px',
-    minWidth: '100%',
-  }),
-  dropdownIndicator: (provided) => ({
-    ...provided,
-  }),
-  indicatorSeparator: (provided) => ({
-    ...provided,
-    minHeight: '1px',
-    height: '24px',
-  }),
-  clearIndicator: (provided) => ({
-    ...provided,
-    minHeight: '1px',
-  }),
-  valueContainer: (provided) => ({
-    ...provided,
-    minHeight: '1px',
-    height: '40px',
-    paddingTop: '0',
-    paddingBottom: '0',
-    marginLeft: '5px',
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    minHeight: '1px',
-    color: '#221924',
-  }),
-};
 
 const sortByOptions = [
   { value: 'Most relevant', label: 'Most relevant' },
@@ -108,87 +43,102 @@ const sortByOptions = [
 class ReviewsSort extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: { value: 'Most relevant', label: 'Most relevant' } };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSumbit = this.handleSumbit.bind(this);
+    this.state = { selectedOption: sortByOptions[0] };
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
-  handleChange(selectedOption) {
+  handleSortChange(selectedOption) {
+    const { sortReviews, filteredReviews } = this.props;
     const { value } = selectedOption;
     this.setState({ selectedOption });
-    this.handleSumbit(value);
-  }
-
-  handleSumbit(value) {
-    const { sortReviews, filteredReviews } = this.props;
     sortReviews(filteredReviews, value);
-  }
-
-  showingReviewsOf() {
-    const { filteredReviews, reviewDisplayCount } = this.props;
-    const prefix = filteredReviews.length ? '1-' : '0-';
-    const suffix = reviewDisplayCount > filteredReviews.length
-      ? filteredReviews.length : reviewDisplayCount;
-    const totalReviewsCount = filteredReviews.length;
-    return `Showing ${prefix}${suffix} of ${totalReviewsCount} `;
-  }
-
-  renderReviewsWith() {
-    const { filterCondition } = this.props;
-    if (filterCondition !== 0 && typeof filterCondition === 'number') {
-      return `reviews with "${filterCondition} stars".`;
-    }
-    if (filterCondition !== '' && typeof filterCondition === 'string') {
-      return `reviews with "${filterCondition}".`;
-    }
-    return 'reviews.';
   }
 
   render() {
     const {
+      reviewDisplayCount,
+      filteredReviews,
       filterCondition,
       filterReviewsByStarRating,
     } = this.props;
     const { selectedOption } = this.state;
     return (
-      <SortReviewsWrapper>
-        <ReviewsSearchSortFilterResults>
-          {this.showingReviewsOf()}
-          {this.renderReviewsWith()}
-          {filterCondition !== 0 && filterCondition !== '' ? (
-            <ClearFiltersButton type="button" onClick={() => filterReviewsByStarRating(0)} onKeyPress={() => filterReviewsByStarRating(0)}>
-              Clear
-            </ClearFiltersButton>
-          ) : null}
-        </ReviewsSearchSortFilterResults>
-        <Select
-          components={{ IndicatorSeparator: () => null }}
-          styles={customStyles}
-          defaultValue={selectedOption}
-          value={selectedOption}
-          onChange={this.handleChange}
-          options={sortByOptions}
-          placeholder="Sort by"
-          theme={(theme) => ({
-            ...theme,
-            colors: {
-              ...theme.colors,
-              primary25: '#e6d3e4',
-              primary: '#d9d8db',
-            },
-          })}
-        />
-      </SortReviewsWrapper>
+      <section>
+        <SortReviewsWrapper>
+          <ReviewsSearchSortFilterResults>
+            {Parse.showingReviewsOfText(filterCondition, reviewDisplayCount, filteredReviews)}
+            {Parse.reviewsWithText(filterCondition)}
+            {filterCondition !== 0 && filterCondition !== '' ? (
+              <ClearFiltersButton
+                type="button"
+                onClick={() => filterReviewsByStarRating(0)}
+                onKeyPress={() => filterReviewsByStarRating(0)}
+              >
+                Clear
+              </ClearFiltersButton>
+            ) : null}
+          </ReviewsSearchSortFilterResults>
+          <Select
+            components={{ IndicatorSeparator: () => null }}
+            styles={customSortBar}
+            defaultValue={selectedOption}
+            value={selectedOption}
+            onChange={this.handleSortChange}
+            options={sortByOptions}
+            placeholder="Sort by"
+            theme={(theme) => ({
+              ...theme,
+              colors: {
+                ...theme.colors,
+                primary25: '#e6d3e4',
+                primary: '#d9d8db',
+              },
+            })}
+          />
+        </SortReviewsWrapper>
+      </section>
     );
   }
 }
 
+ReviewsSort.defaultProps = {
+  reviewDisplayCount: 3,
+  filteredReviews: [{
+    id: 2,
+    url_id: 2,
+    name: 'Yu-Lin',
+    location: 'California',
+    date: '2020-20-20T20:20:20.000Z',
+    comment: 'Reviews are fun',
+    rating: 2,
+    helpful: 2,
+    img: 'https://bit.ly/3kMfzKt',
+  }],
+  filterCondition: 0,
+};
+
 ReviewsSort.propTypes = {
-  reviewDisplayCount: PropTypes.number.isRequired,
-  filteredReviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sortReviews: PropTypes.func.isRequired,
-  filterCondition: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  reviewDisplayCount: PropTypes.number,
+  filteredReviews: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      url_id: PropTypes.number,
+      name: PropTypes.string,
+      location: PropTypes.string,
+      date: PropTypes.string,
+      comment: PropTypes.string,
+      rating: PropTypes.number,
+      helpful: PropTypes.number,
+      img: PropTypes.string,
+    }),
+    PropTypes.array),
+  ]),
+  filterCondition: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
   filterReviewsByStarRating: PropTypes.func.isRequired,
+  sortReviews: PropTypes.func.isRequired,
 };
 
 export default ReviewsSort;
