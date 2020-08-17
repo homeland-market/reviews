@@ -1,9 +1,6 @@
 ## MAC files ##
 .DS_Store
 
-## mysql login ##
-server/database/config.js
-
 ## NPM ##
 npm
 npm-debug.log
@@ -28,4 +25,5 @@ build/
 dist/
 
 #Files
-public/bundle.js
+bundle.js
+config.js
