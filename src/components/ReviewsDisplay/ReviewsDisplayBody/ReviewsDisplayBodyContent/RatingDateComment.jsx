@@ -6,7 +6,7 @@ import StarRatings from 'react-star-ratings';
 import { Parse } from '../../../../lib/FilterSortCalcParse';
 import { SearchText } from '../../../../lib/SearchText';
 
-import { FiveStarsSVGPath } from '../../../../assets/svg';
+import { SmallStarSVGPath } from '../../../../assets/svg';
 
 const StarRatingDateCommentJustifySpace = styled.div`
   display: flex;
@@ -55,7 +55,7 @@ const RatingDateComment = ({
             starSpacing="0"
             starRatedColor="#f6b71d"
             starEmptyColor="#d9d8db"
-            svgIconPath={FiveStarsSVGPath}
+            svgIconPath={SmallStarSVGPath}
             svgIconViewBox="0 0 20 13"
           />
         </ReviewStars>

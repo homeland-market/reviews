@@ -114,8 +114,9 @@ class ReviewsSearch extends Component {
                   viewBox="0 0 28 28"
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnsXlink="http://www.w3.org/1999/xlink"
+                  path={SearchMagnifyingGlassSVGPath}
                 >
-                  <SearchMagnifyingGlassSVGPath />
+                  <path d={SearchMagnifyingGlassSVGPath} />
                 </SearchMagnifyingGlassSVG>
               </TextInputButton>
             </TextInputField>
