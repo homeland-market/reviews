@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const RatingsAndReviewsWrapper = styled.div`
@@ -14,9 +15,9 @@ const GuidelinesLink = styled.a`
   }
 `;
 
-const HeaderAndLink = () => (
+const HeaderAndLink = ({ showLessScroll }) => (
   <RatingsAndReviewsWrapper>
-    <h1>Ratings & Reviews</h1>
+    <h1 ref={showLessScroll}>Ratings & Reviews</h1>
     <span>Our </span>
     <GuidelinesLink href="https://bit.ly/3kSiQIb" target="_blank">
       Community Guidelines
@@ -24,5 +25,9 @@ const HeaderAndLink = () => (
     <span> help customers write honest reviews.</span>
   </RatingsAndReviewsWrapper>
 );
+
+HeaderAndLink.propTypes = {
+  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
+};
 
 export default HeaderAndLink;

@@ -19,6 +19,7 @@ const ReviewsShowMoreOrLess = ({
   filteredReviewsLength,
   increaseReviewDisplayCount,
   resetReviewDisplayCount,
+  scrollToReviewsOverview,
 }) => (
   <section>
     <ShowMoreAndLessContainer>
@@ -31,6 +32,7 @@ const ReviewsShowMoreOrLess = ({
         reviewDisplayCount={reviewDisplayCount}
         filteredReviewsLength={filteredReviewsLength}
         resetReviewDisplayCount={resetReviewDisplayCount}
+        scrollToReviewsOverview={scrollToReviewsOverview}
       />
     </ShowMoreAndLessContainer>
   </section>
@@ -46,6 +48,7 @@ ReviewsShowMoreOrLess.propTypes = {
   filteredReviewsLength: PropTypes.number,
   increaseReviewDisplayCount: PropTypes.func.isRequired,
   resetReviewDisplayCount: PropTypes.func.isRequired,
+  scrollToReviewsOverview: PropTypes.func.isRequired,
 };
 
 export default ReviewsShowMoreOrLess;

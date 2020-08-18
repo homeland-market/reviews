@@ -21,12 +21,13 @@ const ShowLessReviews = ({
   reviewDisplayCount,
   filteredReviewsLength,
   resetReviewDisplayCount,
+  scrollToReviewsOverview,
 }) => {
   if (reviewDisplayCount > 3) {
     return (
       <ShowMoreOrLessButton
         type="button"
-        onClick={resetReviewDisplayCount}
+        onClick={() => { resetReviewDisplayCount(); scrollToReviewsOverview(); }}
         onKeyPress={resetReviewDisplayCount}
       >
         {reviewDisplayCount < filteredReviewsLength && <ShowMoreAndLessDivider />}
@@ -53,6 +54,7 @@ ShowLessReviews.propTypes = {
   reviewDisplayCount: PropTypes.number,
   filteredReviewsLength: PropTypes.number,
   resetReviewDisplayCount: PropTypes.func.isRequired,
+  scrollToReviewsOverview: PropTypes.func.isRequired,
 };
 
 export default ShowLessReviews;

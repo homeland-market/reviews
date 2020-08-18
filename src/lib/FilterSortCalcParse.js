@@ -8,7 +8,7 @@ export const Filter = {
     return reviews.filter((review) => review.comment.toLowerCase().includes(target));
   },
 
-  includesCustomerPhotos(reviews) {
+  byCustomerPhotos(reviews) {
     return reviews.filter((review) => review.imgmedium !== null);
   },
 
@@ -58,6 +58,10 @@ export const Calc = {
 
   totalStarReviewCount(reviews, rating) {
     return reviews.reduce((acc, review) => acc + (review.rating === rating ? 1 : 0), 0);
+  },
+
+  maximumContainerLength(imagesTotal, containerWidth) {
+    return -Math.abs((imagesTotal * 208) - containerWidth);
   },
 
 };

@@ -17,11 +17,12 @@ const ReviewsDisplay = ({
   reviewDisplayCount,
   filteredReviews,
   filterCondition,
+  reviewScroll,
 }) => {
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   return (
     <section>
-      <ReviewsDisplayContainer>
+      <ReviewsDisplayContainer ref={reviewScroll}>
         {filteredReviews.length > 0 && (
         <ReviewsBody
           reviewsToRender={reviewsToRender}
@@ -71,6 +72,7 @@ ReviewsDisplay.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
 };
 
 export default ReviewsDisplay;

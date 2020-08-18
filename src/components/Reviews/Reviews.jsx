@@ -25,29 +25,36 @@ class Reviews extends Component {
     this.state = {
       reviews: [],
       totalReviewsCount: 0,
+      customerImages: null,
       reviewStarPercentages: {},
       reviewAverageScore: 0,
-      reviewDisplayCount: 3,
+      reviewDisplayCount: 0,
       filteredReviews: [],
       filterCondition: 0,
       sortCondition: 'Most helpful',
     };
+    this.reviewScroll = React.createRef();
+    this.showLessScroll = React.createRef();
     this.filterReviewsByStarRating = this.filterReviewsByStarRating.bind(this);
     this.filterReviewsByText = this.filterReviewsByText.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
     this.increaseReviewDisplayCount = this.increaseReviewDisplayCount.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
+    this.scrollToReviewsBody = this.scrollToReviewsBody.bind(this);
+    this.scrollToReviewsOverview = this.scrollToReviewsOverview.bind(this);
   }
 
   componentDidMount() {
     getAllReviews((reviews) => {
       const totalReviewsCount = reviews.length;
+      const customerImages = Filter.byCustomerPhotos(reviews);
       const reviewStarPercentages = Calc.getStartPercentagesFills(reviews);
       const reviewAverageScore = Calc.getTotalReviewAverageScore(reviews);
       this.sortReviews(reviews);
       this.setState({
         reviews,
         totalReviewsCount,
+        customerImages,
         reviewAverageScore,
         reviewStarPercentages,
       });
@@ -101,10 +108,22 @@ class Reviews extends Component {
     this.setState({ reviewDisplayCount: 3 });
   }
 
+  scrollToReviewsBody(condition) {
+    const { filterCondition } = this.state;
+    if (condition !== filterCondition) {
+      window.scrollTo(0, this.reviewScroll.current.offsetTop);
+    }
+  }
+
+  scrollToReviewsOverview() {
+    window.scrollTo(0, this.showLessScroll.current.offsetTop);
+  }
+
   render() {
     const {
       reviews,
       totalReviewsCount,
+      customerImages,
       reviewStarPercentages,
       reviewAverageScore,
       reviewDisplayCount,
@@ -120,11 +139,15 @@ class Reviews extends Component {
           reviewStarPercentages={reviewStarPercentages}
           reviewAverageScore={reviewAverageScore}
           filterCondition={filterCondition}
+          showLessScroll={this.showLessScroll}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
+          scrollToReviewsBody={this.scrollToReviewsBody}
         />
-        <ReviewsCustomerPhotos
-          reviews={reviews}
-        />
+        {customerImages && (
+          <ReviewsCustomerPhotos
+            customerImages={customerImages}
+          />
+        )}
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}
         />
@@ -139,6 +162,7 @@ class Reviews extends Component {
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           filterCondition={filterCondition}
+          reviewScroll={this.reviewScroll}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />
@@ -147,6 +171,7 @@ class Reviews extends Component {
           filteredReviewsLength={filteredReviews.length}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
+          scrollToReviewsOverview={this.scrollToReviewsOverview}
         />
       </ReviewsWrapper>
     );
