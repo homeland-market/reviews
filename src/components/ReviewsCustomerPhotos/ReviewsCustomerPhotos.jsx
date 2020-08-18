@@ -37,15 +37,9 @@ const CarouselContainer = styled.ul`
 const CustomerPhotoContainer = styled.div`
   border: 2px solid transparent;
   border-radius: 8px;
-  // cursor: pointer;
   min-width: 208px;
   outline: none
   padding: 4px;
-
-  // &:hover {
-  //   border-color: #7f187f;
-  // }
-
 `;
 
 const CustomerImageSize = styled.div`
@@ -90,7 +84,6 @@ const NextImageButton = styled(StrippedButton)`
   &:hover {
     border-color: #7f187f;
   }
-
 `;
 
 const PreviousImageButton = styled(NextImageButton)`
