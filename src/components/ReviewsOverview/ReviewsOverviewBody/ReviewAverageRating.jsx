@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { FiveStarsSVGPath } from '../../../assets/svg';
+import { SmallStarSVGPath } from '../../../assets/svg';
 
 const AverageRatingScoreWrapper = styled.div`
   text-align: center;
@@ -30,7 +30,7 @@ const ReviewAverageRating = ({ totalReviewsCount, reviewAverageScore }) => (
         starSpacing="0"
         starRatedColor="#f6b71d"
         starEmptyColor="#d9d8db"
-        svgIconPath={FiveStarsSVGPath}
+        svgIconPath={SmallStarSVGPath}
         svgIconViewBox="0 0 20 13"
       />
     </section>

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Calc } from '../../../lib/FilterSortCalcParse';
 
 import { StrippedButton } from '../../../assets/styles';
-import { SmallStarSVG, StarSVGPath } from '../../../assets/svg';
+import { SmallStarSVG, SmallStarSVGPath } from '../../../assets/svg';
 
 const StarNumber = styled.div`
   display: flex;
@@ -91,7 +91,7 @@ const IndividualStarRating = ({
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
     >
-      <StarSVGPath />
+      <path d={SmallStarSVGPath} />
     </SmallStarSVG>
     <FillBarContainer>
       <FillBarBackground
