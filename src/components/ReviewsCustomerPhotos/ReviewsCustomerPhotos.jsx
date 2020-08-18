@@ -125,7 +125,6 @@ class ReviewsCustomerPhotos extends Component {
     const totalCarouselWidth = maxLength - 72;
     return (
       <section>
-        {console.log(translateX)}
         <h1>Customer Photos</h1>
         <CustomerPhotosContainer>
           {translateX !== 0 && translateX !== 136 && (
