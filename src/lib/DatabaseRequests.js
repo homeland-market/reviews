@@ -8,9 +8,9 @@ export const updateHelpfulCount = (helpful, id) => {
 };
 
 export const getAllReviews = (callback) => {
-    axios.get(`/api/reviews/${productIdExtract()}`)
-      .then((reviews) => {
-        callback(reviews.data);
-      })
-      .catch((err) => console.error(err));
+  axios.get(`/api/reviews/${productIdExtract()}`)
+    .then((reviews) => {
+      callback(reviews.data);
+    })
+    .catch((err) => console.error(err));
 };

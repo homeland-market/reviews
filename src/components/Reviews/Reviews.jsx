@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import GlobalStyle from '../../assets/fonts';
 
 import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
+import ReviewsCustomerPhotos from '../ReviewsCustomerPhotos/ReviewsCustomerPhotos';
 import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
 import ReviewsSort from '../ReviewsSort/ReviewsSort';
 import ReviewsDisplay from '../ReviewsDisplay/ReviewsDisplay';
@@ -14,6 +15,7 @@ import { Filter, Sort, Calc } from '../../lib/FilterSortCalcParse';
 const ReviewsWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
+  max-width: 1600px;
   width: 90vw;
 `;
 
@@ -119,6 +121,9 @@ class Reviews extends Component {
           reviewAverageScore={reviewAverageScore}
           filterCondition={filterCondition}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
+        />
+        <ReviewsCustomerPhotos
+          reviews={reviews}
         />
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}

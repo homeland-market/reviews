@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-plusplus */
@@ -62,8 +63,7 @@ const reviewGenerator = (moonId, singleMoonEntry) => mocker()
         review.comment, review.rating, review.helpful];
       insertionPromises.push(databaseRawDataInserion(databaseData));
     });
-    return Promise.all(insertionPromises)
-      .catch((err) => console.error(err));
+    return Promise.all(insertionPromises);
   });
 
 const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
@@ -72,22 +72,29 @@ const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
   .then((info) => {
     const insertionPromises = [];
     info.reviewsTemplate.forEach((review) => {
-      review.rating = weightedRand({ 1: 0.0005, 2: 0.005, 3: 0.1, 4: 0.3, 5: 0.95 });
+      review.rating = weightedRand({
+        1: 0.0005,
+        2: 0.005,
+        3: 0.1,
+        4: 0.3,
+        5: 0.95,
+      });
       const databaseData = [moonId || review.url_id, review.name, review.location, review.date,
         review.comment, review.rating, review.helpful];
       insertionPromises.push(databaseRawDataInserion(databaseData));
     });
-    return Promise.all(insertionPromises)
-      .catch((err) => console.error(err));
+    return Promise.all(insertionPromises);
   });
 
 // inserts img url's into the datatabase
 const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resolve, reject) => {
   const randomIdIndex = Math.floor(Math.random() * 99) + 1;
   const randomImgIndex = Math.floor(Math.random() * 46) + 5;
-  const imageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/small_images/${moonImageIndex || randomImgIndex}.jpg`;
-  const queryString = 'update user_reviews set img = ? where url_id = ? and img is NULL order by rand() limit 1';
-  db.query(queryString, [imageURL, moonIndex || randomIdIndex],
+  const smallImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/small_images/${moonImageIndex || randomImgIndex}.jpg`;
+  const mediumImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/medium_images/${moonImageIndex || randomImgIndex}.jpg`;
+  const queryString = 'update user_reviews set img = ?, imgmedium = ? where url_id = ? and img is NULL order by rand() limit 1';
+  const images = [smallImageURL, mediumImageURL, moonIndex || randomIdIndex];
+  db.query(queryString, images,
     (err, success) => {
       if (err) {
         reject(err);
@@ -116,14 +123,12 @@ const databaseSeeder = () => {
     .then(() => {
       const imageCounter = Math.floor(Math.random() * 600) + 300;
       return Promise.all(promiseCompiler(imageCounter, databaseImageInsertion))
-        .then(() => console.log('🚀🚀 review images seeded!'))
-        .catch((err) => console.error(err));
+        .then(() => console.log('🚀🚀 review images seeded!'));
     })
     .then(() => {
       const moonReviewWeighted = 500;
       return Promise.all(promiseCompiler(moonReviewWeighted, moonReviewGenerator, '0', 1))
-        .then(() => console.log('🌜🌜 moon weighted reviews seeded!'))
-        .catch((err) => console.error(err));
+        .then(() => console.log('🌜🌜 moon weighted reviews seeded!'));
     })
     .then(() => {
       let counter = 10;
@@ -134,8 +139,7 @@ const databaseSeeder = () => {
         counter -= 1;
       }
       return Promise.all(imagePromises)
-        .then(() => console.log('🌜🌜 moon images seeded!'))
-        .catch((err) => console.error(err));
+        .then(() => console.log('🌜🌜 moon images seeded!'));
     })
     .catch((err) => console.error(err));
 };

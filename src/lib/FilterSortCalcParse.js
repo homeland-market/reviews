@@ -8,6 +8,10 @@ export const Filter = {
     return reviews.filter((review) => review.comment.toLowerCase().includes(target));
   },
 
+  includesCustomerPhotos(reviews) {
+    return reviews.filter((review) => review.imgmedium !== null);
+  },
+
 };
 
 export const Sort = {

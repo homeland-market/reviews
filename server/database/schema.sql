@@ -11,5 +11,6 @@ CREATE TABLE user_reviews (
   comment VARCHAR(8000) NOT NULL,
   rating INT NOT NULL,
   helpful INT DEFAULT 0,
-  img VARCHAR(225)
+  img VARCHAR(225),
+  imgmedium VARCHAR(225)
 );

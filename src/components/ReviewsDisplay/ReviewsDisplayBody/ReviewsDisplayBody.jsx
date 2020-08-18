@@ -103,6 +103,7 @@ ReviewsBody.defaultProps = {
     rating: 2,
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
+    imgmedium: 'https://bit.ly/3kMfzKt',
   }],
   filterCondition: 0,
 };
@@ -119,6 +120,7 @@ ReviewsBody.propTypes = {
       rating: PropTypes.number,
       helpful: PropTypes.number,
       img: PropTypes.string,
+      imgmedium: PropTypes.string,
     }),
     PropTypes.array),
   ]),
