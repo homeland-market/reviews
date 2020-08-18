@@ -27,7 +27,7 @@ const HeaderAndLink = ({ showLessScroll }) => (
 );
 
 HeaderAndLink.propTypes = {
-  showLessScroll: PropTypes.func.isRequired,
+  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
 };
 
 export default HeaderAndLink;

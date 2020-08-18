@@ -81,7 +81,7 @@ const IndividualStarRating = ({
 }) => (
   <RatingButtonWrapper
     onClick={() => {
-      scrollToReviewsBody();
+      scrollToReviewsBody(rating);
       filterCondition !== rating ? filterReviewsByStarRating(rating)
         : filterReviewsByStarRating(0);
     }}

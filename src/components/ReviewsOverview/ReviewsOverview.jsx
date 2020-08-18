@@ -32,12 +32,12 @@ const StarRatingContainer = styled.div`
 const stars = [5, 4, 3, 2, 1];
 
 const ReviewsOverview = ({
-  showLessScroll,
   reviews,
   totalReviewsCount,
   reviewStarPercentages,
   reviewAverageScore,
   filterCondition,
+  showLessScroll,
   filterReviewsByStarRating,
   scrollToReviewsBody,
 }) => (
@@ -94,7 +94,7 @@ ReviewsOverview.defaultProps = {
 };
 
 ReviewsOverview.propTypes = {
-  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
+
   reviews: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
@@ -126,6 +126,7 @@ ReviewsOverview.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   filterReviewsByStarRating: PropTypes.func.isRequired,
   scrollToReviewsBody: PropTypes.func.isRequired,
 };

@@ -22,8 +22,6 @@ const ReviewsWrapper = styled.div`
 class Reviews extends Component {
   constructor() {
     super();
-    this.reviewScroll = React.createRef();
-    this.showLessScroll = React.createRef();
     this.state = {
       reviews: [],
       totalReviewsCount: 0,
@@ -35,6 +33,8 @@ class Reviews extends Component {
       filterCondition: 0,
       sortCondition: 'Most helpful',
     };
+    this.reviewScroll = React.createRef();
+    this.showLessScroll = React.createRef();
     this.filterReviewsByStarRating = this.filterReviewsByStarRating.bind(this);
     this.filterReviewsByText = this.filterReviewsByText.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
@@ -108,8 +108,11 @@ class Reviews extends Component {
     this.setState({ reviewDisplayCount: 3 });
   }
 
-  scrollToReviewsBody() {
-    window.scrollTo(0, this.reviewScroll.current.offsetTop);
+  scrollToReviewsBody(condition) {
+    const { filterCondition } = this.state;
+    if (condition !== filterCondition) {
+      window.scrollTo(0, this.reviewScroll.current.offsetTop);
+    }
   }
 
   scrollToReviewsOverview() {
@@ -131,12 +134,12 @@ class Reviews extends Component {
       <ReviewsWrapper>
         <GlobalStyle />
         <ReviewsOverview
-          showLessScroll={this.showLessScroll}
           reviews={reviews}
           totalReviewsCount={totalReviewsCount}
           reviewStarPercentages={reviewStarPercentages}
           reviewAverageScore={reviewAverageScore}
           filterCondition={filterCondition}
+          showLessScroll={this.showLessScroll}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
           scrollToReviewsBody={this.scrollToReviewsBody}
         />
@@ -154,10 +157,10 @@ class Reviews extends Component {
           sortReviews={this.sortReviews}
         />
         <ReviewsDisplay
-          reviewScroll={this.reviewScroll}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           filterCondition={filterCondition}
+          reviewScroll={this.reviewScroll}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
         />

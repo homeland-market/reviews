@@ -14,10 +14,10 @@ const ReviewsDisplayContainer = styled.div`
 `;
 
 const ReviewsDisplay = ({
-  reviewScroll,
   reviewDisplayCount,
   filteredReviews,
   filterCondition,
+  reviewScroll,
 }) => {
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   return (
@@ -52,7 +52,6 @@ ReviewsDisplay.defaultProps = {
 };
 
 ReviewsDisplay.propTypes = {
-  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   reviewDisplayCount: PropTypes.number,
   filteredReviews: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
@@ -73,6 +72,7 @@ ReviewsDisplay.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
 };
 
 export default ReviewsDisplay;
