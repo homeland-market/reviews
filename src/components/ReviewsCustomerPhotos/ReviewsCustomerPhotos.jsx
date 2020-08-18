@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Filter } from '../../lib/FilterSortCalcParse';
+import { Calc } from '../../lib/FilterSortCalcParse';
 
 import { StrippedButton } from '../../assets/styles';
 import { ArrowSVG, ArrowSVGPath } from '../../assets/svg';
@@ -97,40 +97,65 @@ const PreviousImageButton = styled(NextImageButton)`
 class ReviewsCustomerPhotos extends Component {
   constructor(props) {
     super(props);
-    this.state = { translateX: 0 };
+    this.state = { translateX: 0, maxContainerLength: 0 };
+    this.carouselWindow = React.createRef();
   }
 
-  moveRight(reviews, translateX, images, maxLength) {
-    if (translateX === maxLength) {
-      this.setState((PrevState) => ({ translateX: PrevState.translateX - 72 }));
+  componentDidMount() {
+    const { customerImages } = this.props;
+    const imagesTotal = customerImages.length;
+    const containerWidth = this.getContainerWidth();
+    const maxContainerLength = Calc.maxContainerLength(imagesTotal, containerWidth);
+    this.setState({ maxContainerLength });
+  }
+
+  getContainerWidth() {
+    return this.carouselWindow.current.clientWidth;
+  }
+
+  moveRight(imagesTotal, maxContainerLength) {
+    const { translateX } = this.state;
+    const containerWidth = this.getContainerWidth();
+    if ((maxContainerLength - translateX) >= -208) {
+      this.setState((PrevState) => ({
+        translateX: PrevState.translateX + ((maxContainerLength - translateX) - 8), // -8 = padding
+        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+      }));
     } else {
-      this.setState((PrevState) => ({ translateX: PrevState.translateX - 208 }));
+      this.setState((PrevState) => ({
+        translateX: PrevState.translateX - 208,
+        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+      }));
     }
   }
 
-  moveLeft(reviews, translateX, images, maxLength) {
-    if (translateX === maxLength) {
-      this.setState((PrevState) => ({ translateX: PrevState.translateX + 72 }));
+  moveLeft(imagesTotal, maxContainerLength) {
+    const { translateX } = this.state;
+    const containerWidth = this.getContainerWidth();
+    if ((maxContainerLength + translateX) >= 208) {
+      this.setState((PrevState) => ({
+        translateX: PrevState.translateX + ((maxContainerLength - translateX) - 8), // -8 = padding
+        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+      }));
     } else {
-      this.setState((PrevState) => ({ translateX: PrevState.translateX + 208 }));
+      this.setState((PrevState) => ({
+        translateX: PrevState.translateX + 208,
+        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+      }));
     }
   }
 
   render() {
-    const { reviews } = this.props;
-    const { translateX } = this.state;
-    const images = Filter.includesCustomerPhotos(reviews);
-    const imageLength = images.length;
-    const maxLength = -Math.abs(((images.length - 8) * 208));
-    const totalCarouselWidth = maxLength - 72;
+    const { customerImages } = this.props;
+    const { translateX, maxContainerLength } = this.state;
+    const imagesTotal = customerImages.length;
+    const imageThreshold = (Math.floor(Math.abs(maxContainerLength / 208)));
     return (
       <section>
         <h1>Customer Photos</h1>
-        <CustomerPhotosContainer>
-          {translateX !== 0 && translateX !== 136 && (
-            <PreviousImageButton
-              onClick={() => this.moveLeft(reviews, translateX, images, maxLength)}
-            >
+        <CustomerPhotosContainer ref={this.carouselWindow}>
+          {translateX < 0 && (
+            <PreviousImageButton onClick={() => this.moveLeft(imagesTotal, maxContainerLength)}>
               <ArrowSVG
                 viewBox="0 0 28 28"
                 xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +167,7 @@ class ReviewsCustomerPhotos extends Component {
             </PreviousImageButton>
           )}
           <CarouselContainer ref={this.myRef} translateX={translateX}>
-            {images.map((image) => (
+            {customerImages.map((image) => (
               <li key={image.id}>
                 <CustomerPhotoContainer>
                   <CustomerImageSize>
@@ -152,10 +177,8 @@ class ReviewsCustomerPhotos extends Component {
               </li>
             ))}
           </CarouselContainer>
-          {translateX !== totalCarouselWidth && imageLength > 8 && (
-            <NextImageButton
-              onClick={() => this.moveRight(reviews, translateX, images, maxLength)}
-            >
+          {translateX >= maxContainerLength && imagesTotal > imageThreshold && (
+            <NextImageButton onClick={() => this.moveRight(imagesTotal, maxContainerLength)}>
               <ArrowSVG
                 viewBox="0 0 28 28"
                 xmlns="http://www.w3.org/2000/svg"
@@ -171,36 +194,8 @@ class ReviewsCustomerPhotos extends Component {
   }
 }
 
-ReviewsCustomerPhotos.defaultProps = {
-  reviews: [{
-    id: 2,
-    url_id: 2,
-    name: 'Yu-Lin',
-    location: 'California',
-    date: '2020-20-20T20:20:20.000Z',
-    comment: 'Reviews are fun',
-    rating: 2,
-    helpful: 2,
-    img: 'https://bit.ly/3kMfzKt',
-    imgmedium: 'https://bit.ly/3kMfzKt',
-  }],
-};
 ReviewsCustomerPhotos.propTypes = {
-  reviews: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      url_id: PropTypes.number,
-      name: PropTypes.string,
-      location: PropTypes.string,
-      date: PropTypes.string,
-      comment: PropTypes.string,
-      rating: PropTypes.number,
-      helpful: PropTypes.number,
-      img: PropTypes.string,
-      imgmedium: PropTypes.string,
-    }),
-    PropTypes.array),
-  ]),
+  customerImages: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default ReviewsCustomerPhotos;

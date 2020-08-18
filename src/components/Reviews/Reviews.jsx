@@ -25,6 +25,7 @@ class Reviews extends Component {
     this.state = {
       reviews: [],
       totalReviewsCount: 0,
+      customerImages: [],
       reviewStarPercentages: {},
       reviewAverageScore: 0,
       reviewDisplayCount: 3,
@@ -42,12 +43,14 @@ class Reviews extends Component {
   componentDidMount() {
     getAllReviews((reviews) => {
       const totalReviewsCount = reviews.length;
+      const customerImages = Filter.byCustomerPhotos(reviews);
       const reviewStarPercentages = Calc.getStartPercentagesFills(reviews);
       const reviewAverageScore = Calc.getTotalReviewAverageScore(reviews);
       this.sortReviews(reviews);
       this.setState({
         reviews,
         totalReviewsCount,
+        customerImages,
         reviewAverageScore,
         reviewStarPercentages,
       });
@@ -105,6 +108,7 @@ class Reviews extends Component {
     const {
       reviews,
       totalReviewsCount,
+      customerImages,
       reviewStarPercentages,
       reviewAverageScore,
       reviewDisplayCount,
@@ -123,7 +127,7 @@ class Reviews extends Component {
           filterReviewsByStarRating={this.filterReviewsByStarRating}
         />
         <ReviewsCustomerPhotos
-          reviews={reviews}
+          customerImages={customerImages}
         />
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}
