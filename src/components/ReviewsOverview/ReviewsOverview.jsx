@@ -76,6 +76,7 @@ ReviewsOverview.defaultProps = {
     rating: 2,
     helpful: 2,
     img: 'https://bit.ly/3kMfzKt',
+    imgmedium: 'https://bit.ly/3kMfzKt',
   }],
   totalReviewsCount: 0,
   reviewStarPercentages: {
@@ -101,6 +102,7 @@ ReviewsOverview.propTypes = {
       rating: PropTypes.number,
       helpful: PropTypes.number,
       img: PropTypes.string,
+      imgmedium: PropTypes.string,
     }),
     PropTypes.array),
   ]),

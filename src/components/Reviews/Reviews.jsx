@@ -15,6 +15,7 @@ import { Filter, Sort, Calc } from '../../lib/FilterSortCalcParse';
 const ReviewsWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
+  max-width: 1600px;
   width: 90vw;
 `;
 
@@ -121,7 +122,9 @@ class Reviews extends Component {
           filterCondition={filterCondition}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
         />
-        <ReviewsCustomerPhotos />
+        <ReviewsCustomerPhotos
+          reviews={reviews}
+        />
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}
         />

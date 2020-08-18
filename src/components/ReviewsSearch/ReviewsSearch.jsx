@@ -6,7 +6,7 @@ import { StrippedButton } from '../../assets/styles';
 import { SearchMagnifyingGlassSVG, SearchMagnifyingGlassSVGPath } from '../../assets/svg';
 
 const SearchContainer = styled.div`
-  margin-top: 24px;
+  margin-top: 0px;
 `;
 
 const ShowReviewsThatContainer = styled.div`
