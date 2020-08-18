@@ -25,10 +25,10 @@ class Reviews extends Component {
     this.state = {
       reviews: [],
       totalReviewsCount: 0,
-      customerImages: [],
+      customerImages: null,
       reviewStarPercentages: {},
       reviewAverageScore: 0,
-      reviewDisplayCount: 3,
+      reviewDisplayCount: 0,
       filteredReviews: [],
       filterCondition: 0,
       sortCondition: 'Most helpful',
@@ -143,9 +143,11 @@ class Reviews extends Component {
           filterReviewsByStarRating={this.filterReviewsByStarRating}
           scrollToReviewsBody={this.scrollToReviewsBody}
         />
-        <ReviewsCustomerPhotos
-          customerImages={customerImages}
-        />
+        {customerImages && (
+          <ReviewsCustomerPhotos
+            customerImages={customerImages}
+          />
+        )}
         <ReviewsSearch
           filterReviewsByText={this.filterReviewsByText}
         />

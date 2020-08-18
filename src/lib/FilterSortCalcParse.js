@@ -60,7 +60,7 @@ export const Calc = {
     return reviews.reduce((acc, review) => acc + (review.rating === rating ? 1 : 0), 0);
   },
 
-  maxContainerLength(imagesTotal, containerWidth) {
+  maximumContainerLength(imagesTotal, containerWidth) {
     return -Math.abs((imagesTotal * 208) - containerWidth);
   },
 

@@ -14,6 +14,10 @@ const CustomerPhotosContainer = styled.div`
   position: relative;
 `;
 
+const CustomerReviewsHeader = styled.h1`
+  margin-bottom: 8.75px;
+`;
+
 const CarouselContainer = styled.ul`
   display: flex;
   flex-wrap: nowrap;
@@ -96,7 +100,12 @@ const PreviousImageButton = styled(NextImageButton)`
 class ReviewsCustomerPhotos extends Component {
   constructor(props) {
     super(props);
-    this.state = { translateX: 0, maxContainerLength: 0 };
+    this.state = {
+      translateX: 0,
+      maxContainerLength: 0,
+      imagesTotal: 0,
+      containerWidth: 0,
+    };
     this.carouselWindow = React.createRef();
   }
 
@@ -104,26 +113,30 @@ class ReviewsCustomerPhotos extends Component {
     const { customerImages } = this.props;
     const imagesTotal = customerImages.length;
     const containerWidth = this.getContainerWidth();
-    const maxContainerLength = Calc.maxContainerLength(imagesTotal, containerWidth);
-    this.setState({ maxContainerLength });
+    const maxContainerLength = Calc.maximumContainerLength(imagesTotal, containerWidth);
+    this.setState({ maxContainerLength, imagesTotal, containerWidth });
   }
 
   getContainerWidth() {
     return this.carouselWindow.current.clientWidth;
   }
 
+  calculateLastImagePlacement(maxContainerLength, translateX, imagesTotal, containerWidth) {
+    this.setState((PrevState) => ({
+      translateX: PrevState.translateX + ((maxContainerLength - translateX) - 8), // -8 = padding
+      maxContainerLength: Calc.maximumContainerLength(imagesTotal, containerWidth),
+    }));
+  }
+
   moveRight(imagesTotal, maxContainerLength) {
     const { translateX } = this.state;
     const containerWidth = this.getContainerWidth();
     if ((maxContainerLength - translateX) >= -208) {
-      this.setState((PrevState) => ({
-        translateX: PrevState.translateX + ((maxContainerLength - translateX) - 8), // -8 = padding
-        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
-      }));
+      this.calculateLastImagePlacement(maxContainerLength, translateX, imagesTotal, containerWidth);
     } else {
       this.setState((PrevState) => ({
         translateX: PrevState.translateX - 208,
-        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+        maxContainerLength: Calc.maximumContainerLength(imagesTotal, containerWidth),
       }));
     }
   }
@@ -132,26 +145,29 @@ class ReviewsCustomerPhotos extends Component {
     const { translateX } = this.state;
     const containerWidth = this.getContainerWidth();
     if ((maxContainerLength + translateX) >= 208) {
-      this.setState((PrevState) => ({
-        translateX: PrevState.translateX + ((maxContainerLength - translateX) - 8), // -8 = padding
-        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
-      }));
+      this.calculateLastImagePlacement(maxContainerLength, translateX, imagesTotal, containerWidth);
     } else {
       this.setState((PrevState) => ({
         translateX: PrevState.translateX + 208,
-        maxContainerLength: Calc.maxContainerLength(imagesTotal, containerWidth),
+        maxContainerLength: Calc.maximumContainerLength(imagesTotal, containerWidth),
       }));
     }
   }
 
   render() {
+    const {
+      translateX,
+      maxContainerLength,
+      imagesTotal,
+      containerWidth,
+    } = this.state;
     const { customerImages } = this.props;
-    const { translateX, maxContainerLength } = this.state;
-    const imagesTotal = customerImages.length;
-    const imageThreshold = (Math.floor(Math.abs(maxContainerLength / 208)));
+    const imageThreshold = (Math.floor(Math.abs(containerWidth / 208)));
     return (
       <section>
-        <h1>Customer Photos</h1>
+        <CustomerReviewsHeader>
+          Customer Photos
+        </CustomerReviewsHeader>
         <CustomerPhotosContainer ref={this.carouselWindow}>
           {translateX < 0 && (
             <PreviousImageButton onClick={() => this.moveLeft(imagesTotal, maxContainerLength)}>
@@ -176,7 +192,7 @@ class ReviewsCustomerPhotos extends Component {
               </li>
             ))}
           </CarouselContainer>
-          {translateX >= maxContainerLength && imagesTotal > imageThreshold && (
+          {((translateX >= maxContainerLength) && (imagesTotal > imageThreshold)) && (
             <NextImageButton onClick={() => this.moveRight(imagesTotal, maxContainerLength)}>
               <ArrowSVG
                 viewBox="0 0 28 28"
