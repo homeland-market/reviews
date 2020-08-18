@@ -141,7 +141,7 @@ class ReviewsCustomerPhotos extends Component {
               </ArrowSVG>
             </PreviousImageButton>
           )}
-          <CarouselContainer translateX={translateX}>
+          <CarouselContainer ref={this.myRef} translateX={translateX}>
             {images.map((image) => (
               <li key={image.id}>
                 <CustomerPhotoContainer>
@@ -185,7 +185,6 @@ ReviewsCustomerPhotos.defaultProps = {
     imgmedium: 'https://bit.ly/3kMfzKt',
   }],
 };
-
 ReviewsCustomerPhotos.propTypes = {
   reviews: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
