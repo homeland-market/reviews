@@ -32,15 +32,17 @@ const StarRatingContainer = styled.div`
 const stars = [5, 4, 3, 2, 1];
 
 const ReviewsOverview = ({
+  showLessScroll,
   reviews,
   totalReviewsCount,
   reviewStarPercentages,
   reviewAverageScore,
   filterCondition,
   filterReviewsByStarRating,
+  scrollToReviewsBody,
 }) => (
   <section>
-    <HeaderAndLink />
+    <HeaderAndLink showLessScroll={showLessScroll} />
     <OverviewBodyContainer>
       <AverageScoreContainer>
         <ReviewAverageRating
@@ -57,6 +59,7 @@ const ReviewsOverview = ({
               reviewStarPercentages={reviewStarPercentages[rating]}
               filterCondition={filterCondition}
               filterReviewsByStarRating={filterReviewsByStarRating}
+              scrollToReviewsBody={scrollToReviewsBody}
             />
           </section>
         ))}
@@ -91,6 +94,7 @@ ReviewsOverview.defaultProps = {
 };
 
 ReviewsOverview.propTypes = {
+  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   reviews: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
@@ -123,6 +127,7 @@ ReviewsOverview.propTypes = {
     PropTypes.number,
   ]),
   filterReviewsByStarRating: PropTypes.func.isRequired,
+  scrollToReviewsBody: PropTypes.func.isRequired,
 };
 
 export default ReviewsOverview;

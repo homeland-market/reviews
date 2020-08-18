@@ -14,6 +14,7 @@ const ReviewsDisplayContainer = styled.div`
 `;
 
 const ReviewsDisplay = ({
+  reviewScroll,
   reviewDisplayCount,
   filteredReviews,
   filterCondition,
@@ -21,7 +22,7 @@ const ReviewsDisplay = ({
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   return (
     <section>
-      <ReviewsDisplayContainer>
+      <ReviewsDisplayContainer ref={reviewScroll}>
         {filteredReviews.length > 0 && (
         <ReviewsBody
           reviewsToRender={reviewsToRender}
@@ -51,6 +52,7 @@ ReviewsDisplay.defaultProps = {
 };
 
 ReviewsDisplay.propTypes = {
+  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   reviewDisplayCount: PropTypes.number,
   filteredReviews: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.shape({

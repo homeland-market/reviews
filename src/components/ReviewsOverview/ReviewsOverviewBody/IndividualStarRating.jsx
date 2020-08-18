@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -76,10 +77,14 @@ const IndividualStarRating = ({
   reviewStarPercentages,
   filterCondition,
   filterReviewsByStarRating,
+  scrollToReviewsBody,
 }) => (
   <RatingButtonWrapper
-    onClick={() => (filterCondition !== rating ? filterReviewsByStarRating(rating)
-      : filterReviewsByStarRating(0))}
+    onClick={() => {
+      scrollToReviewsBody();
+      filterCondition !== rating ? filterReviewsByStarRating(rating)
+        : filterReviewsByStarRating(0);
+    }}
   >
     <StarNumber>
       {rating}
@@ -152,6 +157,7 @@ IndividualStarRating.propTypes = {
     PropTypes.number,
   ]),
   filterReviewsByStarRating: PropTypes.func.isRequired,
+  scrollToReviewsBody: PropTypes.func.isRequired,
 };
 
 export default IndividualStarRating;

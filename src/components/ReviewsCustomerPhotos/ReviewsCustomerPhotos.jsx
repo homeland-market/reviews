@@ -11,7 +11,6 @@ const CustomerPhotosContainer = styled.div`
   flex-direction: row;
   overflow: hidden;
   padding-bottom: 12px;
-  padding-top: 12px;
   position: relative;
 `;
 

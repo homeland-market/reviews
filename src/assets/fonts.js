@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
         background-color: #f4f4f5;
         margin: 0;
         padding: 0;
+        scroll-behavior: smooth;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
     `;
 
 export default GlobalStyle;

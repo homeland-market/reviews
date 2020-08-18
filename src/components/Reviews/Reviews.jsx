@@ -22,6 +22,8 @@ const ReviewsWrapper = styled.div`
 class Reviews extends Component {
   constructor() {
     super();
+    this.reviewScroll = React.createRef();
+    this.showLessScroll = React.createRef();
     this.state = {
       reviews: [],
       totalReviewsCount: 0,
@@ -38,6 +40,8 @@ class Reviews extends Component {
     this.sortReviews = this.sortReviews.bind(this);
     this.increaseReviewDisplayCount = this.increaseReviewDisplayCount.bind(this);
     this.resetReviewDisplayCount = this.resetReviewDisplayCount.bind(this);
+    this.scrollToReviewsBody = this.scrollToReviewsBody.bind(this);
+    this.scrollToReviewsOverview = this.scrollToReviewsOverview.bind(this);
   }
 
   componentDidMount() {
@@ -104,6 +108,14 @@ class Reviews extends Component {
     this.setState({ reviewDisplayCount: 3 });
   }
 
+  scrollToReviewsBody() {
+    window.scrollTo(0, this.reviewScroll.current.offsetTop);
+  }
+
+  scrollToReviewsOverview() {
+    window.scrollTo(0, this.showLessScroll.current.offsetTop);
+  }
+
   render() {
     const {
       reviews,
@@ -119,12 +131,14 @@ class Reviews extends Component {
       <ReviewsWrapper>
         <GlobalStyle />
         <ReviewsOverview
+          showLessScroll={this.showLessScroll}
           reviews={reviews}
           totalReviewsCount={totalReviewsCount}
           reviewStarPercentages={reviewStarPercentages}
           reviewAverageScore={reviewAverageScore}
           filterCondition={filterCondition}
           filterReviewsByStarRating={this.filterReviewsByStarRating}
+          scrollToReviewsBody={this.scrollToReviewsBody}
         />
         <ReviewsCustomerPhotos
           customerImages={customerImages}
@@ -140,6 +154,7 @@ class Reviews extends Component {
           sortReviews={this.sortReviews}
         />
         <ReviewsDisplay
+          reviewScroll={this.reviewScroll}
           reviewDisplayCount={reviewDisplayCount}
           filteredReviews={filteredReviews}
           filterCondition={filterCondition}
@@ -151,6 +166,7 @@ class Reviews extends Component {
           filteredReviewsLength={filteredReviews.length}
           increaseReviewDisplayCount={this.increaseReviewDisplayCount}
           resetReviewDisplayCount={this.resetReviewDisplayCount}
+          scrollToReviewsOverview={this.scrollToReviewsOverview}
         />
       </ReviewsWrapper>
     );
