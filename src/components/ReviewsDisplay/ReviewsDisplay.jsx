@@ -138,7 +138,7 @@ ReviewsDisplay.propTypes = {
       img: PropTypes.string,
       imgmedium: PropTypes.string,
     }),
-      PropTypes.array),
+    PropTypes.array),
   ]),
   filterCondition: PropTypes.oneOfType([
     PropTypes.string,
