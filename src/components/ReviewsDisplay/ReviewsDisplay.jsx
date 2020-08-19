@@ -7,7 +7,7 @@ import ReviewsBody from './ReviewsDisplayBody/ReviewsDisplayBody';
 const ReviewsDisplayContainer = styled.div`
   background-color: #fff;
   border-radius: 8px;
-  display: block;
+  display: relative;
   margin-top: 24px;
   padding-left: 24px;
   padding-right: 24px;

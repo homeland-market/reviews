@@ -54,42 +54,35 @@ const ProductReviewDivider = styled.hr`
 `;
 
 const ReviewsBody = ({ reviewsToRender, filterCondition }) => {
-  let counter = 0;
   const totalAmountOfReviews = reviewsToRender.length;
-  const elements = [];
-  while (counter < totalAmountOfReviews) {
-    const review = reviewsToRender[counter];
-    elements.push(
-      <div key={review.id}>
-        <ProductReviewGrid>
-          <RatingDateCommentContainer>
-            <RatingDateComment
-              review={review}
-              filterCondition={filterCondition}
-            />
-          </RatingDateCommentContainer>
-          <CustomerImageContainer>
-            <CustomerImage
-              review={review}
-            />
-          </CustomerImageContainer>
-          <NameAndLocationContainer>
-            <NameAndLocation
-              review={review}
-            />
-          </NameAndLocationContainer>
-          <HelpfulButtonContainer>
-            <HelpfulButton
-              review={review}
-            />
-          </HelpfulButtonContainer>
-        </ProductReviewGrid>
-        {counter < (totalAmountOfReviews - 1) && <ProductReviewDivider />}
-      </div>,
-    );
-    counter += 1;
-  }
-  return <div>{elements}</div>;
+  return reviewsToRender.map((review, index) => (
+    <div key={review.id}>
+      <ProductReviewGrid>
+        <RatingDateCommentContainer>
+          <RatingDateComment
+            review={review}
+            filterCondition={filterCondition}
+          />
+        </RatingDateCommentContainer>
+        <CustomerImageContainer>
+          <CustomerImage
+            review={review}
+          />
+        </CustomerImageContainer>
+        <NameAndLocationContainer>
+          <NameAndLocation
+            review={review}
+          />
+        </NameAndLocationContainer>
+        <HelpfulButtonContainer>
+          <HelpfulButton
+            review={review}
+          />
+        </HelpfulButtonContainer>
+      </ProductReviewGrid>
+      {index < (totalAmountOfReviews - 1) && <ProductReviewDivider />}
+    </div>
+  ));
 };
 
 ReviewsBody.defaultProps = {

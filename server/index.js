@@ -14,8 +14,9 @@ app.use((req, res, next) => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/products/', express.static(path.join('./public')));
-app.use('/products/:id', express.static(path.join('./public')));
+app.use('/', express.static(path.resolve('./public')));
+app.use('/products/', express.static(path.resolve('./public')));
+app.use('/products/:id', express.static(path.resolve('./public')));
 
 app.get('/api/reviews/:id', (req, res) => {
   const requestId = req.params.id;
