@@ -1,9 +1,15 @@
+/* eslint-disable no-console */
 const path = require('path');
 const express = require('express');
 const models = require('./models/api.js');
 
 const PORT = 5004;
 const app = express();
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
