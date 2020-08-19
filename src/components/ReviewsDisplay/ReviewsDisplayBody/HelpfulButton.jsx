@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { updateHelpfulCount } from '../../../../lib/DatabaseRequests';
+import { updateHelpfulCount } from '../../../lib/DatabaseRequests';
 
-import { StrippedButton } from '../../../../assets/styles';
-import { HelpfulSVG, HelpfulSVGPath } from '../../../../assets/svg';
+import { StrippedButton } from '../../../assets/styles';
+import { HelpfulSVG, HelpfulSVGPath } from '../../../assets/svg';
 
 const HelpfulReviewButton = styled(StrippedButton)`
   background-color: ${(props) => (props.helpfulToggle ? '#7f187f;' : '#fff')};
