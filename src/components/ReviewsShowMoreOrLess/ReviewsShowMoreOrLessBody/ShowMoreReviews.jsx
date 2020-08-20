@@ -21,7 +21,7 @@ class ShowMoreReviews extends Component {
     const { showButton } = this.state;
     return (
       <section>
-        {reviewDisplayCount < filteredReviewsLength && showButton && ( // AWFUL... BUT WORKS
+        {reviewDisplayCount < filteredReviewsLength && showButton && ( // AWFUL... BUT WORKS!
           <ShowMoreOrLessButton
             type="button"
             onClick={() => { increaseReviewDisplayCount(); this.hideShowMoreButton(); }}
@@ -37,7 +37,7 @@ class ShowMoreReviews extends Component {
             </DownArrowSVG>
           </ShowMoreOrLessButton>
         )}
-        {reviewDisplayCount < filteredReviewsLength && !showButton && ( // AWFUL... BUT WORKS
+        {reviewDisplayCount < filteredReviewsLength && !showButton && ( // AWFUL... BUT WORKS!
           <ShowMoreOrLessButton
             type="button"
             onClick={() => { increaseReviewDisplayCount(); this.hideShowMoreButton(); }}
