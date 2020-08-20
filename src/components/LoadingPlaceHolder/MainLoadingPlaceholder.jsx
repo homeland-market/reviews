@@ -6,12 +6,12 @@ import { SmallStarSVGPath } from '../../assets/svg';
 
 const MainLoadingBlock = styled.div`
   animation: fadein .8s infinite alternate;
-  background: #8f82a6;
+  background: #d9d8db;
   border-radius: 8px;
   display: block;
   margin: 12px auto;
-  padding-bottom: 3%;
-  padding-top: 3%;
+  padding-bottom: 4%;
+  padding-top: 4%;
   text-align: center;
   width: 100%;
 
@@ -28,7 +28,7 @@ const MainLoadingPlaceholder = () => (
         <StarRatings
           starDimension="5vw"
           starSpacing="2rem"
-          starEmptyColor="#d9d8db"
+          starEmptyColor="#b8b8b8"
           svgIconPath={SmallStarSVGPath}
           svgIconViewBox="0 0 20 13"
         />
