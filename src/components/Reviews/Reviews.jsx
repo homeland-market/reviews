@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../../assets/fonts';
 
+import MainLoadingPlaceholder from '../LoadingPlaceHolder/MainLoadingPlaceholder';
+import BarsLoadingPlaceholder from '../LoadingPlaceHolder/BarsLoadingPlaceholder';
+import ReviewsHeader from '../ReviewsHeader/ReviewsHeader';
 import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
 import ReviewsCustomerPhotos from '../ReviewsCustomerPhotos/ReviewsCustomerPhotos';
 import ReviewsSearch from '../ReviewsSearch/ReviewsSearch';
@@ -23,6 +26,7 @@ class Reviews extends Component {
   constructor() {
     super();
     this.state = {
+      reviewsLoaded: false,
       reviews: [],
       totalReviewsCount: 0,
       customerImages: null,
@@ -58,7 +62,14 @@ class Reviews extends Component {
         reviewAverageScore,
         reviewStarPercentages,
       });
+      this.loadReviewsContent();
     });
+  }
+
+  loadReviewsContent() {
+    setTimeout(() => {
+      this.setState(() => ({ reviewsLoaded: true }));
+    }, 1000);
   }
 
   filterReviewsByStarRating(value) {
@@ -121,6 +132,7 @@ class Reviews extends Component {
 
   render() {
     const {
+      reviewsLoaded,
       reviews,
       totalReviewsCount,
       customerImages,
@@ -133,46 +145,58 @@ class Reviews extends Component {
     return (
       <ReviewsWrapper>
         <GlobalStyle />
-        <ReviewsOverview
-          reviews={reviews}
-          totalReviewsCount={totalReviewsCount}
-          reviewStarPercentages={reviewStarPercentages}
-          reviewAverageScore={reviewAverageScore}
-          filterCondition={filterCondition}
-          showLessScroll={this.showLessScroll}
-          filterReviewsByStarRating={this.filterReviewsByStarRating}
-          scrollToReviewsBody={this.scrollToReviewsBody}
-        />
-        {customerImages && (
-          <ReviewsCustomerPhotos
-            customerImages={customerImages}
-          />
-        )}
-        <ReviewsSearch
-          filterReviewsByText={this.filterReviewsByText}
-        />
-        <ReviewsSort
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-          filterCondition={filterCondition}
-          filterReviewsByStarRating={this.filterReviewsByStarRating}
-          sortReviews={this.sortReviews}
-        />
-        <ReviewsDisplay
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviews={filteredReviews}
-          filterCondition={filterCondition}
-          reviewScroll={this.reviewScroll}
-          increaseReviewDisplayCount={this.increaseReviewDisplayCount}
-          resetReviewDisplayCount={this.resetReviewDisplayCount}
-        />
-        <ReviewsShowMoreOrLess
-          reviewDisplayCount={reviewDisplayCount}
-          filteredReviewsLength={filteredReviews.length}
-          increaseReviewDisplayCount={this.increaseReviewDisplayCount}
-          resetReviewDisplayCount={this.resetReviewDisplayCount}
-          scrollToReviewsOverview={this.scrollToReviewsOverview}
-        />
+        <section>
+          <ReviewsHeader showLessScroll={this.showLessScroll} />
+          {!reviewsLoaded ? <MainLoadingPlaceholder /> : (
+            <ReviewsOverview
+              reviews={reviews}
+              totalReviewsCount={totalReviewsCount}
+              reviewStarPercentages={reviewStarPercentages}
+              reviewAverageScore={reviewAverageScore}
+              filterCondition={filterCondition}
+              filterReviewsByStarRating={this.filterReviewsByStarRating}
+              scrollToReviewsBody={this.scrollToReviewsBody}
+            />
+          )}
+          {!reviewsLoaded ? <BarsLoadingPlaceholder /> : (
+            <section>
+              {customerImages && (
+                <ReviewsCustomerPhotos
+                  customerImages={customerImages}
+                />
+              )}
+            </section>
+          )}
+          {!reviewsLoaded ? null : (
+            <section>
+              <ReviewsSearch
+                filterReviewsByText={this.filterReviewsByText}
+              />
+              <ReviewsSort
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviews={filteredReviews}
+                filterCondition={filterCondition}
+                filterReviewsByStarRating={this.filterReviewsByStarRating}
+                sortReviews={this.sortReviews}
+              />
+              <ReviewsDisplay
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviews={filteredReviews}
+                filterCondition={filterCondition}
+                reviewScroll={this.reviewScroll}
+                increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+                resetReviewDisplayCount={this.resetReviewDisplayCount}
+              />
+              <ReviewsShowMoreOrLess
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviewsLength={filteredReviews.length}
+                increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+                resetReviewDisplayCount={this.resetReviewDisplayCount}
+                scrollToReviewsOverview={this.scrollToReviewsOverview}
+              />
+            </section>
+          )}
+        </section>
       </ReviewsWrapper>
     );
   }

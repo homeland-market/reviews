@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReactTooltip from 'react-tooltip';
 
-import { StrippedButton } from '../../../../assets/styles';
+import { StrippedButton } from '../../../assets/styles';
 
 const ProductReviewCustomerInfoContainer = styled.header`
   display: block;

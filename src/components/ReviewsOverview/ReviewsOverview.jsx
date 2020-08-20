@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import HeaderAndLink from './ReviewsOverviewBody/HeaderAndLink';
 import ReviewAverageRating from './ReviewsOverviewBody/ReviewAverageRating';
 import IndividualStarRating from './ReviewsOverviewBody/IndividualStarRating';
 
@@ -37,12 +36,10 @@ const ReviewsOverview = ({
   reviewStarPercentages,
   reviewAverageScore,
   filterCondition,
-  showLessScroll,
   filterReviewsByStarRating,
   scrollToReviewsBody,
 }) => (
   <section>
-    <HeaderAndLink showLessScroll={showLessScroll} />
     <OverviewBodyContainer>
       <AverageScoreContainer>
         <ReviewAverageRating

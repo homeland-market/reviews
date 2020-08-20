@@ -76,7 +76,7 @@ const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
         1: 0.0005,
         2: 0.005,
         3: 0.1,
-        4: 0.3,
+        4: 0.4,
         5: 0.95,
       });
       const databaseData = [moonId || review.url_id, review.name, review.location, review.date,
@@ -126,12 +126,12 @@ const databaseSeeder = () => {
         .then(() => console.log('🚀🚀 review images seeded!'));
     })
     .then(() => {
-      const moonReviewWeighted = 500;
+      const moonReviewWeighted = 400;
       return Promise.all(promiseCompiler(moonReviewWeighted, moonReviewGenerator, '0', 1))
         .then(() => console.log('🌜🌜 moon weighted reviews seeded!'));
     })
     .then(() => {
-      let counter = 10;
+      let counter = 3;
       const imagePromises = [];
       while (counter > 0) {
         const moonImageCount = 5;

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import StarRatings from 'react-star-ratings';
 
-import { Parse } from '../../../../lib/FilterSortCalcParse';
-import { SearchText } from '../../../../lib/SearchText';
+import { Parse } from '../../../lib/FilterSortCalcParse';
+import { SearchText } from '../../../lib/SearchText';
 
-import { SmallStarSVGPath } from '../../../../assets/svg';
+import { SmallStarSVGPath } from '../../../assets/svg';
 
 const StarRatingDateCommentJustifySpace = styled.div`
   display: flex;

@@ -15,7 +15,7 @@ const GuidelinesLink = styled.a`
   }
 `;
 
-const HeaderAndLink = ({ showLessScroll }) => (
+const ReviewsHeader = ({ showLessScroll }) => (
   <RatingsAndReviewsWrapper>
     <h1 ref={showLessScroll}>Ratings & Reviews</h1>
     <span>Our </span>
@@ -26,8 +26,8 @@ const HeaderAndLink = ({ showLessScroll }) => (
   </RatingsAndReviewsWrapper>
 );
 
-HeaderAndLink.propTypes = {
+ReviewsHeader.propTypes = {
   showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
 };
 
-export default HeaderAndLink;
+export default ReviewsHeader;

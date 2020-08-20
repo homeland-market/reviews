@@ -18,6 +18,7 @@ export const ShowMoreOrLessButton = styled(StrippedButton)`
   height: 100%;
   justify-content: center;
   text-decoration: underline;
+  outline: none;
 
   &:hover {
     text-decoration: none;

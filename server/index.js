@@ -8,14 +8,17 @@ const app = express();
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/products/', express.static(path.join('./public')));
-app.use('/products/:id', express.static(path.join('./public')));
+app.use('/', express.static(path.resolve('./public')));
+app.use('/products/', express.static(path.resolve('./public')));
+app.use('/products/:id', express.static(path.resolve('./public')));
 
 app.get('/api/reviews/:id', (req, res) => {
   const requestId = req.params.id;
