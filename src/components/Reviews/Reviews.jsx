@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import GlobalStyle from '../../assets/fonts';
 
-import MainLoadingPlaceholder from '../LoadingPlaceHolder/MainLoadingPlaceholder';
-import BarsLoadingPlaceholder from '../LoadingPlaceHolder/BarsLoadingPlaceholder';
+import {
+  MainLoadingPlaceholder,
+  BarsLoadingPlaceholder,
+} from '../LoadingPlaceholder/LoadingPlaceholder';
+
 import ReviewsHeader from '../ReviewsHeader/ReviewsHeader';
 import ReviewsOverview from '../ReviewsOverview/ReviewsOverview';
 import ReviewsCustomerPhotos from '../ReviewsCustomerPhotos/ReviewsCustomerPhotos';
@@ -69,7 +72,7 @@ class Reviews extends Component {
   loadReviewsContent() {
     setTimeout(() => {
       this.setState(() => ({ reviewsLoaded: true }));
-    }, 1000);
+    }, 1500);
   }
 
   filterReviewsByStarRating(value) {

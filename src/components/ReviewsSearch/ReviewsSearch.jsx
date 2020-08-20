@@ -42,7 +42,7 @@ const TextInput = styled.input`
   border: none;
   cursor: text;
   flex-grow: 1;
-  height: calc(56px - 2em);
+  height: 100%;
   margin: 1em 1em 1em;
   outline: none;
   text-overflow: ellipsis;

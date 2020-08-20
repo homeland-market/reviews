@@ -21,7 +21,45 @@ const MainLoadingBlock = styled.div`
   }
 `;
 
-const MainLoadingPlaceholder = () => (
+const LoadingBarsLarge = styled.div`
+  animation: fadein .8s infinite alternate;
+  background: #d9d8db;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding-bottom: 10%;
+  width: 100%;
+
+  @keyframes fadein {
+    from { opacity: 1; }
+    to { opacity: .5; }
+  }
+`;
+
+const LoadingBars = styled.div`
+  animation: fadein .8s infinite alternate;
+  background: #d9d8db;
+  border-radius: 8px;
+  margin-top: 1rem;
+  padding-bottom: 4%;
+  width: 100%;
+
+  @keyframes fadein {
+    from { opacity: 1; }
+    to { opacity: .5; }
+  }
+`;
+
+export const BarsLoadingPlaceholder = () => (
+  <section>
+    <LoadingBarsLarge />
+    <LoadingBars />
+    <LoadingBars />
+    <LoadingBars />
+    <LoadingBars />
+  </section>
+);
+
+export const MainLoadingPlaceholder = () => (
   <section>
     <MainLoadingBlock>
       <div>
@@ -36,5 +74,3 @@ const MainLoadingPlaceholder = () => (
     </MainLoadingBlock>
   </section>
 );
-
-export default MainLoadingPlaceholder;
