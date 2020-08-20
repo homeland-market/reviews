@@ -5,8 +5,8 @@ const LoadingBars = styled.div`
   animation: fadein .8s infinite alternate;
   background: #8f82a6;
   border-radius: 8px;
-  margin-top: 12px;
-  padding-bottom: 3%;
+  margin-top: 1rem;
+  padding-bottom: 4%;
   width: 100%;
 
   @keyframes fadein {
