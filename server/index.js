@@ -24,7 +24,7 @@ app.get('/api/reviews/:id', (req, res) => {
   const requestId = req.params.id;
   models.getAll([requestId], (error, reviews) => {
     if (error) {
-      res.status(500).send(error);
+      res.status(500).send('An error occurred while retrieving reviews.');
     } else {
       res.status(200).json(reviews);
     }
@@ -35,11 +35,14 @@ app.put('/api/reviews/helpful/:id', (req, res) => {
   const { helpful, id } = req.body;
   models.updateHelpful([helpful, id], (error, results) => {
     if (error) {
-      res.status(500).json(error);
+      res.status(500).json('An error occurred while updating the helpful count.');
     } else {
       res.status(200).json(results);
     }
   });
 });
 
-app.listen(PORT, () => console.log(`🚀🚀 review server connected!\n🚀🚀 Listening on ${PORT}`));
+app.listen(PORT, () => console.log(`\n
+  ===========================`, '\x1b[36m',
+'\n 🆁', '\x1b[37m', 'server connected!', '\x1b[35m',
+'\n 🅴', '\x1b[37m', `listening on port: ${PORT}!`));

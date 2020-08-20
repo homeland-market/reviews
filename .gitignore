@@ -27,3 +27,4 @@ dist/
 #Files
 bundle.js
 config.js
+connection.js

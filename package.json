@@ -7,9 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "dev-start": "webpack --config webpack.config.js",
-    "dev-server": "nodemon server/index.js",
-    "seed": "node server/database/dbSeed.js",
+    "bundle": "webpack --config webpack.config.js",
+    "build": "nodemon --ignore node_modules server/index.js",
     "test": "jest --coverage"
   },
   "repository": {
@@ -30,6 +29,7 @@
   "homepage": "https://github.com/Unfair-dot-com/reviews#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "bluebird": "^3.7.2",
     "express": "^4.17.1",
     "mocker-data-generator": "^2.8.0",
     "mysql": "^2.18.1",

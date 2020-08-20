@@ -4,7 +4,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
 const mocker = require('mocker-data-generator').default;
-const db = require('./index.js');
+const db = require('./connection.js');
 
 const reviewsTemplate = {
   url_id: {
@@ -119,16 +119,16 @@ const promiseCompiler = (counter, func, arg1, arg2) => {
 const databaseSeeder = () => {
   const mainReviewCounter = Math.floor(Math.random() * 100) + 40;
   return Promise.all(promiseCompiler(mainReviewCounter, reviewGenerator))
-    .then(() => console.log('🚀🚀 review database seeded!'))
+    .then(() => console.log('\x1b[32m', '🅸', '\x1b[37m', 'review text seeded!'))
     .then(() => {
       const imageCounter = Math.floor(Math.random() * 600) + 300;
       return Promise.all(promiseCompiler(imageCounter, databaseImageInsertion))
-        .then(() => console.log('🚀🚀 review images seeded!'));
+        .then(() => console.log('\x1b[33m', '🅴', '\x1b[37m', 'review images seeded!'));
     })
     .then(() => {
       const moonReviewWeighted = 400;
       return Promise.all(promiseCompiler(moonReviewWeighted, moonReviewGenerator, '0', 1))
-        .then(() => console.log('🌜🌜 moon weighted reviews seeded!'));
+        .then(() => console.log('\x1b[35m', '🆆', '\x1b[37m', 'moon reviews seeded!'));
     })
     .then(() => {
       let counter = 3;
@@ -139,9 +139,10 @@ const databaseSeeder = () => {
         counter -= 1;
       }
       return Promise.all(imagePromises)
-        .then(() => console.log('🌜🌜 moon images seeded!'));
+        .then(() => console.log('\x1b[36m', '🆂', '\x1b[37m', 'moon images seeded!\n', '\x1b[37m', '==========================='));
     })
     .catch((err) => console.error(err));
 };
 
-databaseSeeder();
+// databaseSeeder();
+module.exports = databaseSeeder;
