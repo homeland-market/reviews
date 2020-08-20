@@ -123,7 +123,6 @@ ReviewsOverview.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  showLessScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   filterReviewsByStarRating: PropTypes.func.isRequired,
   scrollToReviewsBody: PropTypes.func.isRequired,
 };
