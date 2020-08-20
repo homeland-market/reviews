@@ -9,7 +9,6 @@
   "scripts": {
     "bundle": "webpack --config webpack.config.js",
     "build": "nodemon --ignore node_modules server/index.js",
-    "seed": "node server/database/dbSeed.js",
     "test": "jest --coverage"
   },
   "repository": {
