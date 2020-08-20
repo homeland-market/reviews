@@ -3,17 +3,8 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-console */
-const mysql = require('mysql');
 const mocker = require('mocker-data-generator').default;
-// const db = require('./index.js');
-
-const db = mysql.createConnection({
-  user: 'root',
-  password: 'password',
-  database: 'reviews',
-});
-
-db.connect((err) => (err));
+const db = require('./connection.js');
 
 const reviewsTemplate = {
   url_id: {

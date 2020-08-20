@@ -3,7 +3,7 @@ const mysql = require('mysql');
 const Promise = require('bluebird');
 const mysqlConfig = require('./config.js');
 const createTables = require('./createDatabaseTables.js');
-const databaseSeeder = require('./dbSeed.js');
+const databaseSeeder = require('./databaseSeeder.js');
 
 const database = 'reviews';
 const connection = mysql.createConnection(mysqlConfig);
