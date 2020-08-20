@@ -168,37 +168,33 @@ class Reviews extends Component {
             </section>
           )}
           {!reviewsLoaded ? null : (
-            <ReviewsSearch
-              filterReviewsByText={this.filterReviewsByText}
-            />
-          )}
-          {!reviewsLoaded ? null : (
-            <ReviewsSort
-              reviewDisplayCount={reviewDisplayCount}
-              filteredReviews={filteredReviews}
-              filterCondition={filterCondition}
-              filterReviewsByStarRating={this.filterReviewsByStarRating}
-              sortReviews={this.sortReviews}
-            />
-          )}
-          {!reviewsLoaded ? null : (
-            <ReviewsDisplay
-              reviewDisplayCount={reviewDisplayCount}
-              filteredReviews={filteredReviews}
-              filterCondition={filterCondition}
-              reviewScroll={this.reviewScroll}
-              increaseReviewDisplayCount={this.increaseReviewDisplayCount}
-              resetReviewDisplayCount={this.resetReviewDisplayCount}
-            />
-          )}
-          {!reviewsLoaded ? null : (
-            <ReviewsShowMoreOrLess
-              reviewDisplayCount={reviewDisplayCount}
-              filteredReviewsLength={filteredReviews.length}
-              increaseReviewDisplayCount={this.increaseReviewDisplayCount}
-              resetReviewDisplayCount={this.resetReviewDisplayCount}
-              scrollToReviewsOverview={this.scrollToReviewsOverview}
-            />
+            <section>
+              <ReviewsSearch
+                filterReviewsByText={this.filterReviewsByText}
+              />
+              <ReviewsSort
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviews={filteredReviews}
+                filterCondition={filterCondition}
+                filterReviewsByStarRating={this.filterReviewsByStarRating}
+                sortReviews={this.sortReviews}
+              />
+              <ReviewsDisplay
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviews={filteredReviews}
+                filterCondition={filterCondition}
+                reviewScroll={this.reviewScroll}
+                increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+                resetReviewDisplayCount={this.resetReviewDisplayCount}
+              />
+              <ReviewsShowMoreOrLess
+                reviewDisplayCount={reviewDisplayCount}
+                filteredReviewsLength={filteredReviews.length}
+                increaseReviewDisplayCount={this.increaseReviewDisplayCount}
+                resetReviewDisplayCount={this.resetReviewDisplayCount}
+                scrollToReviewsOverview={this.scrollToReviewsOverview}
+              />
+            </section>
           )}
         </section>
       </ReviewsWrapper>
