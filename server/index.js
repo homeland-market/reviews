@@ -3,7 +3,8 @@ const path = require('path');
 const express = require('express');
 const models = require('./models/api.js');
 
-const PORT = 5004;
+const PORT = process.env.PORT || '5004';
+
 const app = express();
 
 app.use((req, res, next) => {
