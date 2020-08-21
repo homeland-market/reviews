@@ -90,8 +90,8 @@ const moonReviewGenerator = (moonId, singleMoonEntry) => mocker()
 const databaseImageInsertion = (moonIndex, moonImageIndex) => new Promise((resolve, reject) => {
   const randomIdIndex = Math.floor(Math.random() * 99) + 1;
   const randomImgIndex = Math.floor(Math.random() * 46) + 5;
-  const smallImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/small_images/${moonImageIndex || randomImgIndex}.jpg`;
-  const mediumImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/medium_images/${moonImageIndex || randomImgIndex}.jpg`;
+  const smallImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/reviews-small/${moonImageIndex || randomImgIndex}.jpg`;
+  const mediumImageURL = `https://hrr47-reviews.s3-us-west-1.amazonaws.com/reviews-large/${moonImageIndex || randomImgIndex}.jpg`;
   const queryString = 'update user_reviews set img = ?, imgmedium = ? where url_id = ? and img is NULL order by rand() limit 1';
   const images = [smallImageURL, mediumImageURL, moonIndex || randomIdIndex];
   db.query(queryString, images,
@@ -131,7 +131,7 @@ const databaseSeeder = () => {
         .then(() => console.log('\x1b[35m', '🆆', '\x1b[37m', 'moon reviews seeded!'));
     })
     .then(() => {
-      let counter = 3;
+      let counter = 2;
       const imagePromises = [];
       while (counter > 0) {
         const moonImageCount = 5;
