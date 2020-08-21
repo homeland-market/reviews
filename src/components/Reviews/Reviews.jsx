@@ -173,6 +173,7 @@ class Reviews extends Component {
           {!reviewsLoaded ? null : (
             <section>
               <ReviewsSearch
+                reviewScroll={this.reviewScroll}
                 filterReviewsByText={this.filterReviewsByText}
               />
               <ReviewsSort
@@ -186,7 +187,6 @@ class Reviews extends Component {
                 reviewDisplayCount={reviewDisplayCount}
                 filteredReviews={filteredReviews}
                 filterCondition={filterCondition}
-                reviewScroll={this.reviewScroll}
                 increaseReviewDisplayCount={this.increaseReviewDisplayCount}
                 resetReviewDisplayCount={this.resetReviewDisplayCount}
               />
