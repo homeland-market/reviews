@@ -41,7 +41,6 @@ class Reviews extends Component {
       sortCondition: 'Most helpful',
     };
     this.reviewScroll = React.createRef();
-    this.showLessScroll = React.createRef();
     this.filterReviewsByStarRating = this.filterReviewsByStarRating.bind(this);
     this.filterReviewsByText = this.filterReviewsByText.bind(this);
     this.sortReviews = this.sortReviews.bind(this);
@@ -130,7 +129,7 @@ class Reviews extends Component {
   }
 
   scrollToReviewsOverview() {
-    window.scrollTo(0, this.showLessScroll.current.offsetTop);
+    window.scrollTo(0, this.reviewScroll.current.offsetTop);
   }
 
   render() {
@@ -149,7 +148,7 @@ class Reviews extends Component {
       <ReviewsWrapper>
         <GlobalStyle />
         <section>
-          <ReviewsHeader showLessScroll={this.showLessScroll} />
+          <ReviewsHeader />
           {!reviewsLoaded ? <MainLoadingPlaceholder /> : (
             <ReviewsOverview
               reviews={reviews}
