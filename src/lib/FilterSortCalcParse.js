@@ -76,11 +76,11 @@ export const Parse = {
     return `${month}/${day}/${year}`;
   },
 
-  showingReviewsOfText(filterCondition, reviewDisplayCount, filteredReviews) {
-    const prefix = filteredReviews.length ? '1-' : '0-';
-    const suffix = reviewDisplayCount > filteredReviews.length
-      ? filteredReviews.length : reviewDisplayCount;
-    const totalReviewsCount = filteredReviews.length;
+  showingReviewsOfText(filterCondition, reviewDisplayCount, reviewLength) {
+    const prefix = reviewLength ? '1-' : '0-';
+    const suffix = reviewDisplayCount > reviewLength
+      ? reviewLength : reviewDisplayCount;
+    const totalReviewsCount = reviewLength;
     return `Showing ${prefix}${suffix} of ${totalReviewsCount} `;
   },
 

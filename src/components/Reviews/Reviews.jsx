@@ -71,16 +71,16 @@ class Reviews extends Component {
   loadReviewsContent() {
     setTimeout(() => {
       this.setState(() => ({ reviewsLoaded: true }));
-    }, 1500);
+    }, 1000);
   }
 
   filterReviewsByStarRating(value) {
     const { reviews } = this.state;
     if (value === 0) {
-      this.sortReviews(reviews);
+      this.sortReviews([...reviews]);
       this.setState({ filterCondition: value });
     } else {
-      const filtered = Filter.byRating(reviews, value);
+      const filtered = Filter.byRating([...reviews], value);
       this.sortReviews(filtered);
       if (filtered.length) { this.setState({ filterCondition: value }); }
     }
@@ -88,7 +88,7 @@ class Reviews extends Component {
 
   filterReviewsByText(value) {
     const { reviews } = this.state;
-    const filtered = Filter.byText(reviews, value);
+    const filtered = Filter.byText([...reviews], value);
     this.sortReviews(filtered);
     this.setState({ filterCondition: value });
   }

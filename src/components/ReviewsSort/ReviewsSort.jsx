@@ -51,7 +51,7 @@ class ReviewsSort extends React.Component {
     const { sortReviews, filteredReviews } = this.props;
     const { value } = selectedOption;
     this.setState({ selectedOption });
-    sortReviews(filteredReviews, value);
+    sortReviews([...filteredReviews], value);
   }
 
   render() {
@@ -66,7 +66,8 @@ class ReviewsSort extends React.Component {
       <section>
         <SortReviewsWrapper>
           <ReviewsSearchSortFilterResults>
-            {Parse.showingReviewsOfText(filterCondition, reviewDisplayCount, filteredReviews)}
+            {Parse.showingReviewsOfText(filterCondition,
+              reviewDisplayCount, filteredReviews.length)}
             {Parse.reviewsWithText(filterCondition)}
             {filterCondition !== 0 && filterCondition !== '' ? (
               <ClearFiltersButton
