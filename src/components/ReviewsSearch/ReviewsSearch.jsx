@@ -94,9 +94,10 @@ class ReviewsSearch extends Component {
   }
 
   render() {
+    const { reviewScroll } = this.props;
     return (
       <section>
-        <SearchContainer>
+        <SearchContainer ref={reviewScroll}>
           <ShowReviewsThatContainer>
             Show reviews that mention
           </ShowReviewsThatContainer>
@@ -128,6 +129,7 @@ class ReviewsSearch extends Component {
 }
 
 ReviewsSearch.propTypes = {
+  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
   filterReviewsByText: PropTypes.func.isRequired,
 };
 

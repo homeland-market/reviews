@@ -66,13 +66,12 @@ const ReviewsDisplay = ({
   reviewDisplayCount,
   filteredReviews,
   filterCondition,
-  reviewScroll,
 }) => {
   const reviewsToRender = filteredReviews.slice(0, reviewDisplayCount);
   const totalAmountOfReviews = reviewsToRender.length;
   return (
     <section>
-      <ReviewsDisplayContainer ref={reviewScroll}>
+      <ReviewsDisplayContainer>
         {reviewsToRender.map((review, index) => (
           <div key={review.id}>
             <ProductReviewGrid>
@@ -144,7 +143,6 @@ ReviewsDisplay.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-  reviewScroll: PropTypes.shape({ current: PropTypes.instanceOf(Element) }).isRequired,
 };
 
 export default ReviewsDisplay;
