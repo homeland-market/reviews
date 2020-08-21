@@ -51,7 +51,7 @@ export const SearchText = {
 
   renderComment({ review: { comment, id } }, filterCondition) {
     if (!filterCondition || typeof filterCondition === 'number'
-      || filterCondition.indexOf(escapeables)) {
+      || escapeables.includes(filterCondition)) {
       return <ProductUserComments>{comment}</ProductUserComments>;
     }
     return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
