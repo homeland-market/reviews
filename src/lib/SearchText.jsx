@@ -15,6 +15,8 @@ const SearchHighlight = styled.mark`
   padding-bottom: 4px;
 `;
 
+const escapeables = ['.', ',', '?', '!', ';', '/', ':'];
+
 export const SearchText = {
 
   filterConditionExtractor(comment, filterCondition) {
@@ -48,7 +50,8 @@ export const SearchText = {
   },
 
   renderComment({ review: { comment, id } }, filterCondition) {
-    if (!filterCondition || typeof filterCondition === 'number') {
+    if (!filterCondition || typeof filterCondition === 'number'
+      || filterCondition.indexOf(escapeables)) {
       return <ProductUserComments>{comment}</ProductUserComments>;
     }
     return SearchText.highlightAllMatchingCommentText(comment, id, filterCondition);
