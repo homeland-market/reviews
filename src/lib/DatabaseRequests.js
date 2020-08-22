@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const localhost = 'http://localhost:5004';
-const ec2 = 'http://13.57.49.21:5004';
+const ec2 = 'http://13.57.49.21';
 
 const productIdExtract = () => window.location.pathname.split('/')[2];
 
