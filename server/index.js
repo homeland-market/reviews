@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const models = require('./models/api.js');
 
-const PORT = process.env.PORT || '5004';
+const PORT = '5004';
 
 const app = express();
 
