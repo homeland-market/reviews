@@ -11,7 +11,7 @@ This is an interactive ratings and reviews module that can usually be found on v
 
 1. [Setup](#Setup)
 1. [Requirements](#Requirements)
-1. [Additonal Notes](#Additonal Notes)
+1. [Additonal-Notes](#Additonal-Notes)
 
 ## Setup
 
@@ -32,6 +32,6 @@ Run ```npm run build```
 - Node.js
 - MySQL
 
-## Additonal Notes
+## Additonal-Notes
 
 The current seeding script found inside ```server/database/databaseSeeder.js``` will create a brand new database everytime the ```npm run build``` script is ran, or changes are made and saved while nodemon is running. To change this, you need to modifiy the ```db.connectAsync()``` function inside ```server/database/index.js```.
