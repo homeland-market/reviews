@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 module.exports = (db) => {
   if (!db.queryAsync) {
