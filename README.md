@@ -24,9 +24,9 @@ In order to set-up the file, you will need to follow these steps:
 1-a) Inside of these files, add your MySQL username and password inside the quotations marks as requested.
 
 2) Run the following commands from the command line inside the root folder:
-    a) Run ```npm install```
-    b) Run ```npm run bundle```
-    c) Run ```npm run build```
+    a) Run ```npm install```.
+    b) Run ```npm run bundle```.
+    c) Run ```npm run build```.
 
 ## Requirements
 
