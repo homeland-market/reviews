@@ -9,23 +9,24 @@ This is an interactive ratings and reviews module that can usually be found on v
 
 ## Table of Contents
 
-1. [Setup](#Setup)
+1. [Set-up](#Set-up)
 1. [Requirements](#Requirements)
 1. [Additonal-Notes](#Additonal-Notes)
 
-## Setup
+## Set-up
 
-In order to set up the file you will need to follow these steps: 
+In order to set-up the file, you will need to follow these steps: 
 
-Rename the following files inside server/database/
- 1) RENAME-ME-TO-CONFIG.js = config.js
- 2) RENAME-ME-TO-CONNECTION.js = connection.js
+1) Rename the following files inside server/database/
+   a) RENAME-ME-TO-CONFIG.js = config.js
+   b) RENAME-ME-TO-CONNECTION.js = connection.js
 
-Inside of these files, add your MySQL username and password inside the quotations marks as requested.
+1-a) Inside of these files, add your MySQL username and password inside the quotations marks as requested.
 
-Run ```npm install```
-Run ```npm run bundle```
-Run ```npm run build```
+2) Run the following commands from the command line inside the root folder:
+    a) Run ```npm install```
+    b) Run ```npm run bundle```
+    c) Run ```npm run build```
 
 ## Requirements
 
