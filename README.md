@@ -1,6 +1,6 @@
 # Ratings and Reviews Module
 
-This is an interactive ratings and reviews module that can usually be found on various Ecommerce product pages. The module alows user interaction in the following ways: A customer photos carousel; filter reivews by star rating; filter reviews by search queries (text field); sort reviews by specific criteria; "Verify Buyer" tooltip hover effects; Show More & Show Less conditionals; Clear review filters.
+This is an interactive ratings and reviews module that can usually be found on various Ecommerce product pages. The module alows user interaction in the following ways: A customer photos carousel; filter reivews by star rating; filter reviews by search queries (text field); sort reviews by specific criteria; a "Verify Buyer" tooltip that displays on mouse hover; Show More & Show Less conditional buttons; and a "Clear" button for currently active review filters.
 
 ## Related Projects
 
