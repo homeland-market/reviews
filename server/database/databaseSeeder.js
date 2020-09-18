@@ -144,5 +144,4 @@ const databaseSeeder = () => {
     .catch((err) => console.error(err));
 };
 
-// databaseSeeder();
 module.exports = databaseSeeder;
