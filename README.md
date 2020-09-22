@@ -5,7 +5,7 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 
 1. [Overview](#overview)
 2. [Features](#features)
-    * [Star Rating Filtering](#star-score-filtering)
+    * [Star Score Filtering](#star-score-filtering)
     * [Customer Photo Carousel](#customer-photo-carousel)
     * [Review Sorting](#review-sorting)
     * [Review Upvoting](#review-upvoting)
