@@ -25,14 +25,14 @@ An eCommerce ratings and reviews module of customer product feedback.
 ## Features
 
 ### Placeholder 1
-<p><img src="https://media.giphy.com/media/7Eh9Ybna9Gw9NwQKDl/giphy.gif"></p>
+<p><img src="gif url here"></p>
 
 Placeholder 1
 
 ---
 
 ### Placeholder 2
-<p><img src="https://media.giphy.com/media/q6vKDPvdgwUktIXuqz/giphy.gif"></p>
+<p><img src="gif url here"></p>
 
 Placeholder 2
 
