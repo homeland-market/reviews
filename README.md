@@ -30,7 +30,7 @@ This interactive ratings and reviews module is the ideal solution for displaying
 ## Features
 
 ### Preload Animation
-<p><img src="https://media.giphy.com/media/75VAwmdNNcWKgbZqKo/giphy.gif"></p>
+<p><img src="https://media.giphy.com/media/SRVBgLxKKcr7LyrG6f/giphy.gif"></p>
 
 The component features a preloading state animation that runs until all review data has been successfully fetched from the database. This feature is to reduce snapping/popping of information when there are longer than expected query times on the page's initial load.
 
