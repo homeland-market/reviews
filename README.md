@@ -1,5 +1,5 @@
 # Homeland Market: Ratings & Reviews
-An ecommerce ratings and reviews module to dispay, filter, sort, and search customer product feedback.
+An ecommerce ratings and reviews module that features filtering, sorting, searching, voting, and a handy customer photo carousel!
 
 ## Table of Contents
 
