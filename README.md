@@ -5,9 +5,12 @@ An ecommerce ratings and reviews module to dispay, filter, sort, and search cust
 
 1. [Overview](#overview)
 2. [Features](#features)
-    * [Placeholder 1](#placeholder-1)
-    * [Placeholder 2](#placeholder-2)
-    * [Placeholder 3](#placeholder-3)
+    * [Star Rating Filtering](#star-score-filtering)
+    * [Customer Photo Carousel](#customer-photo-carousel)
+    * [Review Sorting](#review-sorting)
+    * [Review Upvoting](#review-upvoting)
+    * [Text Filtering & Highlighting](#text-filtering--highlighting)
+    * [Buyer Verification](#buyer-verification)
 3. [Built With](#built-with)
 4. [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
@@ -24,24 +27,45 @@ An ecommerce ratings and reviews module to dispay, filter, sort, and search cust
 
 ## Features
 
-### Placeholder 1
-<p><img src="gif url here"></p>
+### Star Score Filtering
+<p><img src="https://media.giphy.com/media/sMfkPLBoCVxxBnZsVf/giphy.gif"></p>
 
 Placeholder 1
 
 ---
 
-### Placeholder 2
-<p><img src="gif url here"></p>
+### Customer Photo Carousel
+<p><img src="https://media.giphy.com/media/6FavGp8XNpDWgsUvES/giphy.gif"></p>
 
 Placeholder 2
 
 ---
 
-### Placeholder 3
-<p><img src="gif url here"></p>
+### Review Sorting
+<p><img src="https://media.giphy.com/media/T8YfkYLxp9rKD9oitr/giphy.gif"></p>
 
 Placeholder 3
+
+---
+
+### Review Upvoting
+<p><img src="https://media.giphy.com/media/WQj4zfisO19Y0HqKxQ/giphy.gif"></p>
+
+Placeholder 4
+
+---
+
+### Text Filtering & Highlighting
+<p><img src="https://media.giphy.com/media/mOHlEqcXMTCT4FQPMv/giphy.gif"></p>
+
+Placeholder 5
+
+---
+
+### Buyer Verification
+<p><img src="https://media.giphy.com/media/Z2VnAhVo9sjYkUNOcM/giphy.gif"></p>
+
+Placeholder 6
 
 ---
 
