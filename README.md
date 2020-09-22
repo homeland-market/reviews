@@ -38,7 +38,7 @@ You can filter reviews by different star ratings - 1 star, 2 star, 3 star, 4! (a
 ### Customer Photo Carousel
 <p><img src="https://media.giphy.com/media/6FavGp8XNpDWgsUvES/giphy.gif"></p>
 
-Placeholder 2
+The Customer Photo Carousel syncs its images with reviews that included a photo. The carousel makes use of React.createRef() to calculate the current screen size and slot the images into place accordingly: if the screen size is altered mid-transition, the component will recalculate the width and snap the next image back into place. This means that images will always display no matter the user's screen size. If there are no customer photos associated with any reviews, the carousel is automatically hidden; if there aren't enough images to require a scrolling effect, the scroll buttons are hidden.
 
 ---
 
