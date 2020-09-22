@@ -19,7 +19,7 @@ An ecommerce ratings and reviews module to dispay, filter, sort, and search cust
 
 
 ## Overview
-<p align="center" height="200"><img src="https://imgur.com/RKP8Bpo"></p>
+<p align="center" height="200"><img src="https://i.imgur.com/RKP8Bpo.png"></p>
 <p>Placehholder</p>
 
 ## Features
