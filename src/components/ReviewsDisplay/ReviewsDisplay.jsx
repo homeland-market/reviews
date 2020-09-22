@@ -16,6 +16,19 @@ const ReviewsDisplayContainer = styled.div`
   padding-right: 24px;
 `;
 
+const ProductReviewGrid = styled.article`
+  align-items: start;
+  column-gap: 10%;
+  display: grid;
+  grid-template-areas:
+      "customerInfo reviewDetails helpfulButton"
+      "reviewPhotos reviewDetails helpfulButton";
+  grid-template-columns: 216px minmax(350px,3fr) minmax(150px,1fr);
+  grid-template-rows: auto minmax(auto,1fr);
+  padding-bottom: 24px;
+  padding-top: 24px;
+`;
+
 const RatingDateCommentContainer = styled.div`
   grid-area: reviewDetails;
 `;

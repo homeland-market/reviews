@@ -63,7 +63,7 @@ const NameAndLocation = ({ review: { name, location } }) => (
     </CustomerNameAndLocation>
     <ReviewComplianceBadge>
       <ProductReviewComplianceBadge
-        data-tip="This reviewer purchased this item<br>from Unfair."
+        data-tip="This reviewer purchased this item<br>from Homeland Market."
         data-for="unfair-tt"
         data-delay-hide="100"
         data-delay-show="200"
