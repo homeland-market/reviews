@@ -5,6 +5,7 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 
 1. [Overview](#overview)
 2. [Features](#features)
+    * [Preload Animation](#preload-animation)
     * [Star Score Filtering](#star-score-filtering)
     * [Customer Photo Carousel](#customer-photo-carousel)
     * [Review Sorting](#review-sorting)
@@ -27,6 +28,13 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 This interactive ratings and reviews module is the ideal solution for displaying customer's feedback. The application has a strong focus on user interaction, allowing reviews to be filtered, sorted, and searched in a variety of different ways (see [Features](#features) for more info). The component is fully responsive right out of the box, allowing for seamless integration across all media platforms. For further information on how to get started, please see the conveniently named [Getting Started](#getting-started) section below.
 
 ## Features
+
+### Preload Animation
+<p><img src="https://media.giphy.com/media/75VAwmdNNcWKgbZqKo/giphy.gif"></p>
+
+The component features a preloading state animation that runs until all review data has been successfully fetched from the database. This feature is to reduce snapping/popping of information when there are longer than expected query times on the page's initial load.
+
+---
 
 ### Star Score Filtering
 <p><img src="https://media.giphy.com/media/sMfkPLBoCVxxBnZsVf/giphy.gif"></p>
