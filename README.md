@@ -23,7 +23,8 @@ An ecommerce ratings and reviews module to dispay, filter, sort, and search cust
 
 ## Overview
 <p align="center" height="200"><img src="https://i.imgur.com/RKP8Bpo.png"></p>
-<p>Placehholder</p>
+
+This interactive ratings and reviews module is the ideal solution for displaying customer product feedback. The application has a strong focus on user interaction, allowing reviews to be filtered, sorted, and searched in a variety of different ways (see [Features](#features) for more info). The component is fully responsive right out of the box, allowing for seamless implementation across all media platforms. For further information on how to get started, please see the conveniently named [Getting Started](#getting-started) section below.
 
 ## Features
 
