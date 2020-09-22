@@ -1,3 +1,100 @@
+# Homeland Market: Ratings & Reviews
+An eCommerce ratings and reviews module of customer product feedback.
+
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Features](#features)
+    * [Placeholder 1](#placeholder-1)
+    * [Placeholder 2](#placeholder-2)
+    * [Placeholder 3](#placeholder-3)
+3. [Built With](#built-with)
+4. [Getting Started](#getting-started)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+5. [Contributing](#contributing)
+6. [Contact](#contact)
+7. [Acknowledgements](#acknowledgements)
+8. [License](#license)
+
+
+## Overview
+<p align="center" height="200"><img src="img url"></p>
+<p>Placehholder</p>
+
+## Features
+
+### Placeholder 1
+<p><img src="https://media.giphy.com/media/7Eh9Ybna9Gw9NwQKDl/giphy.gif"></p>
+
+Placeholder 1
+
+---
+
+### Placeholder 2
+<p><img src="https://media.giphy.com/media/q6vKDPvdgwUktIXuqz/giphy.gif"></p>
+
+Placeholder 2
+
+---
+
+### Placeholder 3
+<p><img src="gif url here"></p>
+
+Placeholder 3
+
+---
+
+## Built With
+
+Soccer Stats is built with the following technologies:
+* [React](https://reactjs.org/)
+* [Node.js](https://nodejs.org/en/)
+* [Express](https://expressjs.com/)
+
+## Getting Started
+
+### Prerequisites
+
+Node.js and npm are required in order to quickly get up and running with this project. Lukily, npm is distributed with Node.js - which means that when you download Node.js, you automatically get npm installed on your computer! You can install Node.js [HERE](https://nodejs.org/en/).
+
+### Installation
+
+1. 
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Contact
+
+Matthew Wigglesworth - [LinkedIn](https://www.linkedin.com/in/matt-wigg/) - m.p.wigglesworth@gmail.com
+
+Project Link: [https://github.com/Matt-Wigg/soccer-stats/](https://github.com/Matt-Wigg/soccer-stats/)
+
+## Acknowledgements
+
+* [React-Select](https://react-select.com/home)
+* [Styled-Components](https://styled-components.com/)
+* [Axios](https://github.com/axios/axios)
+* [Google Fonts](https://fonts.google.com/)
+
+## License
+
+Distributed under the MIT License.
+
+
+
+
+
+
+
 # Ratings and Reviews Module
 
 This is an interactive ratings and reviews module that can usually be found on various Ecommerce product pages. The module alows user interaction in the following ways: A customer photos carousel; filter reivews by star rating; filter reviews by search queries (text field); sort reviews by specific criteria; a "Verify Buyer" tooltip that displays on mouse hover; Show More & Show Less conditional buttons; and a "Clear" button for currently active review filters.
