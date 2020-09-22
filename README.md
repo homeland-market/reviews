@@ -31,7 +31,7 @@ This interactive ratings and reviews module is the ideal solution for displaying
 ### Star Score Filtering
 <p><img src="https://media.giphy.com/media/sMfkPLBoCVxxBnZsVf/giphy.gif"></p>
 
-You can filter reviews by different star ratings - 1 star, 2 star, 3 star, 4! (and 5). When a specific star is clicked, the screen automatically scrolls to the review body selection, and the corresponding reviews are displayed. You can clear the filter one of three ways: clicking the 'clear filter' text just above the body of reviews,  selecting another star to filter from the list, or clicking on the original star rating to toggle off the selection. Filtered reviews can also be sorted while still maintaining the filtering condition - see [Review Sorting](#review-sorting) for more information.
+You can filter reviews by different star ratings - 1 star, 2 star, 3 star, 4! (and 5). When a specific star is clicked, the screen automatically scrolls to the review body section where the corresponding reviews are displayed. You can clear the filter one of four ways: clicking the 'clear filter' text just above the body of reviews,  selecting another star to filter from the list, clicking on the original star rating to toggle off the selection, or [filtering reviews by text search](#text-filtering--highlighting). Filtered reviews can also be sorted while still maintaining the filtering condition - see [Review Sorting](#review-sorting) for more information.
 
 ---
 
