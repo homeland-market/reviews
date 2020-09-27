@@ -60,21 +60,21 @@ You can sort reviews by the following criteria: <em>Most Relevant, Includes Cust
 ### Review Upvoting
 <p><img src="https://media.giphy.com/media/WQj4zfisO19Y0HqKxQ/giphy.gif"></p>
 
-Placeholder 4
+Each review has it's own Helpful Button. Users can upvote the reviews they find helpful by clicking on the corresponding button. When a Helpful Button is clicked (toggled on), a PUT request gets sent to the server, and the review data inside the database gets updated. If the button is toggled off, another PUT request is sent to update the database. At present, users can only toggle each review on or off: there is no downvoting option. If the page is refreshed, the new helpful total will display.
 
 ---
 
 ### Text Filtering & Highlighting
 <p><img src="https://media.giphy.com/media/mOHlEqcXMTCT4FQPMv/giphy.gif"></p>
 
-Placeholder 5
+By typing a word or phrase into the search bar and pressing enter - or clicking on the search button - reviews can be filtered by that word or phrase. Only the review's comment text is searched - you can not filter by reviewer name or location. Words and phrases are not case sensitive; white space is removed from search words/phrases automatically.
 
 ---
 
 ### Buyer Verification
 <p><img src="https://media.giphy.com/media/Z2VnAhVo9sjYkUNOcM/giphy.gif"></p>
 
-Placeholder 6
+Each review displays a handy tooltip that verifies the review was left by an authentic buyer. Hover over the text to display the tooltip message. There is no way to add reviews via the display module: the module's designed so that reviews are left by email requests or via a separate link. 
 
 ---
 
