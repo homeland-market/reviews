@@ -3,9 +3,8 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 
 ## Table of Contents
 
-1. [Related Projects](#related-projects)
-2. [Overview](#overview)
-3. [Features](#features)
+1. [Overview](#overview)
+2. [Features](#features)
     * [Preload Animation](#preload-animation)
     * [Star Score Filtering](#star-score-filtering)
     * [Customer Photo Carousel](#customer-photo-carousel)
@@ -13,20 +12,15 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
     * [Review Upvoting](#review-upvoting)
     * [Text Filtering & Highlighting](#text-filtering--highlighting)
     * [Buyer Verification](#buyer-verification)
-4. [Built With](#built-with)
-5. [Getting Started](#getting-started)
+3. [Built With](#built-with)
+4. [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
-6. [Contributing](#contributing)
-7. [Contact](#contact)
-8. [Acknowledgements](#acknowledgements)
+5. [Contributing](#contributing)
+6. [Contact](#contact)
+7. [Acknowledgements](#acknowledgements)
+8. [Related Projects](#related-projects)
 9. [License](#license)
-
-## Related Projects
-
-  - https://github.com/homeland-market/fec-main-carousel
-  - https://github.com/homeland-market/product-detail-carousel
-  - https://github.com/homeland-market/addToCartService
 
 ## Overview
 <p align="center" height="200"><img src="https://i.imgur.com/RKP8Bpo.png"></p>
@@ -154,6 +148,12 @@ Project Link: [https://github.com/homeland-market/reviews/](https://github.com/h
 * [Nodemon](https://github.com/remy/nodemon)
 * [Axios](https://github.com/axios/axios)
 * [Google Fonts](https://fonts.google.com/)
+
+## Related Projects
+
+  - https://github.com/homeland-market/fec-main-carousel
+  - https://github.com/homeland-market/product-detail-carousel
+  - https://github.com/homeland-market/addToCartService
 
 ## License
 
