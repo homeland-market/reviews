@@ -3,8 +3,9 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Features](#features)
+1. [Related Projects](#related-projects)
+2. [Overview](#overview)
+3. [Features](#features)
     * [Preload Animation](#preload-animation)
     * [Star Score Filtering](#star-score-filtering)
     * [Customer Photo Carousel](#customer-photo-carousel)
@@ -12,15 +13,20 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
     * [Review Upvoting](#review-upvoting)
     * [Text Filtering & Highlighting](#text-filtering--highlighting)
     * [Buyer Verification](#buyer-verification)
-3. [Built With](#built-with)
-4. [Getting Started](#getting-started)
+4. [Built With](#built-with)
+5. [Getting Started](#getting-started)
     * [Prerequisites](#prerequisites)
     * [Installation](#installation)
-5. [Contributing](#contributing)
-6. [Contact](#contact)
-7. [Acknowledgements](#acknowledgements)
-8. [License](#license)
+6. [Contributing](#contributing)
+7. [Contact](#contact)
+8. [Acknowledgements](#acknowledgements)
+9. [License](#license)
 
+## Related Projects
+
+  - https://github.com/homeland-market/fec-main-carousel
+  - https://github.com/homeland-market/product-detail-carousel
+  - https://github.com/homeland-market/addToCartService
 
 ## Overview
 <p align="center" height="200"><img src="https://i.imgur.com/RKP8Bpo.png"></p>
@@ -80,10 +86,11 @@ Each review displays a handy tooltip that verifies the review was left by an aut
 
 ## Built With
 
-Soccer Stats is built with the following technologies:
+This Reviews & Ratings module is built with the following technologies:
 * [React](https://reactjs.org/)
 * [Node.js](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
+* [MySQL](https://www.mysql.com/)
 
 ## Getting Started
 
@@ -91,9 +98,35 @@ Soccer Stats is built with the following technologies:
 
 Node.js and npm are required in order to quickly get up and running with this project. Lukily, npm is distributed with Node.js - which means that when you download Node.js, you automatically get npm installed on your computer! You can install Node.js [HERE](https://nodejs.org/en/).
 
+MySQL is the database of choice for this project. To install and set up MySQL, please follow the instructions found [HERE](https://dev.mysql.com/doc/refman/8.0/en/installing.html)
+
 ### Installation
 
-1. 
+
+1. Rename the following files inside ```server/database/```
+
+```sh
+RENAME-ME-TO-CONFIG.js = config.js
+RENAME-ME-TO-CONNECTION.js = connection.js
+```
+
+2. Inside of these files, add your `MySQL` username and password.
+
+```js
+user: 'USERNAME-HERE',
+password: 'PASSWORD-HERE',
+```
+
+
+3. Run the following commands from the command line inside the root folder:
+
+```
+npm install
+npm run bundle
+npm run build
+```
+
+<b>Please note:</b> The current seeding script found inside ```server/database/databaseSeeder.js``` will create a brand new database everytime the ```npm run build``` script is run, or changes are made and saved while nodemon is running. To change this, you need to modifiy the `db.connectAsync()` function inside `server/database/index.js`.
 
 ## Contributing
 
@@ -109,66 +142,19 @@ Contributions are what make the open source community such an amazing place to b
 
 Matthew Wigglesworth - [LinkedIn](https://www.linkedin.com/in/matt-wigg/) - m.p.wigglesworth@gmail.com
 
-Project Link: [https://github.com/Matt-Wigg/soccer-stats/](https://github.com/Matt-Wigg/soccer-stats/)
+Project Link: [https://github.com/homeland-market/reviews/](https://github.com/homeland-market/reviews/)
 
 ## Acknowledgements
 
 * [React-Select](https://react-select.com/home)
+* [React-Star-Ratings](https://github.com/ekeric13/react-star-ratings)
+* [React-Tooltip](https://github.com/wwayne/react-tooltip)
 * [Styled-Components](https://styled-components.com/)
+* [Bluebird](http://bluebirdjs.com/docs/getting-started.html)
+* [Nodemon](https://github.com/remy/nodemon)
 * [Axios](https://github.com/axios/axios)
 * [Google Fonts](https://fonts.google.com/)
 
 ## License
 
 Distributed under the MIT License.
-
-
-
-
-
-
-
-# Ratings and Reviews Module
-
-This is an interactive ratings and reviews module that can usually be found on various Ecommerce product pages. The module alows user interaction in the following ways: A customer photos carousel; filter reivews by star rating; filter reviews by search queries (text field); sort reviews by specific criteria; a "Verify Buyer" tooltip that displays on mouse hover; Show More & Show Less conditional buttons; and a "Clear" button for currently active review filters.
-
-## Related Projects
-
-  - https://github.com/Unfair-dot-com/fec-main-carousel
-  - https://github.com/Unfair-dot-com/product-detail-carousel
-
-## Table of Contents
-
-1. [Set-up](#Set-up)
-1. [Requirements](#Requirements)
-1. [Additonal-Notes](#Additonal-Notes)
-
-## Set-up
-
-In order to set-up the file, you will need to follow these steps: 
-
-1) Rename the following files inside ```server/database/```
-
-a) ```RENAME-ME-TO-CONFIG.js``` = ```config.js```
-
-b) ```RENAME-ME-TO-CONNECTION.js``` = ```connection.js```
-
-2) Inside of these files, add your MySQL username and password inside the quotations marks as requested.
-
-
-3) Run the following commands from the command line inside the root folder:
-
-a) Run ```npm install```.
-
-b) Run ```npm run bundle```.
-
-c) Run ```npm run build```.
-
-## Requirements
-
-- Node.js
-- MySQL
-
-## Additonal-Notes
-
-The current seeding script found inside ```server/database/databaseSeeder.js``` will create a brand new database everytime the ```npm run build``` script is ran, or changes are made and saved while nodemon is running. To change this, you need to modifiy the ```db.connectAsync()``` function inside ```server/database/index.js```.
