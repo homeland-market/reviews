@@ -53,7 +53,7 @@ The Customer Photo Carousel syncs its images with reviews that included a photo.
 ### Review Sorting
 <p><img src="https://media.giphy.com/media/T8YfkYLxp9rKD9oitr/giphy.gif"></p>
 
-You can sort reviews by the following criteria: Most Relevant, Includes Customer Photos, Most Recent, Most Helpful. Sort criteria remain persistent even through review filtering. For example, if you sorted all reviews by <em>Most Helpful</em> then filtered the reviews by a [Text Filtering](#text-filtering--highlighting), the newly filtered reviews list would still be sorted by Most Helpful. By default, reviews are sorted using the Most Relevant method. 
+You can sort reviews by the following criteria: <em>Most Relevant, Includes Customer Photos, Most Recent,</em> and <em>Most Helpful</em>. Sort criteria remain persistent even through review filtering. For example, if you sorted all reviews by <em>Most Helpful</em> then filtered the reviews by a [Text Filtering](#text-filtering--highlighting), the newly filtered reviews list would still be sorted by Most Helpful. By default, reviews are sorted using the Most Relevant method. 
 
 ---
 
