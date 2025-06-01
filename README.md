@@ -1,4 +1,8 @@
 # Homeland Market: Ratings & Reviews
+
+> [!IMPORTANT]
+> This repository has been archived and is now read-only. No further updates or contributions will be made.
+
 An ecommerce ratings and reviews module that features filtering, sorting, searching, voting, and a handy customer photo carousel!
 
 ## Table of Contents
@@ -23,6 +27,7 @@ An ecommerce ratings and reviews module that features filtering, sorting, search
 9. [License](#license)
 
 ## Overview
+
 <p align="center" height="200"><img src="https://i.imgur.com/RKP8Bpo.png"></p>
 
 This interactive ratings and reviews module is the ideal solution for displaying customer's feedback. The application has a strong focus on user interaction, allowing reviews to be filtered, sorted, and searched in a variety of different ways (see [Features](#features) for more info). The component is fully responsive right out of the box, allowing for seamless integration across all media platforms. For further information on how to get started, please see the conveniently named [Getting Started](#getting-started) section below.
@@ -30,6 +35,7 @@ This interactive ratings and reviews module is the ideal solution for displaying
 ## Features
 
 ### Preload Animation
+
 <p><img src="https://media.giphy.com/media/6rso7ryZINLPWRd2nj/giphy.gif"></p>
 
 The component features a preloading state animation that runs until all review data has been successfully fetched from the database. This feature is to reduce snapping/popping of information when there are longer than expected query times on the page's initial load.
@@ -37,6 +43,7 @@ The component features a preloading state animation that runs until all review d
 ---
 
 ### Star Score Filtering
+
 <p><img src="https://media.giphy.com/media/sMfkPLBoCVxxBnZsVf/giphy.gif"></p>
 
 You can filter reviews by different star ratings - 1 star, 2 star, 3 star, 4! (and 5). When a specific star is clicked, the screen automatically scrolls to the review body section where the corresponding reviews are displayed. You can clear the filter one of four ways: clicking the 'clear' button just above the body of reviews,  selecting another star to filter from the list, clicking on the original star rating to toggle off the selection, or [filtering reviews by text search](#text-filtering--highlighting). Filtered reviews can also be sorted while still maintaining the filtering condition - see [Review Sorting](#review-sorting) for more information.
@@ -44,6 +51,7 @@ You can filter reviews by different star ratings - 1 star, 2 star, 3 star, 4! (a
 ---
 
 ### Customer Photo Carousel
+
 <p><img src="https://media.giphy.com/media/6FavGp8XNpDWgsUvES/giphy.gif"></p>
 
 The Customer Photo Carousel syncs its images with reviews that included a photo. The carousel makes use of React.createRef() to calculate the current container size to snap images into place. If the screen size is altered mid-transition, the component will recalculate the width and snap the next image back into place: images will always display no matter the user's screen size. If there are no customer photos associated with any reviews, the carousel is automatically hidden; if there aren't enough images to require a scrolling effect, the scroll buttons are hidden.
@@ -51,6 +59,7 @@ The Customer Photo Carousel syncs its images with reviews that included a photo.
 ---
 
 ### Review Sorting
+
 <p><img src="https://media.giphy.com/media/T8YfkYLxp9rKD9oitr/giphy.gif"></p>
 
 You can sort reviews by the following criteria: <em>Most Relevant, Includes Customer Photos, Most Recent,</em> and <em>Most Helpful</em>. Sort criteria remain persistent even through review filtering. For example, if you sorted all reviews by <em>Most Helpful</em> then filtered the reviews by a [Text Filtering](#text-filtering--highlighting), the newly filtered reviews list would still be sorted by Most Helpful. By default, reviews are sorted using the Most Relevant method. 
@@ -58,6 +67,7 @@ You can sort reviews by the following criteria: <em>Most Relevant, Includes Cust
 ---
 
 ### Review Upvoting
+
 <p><img src="https://media.giphy.com/media/WQj4zfisO19Y0HqKxQ/giphy.gif"></p>
 
 Each review has it's own Helpful Button. Users can upvote the reviews they find helpful by clicking on the corresponding button. When a Helpful Button is clicked (toggled on), a PUT request gets sent to the server, and the review data inside the database gets updated. If the button is toggled off, another PUT request is sent to update the database. At present, users can only toggle each review on or off: there is no downvoting option. If the page is refreshed, the new helpful total will display.
@@ -65,6 +75,7 @@ Each review has it's own Helpful Button. Users can upvote the reviews they find 
 ---
 
 ### Text Filtering & Highlighting
+
 <p><img src="https://media.giphy.com/media/mOHlEqcXMTCT4FQPMv/giphy.gif"></p>
 
 By typing a word or phrase into the search bar and pressing enter - or clicking on the search button - reviews can be filtered by that word or phrase. Only the review's comment text is searched - you can not filter by reviewer name or location. Words and phrases are not case sensitive; white space is removed from search words/phrases automatically.
@@ -72,6 +83,7 @@ By typing a word or phrase into the search bar and pressing enter - or clicking 
 ---
 
 ### Buyer Verification
+
 <p><img src="https://media.giphy.com/media/Z2VnAhVo9sjYkUNOcM/giphy.gif"></p>
 
 Each review displays a handy tooltip that verifies the review was left by an authentic buyer. Hover over the text to display the tooltip message. There is no way to add reviews via the display module: the module's designed so that reviews are left by email requests or via a separate link. 
